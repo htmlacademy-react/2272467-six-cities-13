@@ -1,13 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
+import styles from './not-found-page.module.css';
 
 function NotFoundPage(): React.JSX.Element {
   return (
-    <Fragment>
-      <h1>404. Page not found</h1>
-      <Link to={AppRoute.Main}> Go to main page</Link>
-    </Fragment>
+    <div className={`${styles.notFoundPage}`}>
+      <h1 className={styles.title}>404. Page not found</h1>
+      <Link to={AppRoute.Main} className={styles.text}> Go to <span>main page</span>.</Link>
+    </div>
   );
 }
 
