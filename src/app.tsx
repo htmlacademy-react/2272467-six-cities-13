@@ -30,7 +30,7 @@ function App({ rentOfferCount }: AppMainProps): React.JSX.Element {
         }
         >
         </Route>
-        <Route path={'*'} element={<NotFoundPage/>}/>
+        <Route path={AppRoute.NotFound} element={<NotFoundPage/>}/>
       </Routes>
     </BrowserRouter>
   );
