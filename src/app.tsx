@@ -8,6 +8,7 @@ import FavoritesPage from './components/pages/favorites/favorites-page.tsx';
 import PrivateRoute from './components/private-route/private-route.tsx';
 import { AppRoute } from './constants/app-route.ts';
 import { AuthorizationStatus } from './constants/authorization-status.ts';
+import Layout from './components/layout/layout.tsx';
 
 
 type AppMainProps = {
@@ -18,18 +19,20 @@ function App({ rentOfferCount }: AppMainProps): React.JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage rentOfferCount={rentOfferCount}/>}/>
-        <Route path={AppRoute.Offer} element={<OfferPage/>}>
-          <Route path={`${AppRoute.Offer}/:id`}/>
+        <Route path={AppRoute.Main} element={<Layout/>}>
+          <Route index element={<MainPage rentOfferCount={rentOfferCount}/>}/>
+          <Route path={AppRoute.Offer} element={<OfferPage/>}>
+            <Route path={`${AppRoute.Offer}/:id`}/>
+          </Route>
+          <Route path={AppRoute.Favorites} element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.NotAuth}>
+              <FavoritesPage/>
+            </PrivateRoute>
+          }
+          >
+          </Route>
         </Route>
         <Route path={AppRoute.Login} element={<LoginPage/>}/>
-        <Route path={AppRoute.Favorites} element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.NotAuth}>
-            <FavoritesPage/>
-          </PrivateRoute>
-        }
-        >
-        </Route>
         <Route path={AppRoute.NotFound} element={<NotFoundPage/>}/>
       </Routes>
     </BrowserRouter>

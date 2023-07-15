@@ -1,10 +1,8 @@
 import React from 'react';
-import Header from '../../header/header.tsx';
 
 function OfferPage(): React.JSX.Element {
   return (
     <div className="page">
-      <Header/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

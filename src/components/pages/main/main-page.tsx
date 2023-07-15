@@ -1,6 +1,5 @@
 import React from 'react';
 import OfferCard from '../../offer-card/offer-card.tsx';
-import Header from '../../header/header.tsx';
 
 type MainPageProps = {
   rentOfferCount: number;
@@ -9,7 +8,6 @@ type MainPageProps = {
 function MainPage({ rentOfferCount }: MainPageProps): React.JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

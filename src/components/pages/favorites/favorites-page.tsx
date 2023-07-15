@@ -1,10 +1,8 @@
 import React from 'react';
-import Header from '../../header/header.tsx';
 
 function FavoritesPage(): React.JSX.Element {
   return (
     <div className="page">
-      <Header/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
