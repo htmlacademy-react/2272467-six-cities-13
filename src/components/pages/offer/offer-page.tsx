@@ -1,8 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 function OfferPage(): React.JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Информация по аренде</title>
+      </Helmet>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

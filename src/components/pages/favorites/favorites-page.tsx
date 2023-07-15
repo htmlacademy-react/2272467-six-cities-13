@@ -1,8 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 function FavoritesPage(): React.JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Избранное</title>
+      </Helmet>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
