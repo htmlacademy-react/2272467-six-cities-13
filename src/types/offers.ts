@@ -9,7 +9,7 @@ type TCity = {
   location: TLocation;
 }
 
-type TOffer = {
+export type TOffer = {
   id: string;
   title: string;
   type: string;

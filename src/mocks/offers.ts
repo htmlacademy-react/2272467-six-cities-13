@@ -1,8 +1,11 @@
-export const offers: TOffer[] = [
+import { TOffers } from '../types/offers.ts';
+import { offerType } from '../constants/offer.ts';
+
+export const offers: TOffers = [
   {
     id: crypto.randomUUID(),
     title: 'Canal View Prinsengracht',
-    type: 'Apartment',
+    type: offerType.Apartment,
     price: 132,
     city: {
       name: 'Amsterdam',
@@ -20,12 +23,12 @@ export const offers: TOffer[] = [
     isFavorite: false,
     isPremium: true,
     rating: 3,
-    previewImage: 'img/apartment-02.jpg'
+    previewImage: 'img/apartment-01.jpg'
   },
   {
     id: crypto.randomUUID(),
     title: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment',
+    type: offerType.Room,
     price: 200,
     city: {
       name: 'Amsterdam',
@@ -48,7 +51,7 @@ export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Wood and stone place',
-    type: 'Private room',
+    type: offerType.Hotel,
     price: 210,
     city: {
       name: 'Amsterdam',
@@ -64,14 +67,14 @@ export const offers: TOffer[] = [
       zoom: 8
     },
     isFavorite: true,
-    isPremium: true,
+    isPremium: false,
     rating: 4,
-    previewImage: 'img/apartment-04.jpg'
+    previewImage: 'img/room.jpg'
   },
   {
     id: crypto.randomUUID(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: 'Private room',
+    type: offerType.House,
     price: 180,
     city: {
       name: 'Amsterdam',
@@ -87,8 +90,8 @@ export const offers: TOffer[] = [
       zoom: 8
     },
     isFavorite: true,
-    isPremium: true,
+    isPremium: false,
     rating: 2,
-    previewImage: 'img/apartment-04.jpg'
+    previewImage: 'img/room.jpg'
   }
 ];
