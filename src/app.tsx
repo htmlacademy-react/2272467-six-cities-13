@@ -9,13 +9,15 @@ import PrivateRoute from './components/private-route/private-route.tsx';
 import { AppRoute } from './constants/app-route.ts';
 import { AuthorizationStatus } from './constants/authorization-status.ts';
 import Layout from './components/layout/layout.tsx';
-import { HelmetProvider } from 'react-helmet-async'
+import { HelmetProvider } from 'react-helmet-async';
+import { TOffers } from './types/offers.ts';
 
 type AppMainProps = {
   rentOfferCount: number;
+  offers: TOffers;
 }
 
-function App({ rentOfferCount }: AppMainProps): React.JSX.Element {
+function App({ rentOfferCount, offers }: AppMainProps): React.JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>

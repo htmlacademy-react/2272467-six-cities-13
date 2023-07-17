@@ -1,4 +1,4 @@
-export const Offers: TOffer[] = [
+export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Canal View Prinsengracht',
