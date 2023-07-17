@@ -3,11 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import { TOffers } from '../../../types/offers.ts';
 import OfferList from '../../offer-list/offer-list.tsx';
 
-type MainPageProps = {
+type TMainPageProps = {
   offers: TOffers;
 }
 
-function MainPage(props: MainPageProps): React.JSX.Element {
+function MainPage(props: TMainPageProps): React.JSX.Element {
   const { offers } = props;
 
   return (
