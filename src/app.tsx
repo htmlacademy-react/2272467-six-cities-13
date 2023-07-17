@@ -13,17 +13,16 @@ import { HelmetProvider } from 'react-helmet-async';
 import { TOffers } from './types/offers.ts';
 
 type AppMainProps = {
-  rentOfferCount: number;
   offers: TOffers;
 }
 
-function App({ rentOfferCount, offers }: AppMainProps): React.JSX.Element {
+function App({ offers }: AppMainProps): React.JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<Layout/>}>
-            <Route index element={<MainPage rentOfferCount={rentOfferCount}/>}/>
+            <Route index element={<MainPage offers={offers}/>}/>
             <Route path={AppRoute.Offer} element={<OfferPage/>}>
               <Route path={`${AppRoute.Offer}/:id`}/>
             </Route>
