@@ -13,10 +13,12 @@ function OfferCard({ offer }: TOfferCardProps): React.JSX.Element {
     isPremium, previewImage
   } = offer;
 
-  const [activated, setActivated] = useState(id);
+  const [activated, setActivated] = useState({id});
 
-  function addActive(e) {
-    setActivated(e) //TODO Переделать для отображения маркеров на карте
+  function addActive() {
+    setActivated({
+      ...activated
+    });
   }
 
   return (
