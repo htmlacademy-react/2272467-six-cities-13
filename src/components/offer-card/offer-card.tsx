@@ -15,7 +15,7 @@ function OfferCard({ offer }: TOfferCardProps): React.JSX.Element {
 
   const [activated, setActivated] = useState({id});
 
-  function addActive() {
+  function handleAddActive() {
     setActivated({
       ...activated
     });
@@ -24,7 +24,7 @@ function OfferCard({ offer }: TOfferCardProps): React.JSX.Element {
   return (
     <article
       className="cities__card place-card"
-      onMouseOver={addActive}
+      onMouseOver={handleAddActive}
     >
       {isPremium &&
         <div className="place-card__mark">
