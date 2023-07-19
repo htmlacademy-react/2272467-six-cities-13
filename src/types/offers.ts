@@ -1,3 +1,5 @@
+import { offerType } from '../constants/offer.ts';
+
 type TLocation = {
   latitude: number;
   longitude: number;
@@ -9,12 +11,10 @@ type TCity = {
   location: TLocation;
 }
 
-type TOfferType = 'Apartment' | 'Private Room' | 'House' | 'Hotel';
-
 export type TOffer = {
   id: string;
   title: string;
-  type: TOfferType;
+  type: offerType;
   price: number;
   city: TCity;
   location: TLocation;
