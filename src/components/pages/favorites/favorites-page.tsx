@@ -13,7 +13,7 @@ function FavoritesPage({ offers }: TFavoritesPageProps): React.JSX.Element {
   return (
     <div className="page">
       <Helmet>
-        <title>Избранное</title>
+        <title>Favorites</title>
       </Helmet>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

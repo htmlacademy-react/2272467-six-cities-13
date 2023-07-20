@@ -6,7 +6,7 @@ function LoginPage(): React.JSX.Element {
   return (
     <div className="page page--gray page--login">
       <Helmet>
-        <title>Авторизация</title>
+        <title>Authorization</title>
       </Helmet>
       <header className="header">
         <div className="container">

@@ -7,7 +7,7 @@ function OfferPage(): React.JSX.Element {
   return (
     <div className="page">
       <Helmet>
-        <title>Информация по аренде</title>
+        <title>Offer</title>
       </Helmet>
       <main className="page__main page__main--offer">
         <section className="offer">

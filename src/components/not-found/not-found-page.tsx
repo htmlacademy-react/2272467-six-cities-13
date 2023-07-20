@@ -8,7 +8,7 @@ function NotFoundPage(): React.JSX.Element {
   return (
     <div className={`${styles.notFoundPage}`}>
       <Helmet>
-        <title>Страница не найдена</title>
+        <title>Page not found</title>
       </Helmet>
       <h1 className={styles.title}>404. Page not found</h1>
       <Link to={AppRoute.Main} className={styles.text}> Go to <span>main page</span>.</Link>
