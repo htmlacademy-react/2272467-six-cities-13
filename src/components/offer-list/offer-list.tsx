@@ -7,10 +7,12 @@ type TOfferListProps = {
 }
 
 function OfferList({ offers }: TOfferListProps): React.JSX.Element {
-  const [activated, setActivated] = useState(null);
+  const [activated, setActivated] = useState({ id: null });
 
   function handleAddActive(id: string) {
-    setActivated(id);
+    if (activated.id !== id) {
+      setActivated(id);
+    }
   }
 
   return (
