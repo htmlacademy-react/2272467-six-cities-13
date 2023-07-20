@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 function ReviewForm(): React.JSX.Element {
   const [formData, setFormData] = useState(
@@ -8,18 +8,14 @@ function ReviewForm(): React.JSX.Element {
     }
   );
 
-  function handelTextChange(e: Event & {
-    target: HTMLButtonElement;
-  }) {
+  function handelTextChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setFormData({
       ...formData,
       text: e.target.value
     });
   }
 
-  function handelRatingChange(e: Event & {
-    target: HTMLButtonElement;
-  }) {
+  function handelRatingChange(e: ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
       rating: e.target.value
