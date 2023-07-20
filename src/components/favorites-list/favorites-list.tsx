@@ -1,6 +1,6 @@
 import React from 'react';
 import { TOffers } from '../../types/offers.ts';
-import FavoritesCard from '../favorites-card/favorites-card.tsx';
+import OfferCard from '../offer-card/offer-card.tsx';
 
 
 type TFavoritesListProps = {
@@ -19,7 +19,7 @@ function FavoritesList({ offers }: TFavoritesListProps): React.JSX.Element {
           </div>
         </div>
         <div className="favorites__places">
-          {offers.map((item) => <FavoritesCard key={item.id} offer={item}/>)}
+          {offers.map((item) => <OfferCard key={item.id} offer={item} view={'vertical'}/>)}
         </div>
       </li>
     </ul>

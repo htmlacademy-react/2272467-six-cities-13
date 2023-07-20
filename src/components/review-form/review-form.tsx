@@ -8,14 +8,18 @@ function ReviewForm(): React.JSX.Element {
     }
   );
 
-  function handelTextChange(e) {
+  function handelTextChange(e: Event & {
+    target: HTMLButtonElement;
+  }) {
     setFormData({
       ...formData,
       text: e.target.value
     });
   }
 
-  function handelRatingChange(e) {
+  function handelRatingChange(e: Event & {
+    target: HTMLButtonElement;
+  }) {
     setFormData({
       ...formData,
       rating: e.target.value

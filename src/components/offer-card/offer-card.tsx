@@ -1,41 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
 import { TOffer } from '../../types/offers.ts';
 
 type TOfferCardProps = {
   offer: TOffer;
+  view: 'horizontal' | 'vertical';
+  onAddActive?: () => void;
 }
 
-function OfferCard({ offer }: TOfferCardProps): React.JSX.Element {
+function OfferCard({ offer, view, onAddActive }: TOfferCardProps): React.JSX.Element {
   const {
     id, title, type, price,
     isPremium, previewImage
   } = offer;
 
-  const [activated, setActivated] = useState({id});
-
-  function handleAddActive() {
-    setActivated({
-      ...activated
-    });
-  }
-
   return (
     <article
-      className="cities__card place-card"
-      onMouseOver={handleAddActive}
+      className={`${view === 'horizontal' ? 'cities__card' : 'favorites__card'} place-card`}
+      onMouseOver={onAddActive}
     >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div
+        className={`${view === 'horizontal' ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}
+      >
         <Link to={`${AppRoute.Offer}/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image"
+            src={previewImage}
+            width={view === 'horizontal' ? 260 : 150}
+            height={view === 'horizontal' ? 200 : 110}
+            alt="Place image"
+          />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${view === 'horizontal' ? '' : 'favorites__card-info'} "place-card__info"`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
