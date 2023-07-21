@@ -2,8 +2,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import ReviewForm from '../../review-form/review-form.tsx';
 import ReviewList from '../../review-list/review-list.tsx';
+import { TReview } from '../../../types/review.ts';
 
-function OfferPage(): React.JSX.Element {
+type TOfferPageProps = {
+  reviews: TReview[];
+}
+
+function OfferPage({ reviews }: TOfferPageProps): React.JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -138,9 +143,9 @@ function OfferPage(): React.JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">1</span>
+                  Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewList/>
+                <ReviewList reviews={reviews}/>
                 <ReviewForm/>
               </section>
             </div>

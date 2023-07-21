@@ -11,20 +11,22 @@ import { AuthorizationStatus } from './constants/authorization-status.ts';
 import Layout from './components/layout/layout.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { TCity, TOffers } from './types/offers.ts';
+import { TReview } from './types/review.ts';
 
 type AppMainProps = {
   offers: TOffers;
   city: TCity;
+  reviews: TReview[];
 }
 
-function App({ offers, city }: AppMainProps): React.JSX.Element {
+function App({ offers, city, reviews }: AppMainProps): React.JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<Layout/>}>
             <Route index element={<MainPage offers={offers} city={city}/>}/>
-            <Route path={AppRoute.Offer} element={<OfferPage/>}>
+            <Route path={AppRoute.Offer} element={<OfferPage reviews={reviews}/>}>
               <Route path={`${AppRoute.Offer}/:id`}/>
             </Route>
             <Route path={AppRoute.Favorites} element={
