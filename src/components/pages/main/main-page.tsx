@@ -1,17 +1,16 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { TOffers } from '../../../types/offers.ts';
+import { TCity, TOffers } from '../../../types/offers.ts';
 import OfferList from '../../offer-list/offer-list.tsx';
 import Map from '../../map/map.tsx';
 import CitiesList from '../../cities-list/cities-list.tsx';
 
 type TMainPageProps = {
   offers: TOffers;
+  city: TCity;
 }
 
-function MainPage(props: TMainPageProps): React.JSX.Element {
-  const { offers } = props;
-
+function MainPage({ offers, city }: TMainPageProps): React.JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -47,7 +46,7 @@ function MainPage(props: TMainPageProps): React.JSX.Element {
               <OfferList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <Map offers={offers}/>
+              <Map offers={offers} city={city}/>
             </div>
           </div>
         </div>
