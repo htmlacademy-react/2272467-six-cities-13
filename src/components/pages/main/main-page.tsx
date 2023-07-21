@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { TOffers } from '../../../types/offers.ts';
 import OfferList from '../../offer-list/offer-list.tsx';
+import Map from '../../map/map.tsx';
 import CitiesList from '../../cities-list/cities-list.tsx';
 
 type TMainPageProps = {
@@ -14,7 +15,7 @@ function MainPage(props: TMainPageProps): React.JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
-        <title>Главная страница</title>
+        <title>Main</title>
       </Helmet>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -46,6 +47,7 @@ function MainPage(props: TMainPageProps): React.JSX.Element {
               <OfferList offers={offers}/>
             </section>
             <div className="cities__right-section">
+              <Map offers={offers}/>
             </div>
           </div>
         </div>
