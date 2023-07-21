@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
 import { TOffer } from '../../types/offers.ts';
+import Rating from '../rating/rating.tsx';
 
 type TOfferCardProps = {
   offer: TOffer;
@@ -12,7 +13,7 @@ type TOfferCardProps = {
 function OfferCard({ offer, view, onAddActive }: TOfferCardProps): React.JSX.Element {
   const {
     id, title, type, price,
-    isPremium, previewImage
+    isPremium, previewImage, rating
   } = offer;
 
   return (
@@ -49,12 +50,7 @@ function OfferCard({ offer, view, onAddActive }: TOfferCardProps): React.JSX.Ele
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating rating={rating} style={'offer'}/>
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>

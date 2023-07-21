@@ -1,5 +1,7 @@
 import React from 'react';
 import { TReview } from '../../types/review.ts';
+import Rating from '../rating/rating.tsx';
+
 
 type TReviewProps = {
   review: TReview;
@@ -25,12 +27,7 @@ function Review({ review }: TReviewProps): React.JSX.Element {
         <span className="reviews__user-name">{name}</span>
       </div>
       <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{ width: '80%' }}/>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating rating={rating} style={'review'}/>
         <p className="reviews__text">
           {comment}
         </p>

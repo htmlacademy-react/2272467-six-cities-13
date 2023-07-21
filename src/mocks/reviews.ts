@@ -21,7 +21,7 @@ export const reviews: TReview[] = [
       isPro: false
     },
     comment: 'Solicitude matters gone. Prudent rapid denoting nor beloved wrote middleton wishes roused curiosity sons belonging thing. First sympathize belonging him doors worse guest chicken preserved. Daughter immediate moreover except worth ample. Wise blush forth likely jointure agreeable others season devonshire ask boy order wisdom gate additions took tell.',
-    rating: 5
+    rating: 3
   },
   {
     id: crypto.randomUUID(),
@@ -32,6 +32,6 @@ export const reviews: TReview[] = [
       isPro: true
     },
     comment: 'Blush intention enjoyment believed thrown excellence daughters dejection exquisite. Yet scale towards admiration gentleman effect least any ladies except decisively. Mother shewing strongly limited.',
-    rating: 5
+    rating: 1
   }
 ];

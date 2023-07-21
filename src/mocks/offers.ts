@@ -91,7 +91,7 @@ export const offers: TOffers = [
     },
     isFavorite: true,
     isPremium: false,
-    rating: 2,
+    rating: 1,
     previewImage: 'img/room.jpg'
   }
 ];
