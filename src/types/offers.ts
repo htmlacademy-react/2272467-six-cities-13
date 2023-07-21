@@ -6,7 +6,8 @@ type TLocation = {
   zoom: number;
 }
 
-type TCity = {
+export type TCity = {
+  id: string;
   name: string;
   location: TLocation;
 }
@@ -16,7 +17,7 @@ export type TOffer = {
   title: string;
   type: offerType;
   price: number;
-  city: TCity;
+  city: Omit<TCity, 'id'>;
   location: TLocation;
   isFavorite: boolean;
   isPremium: boolean;
