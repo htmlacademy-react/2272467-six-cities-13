@@ -6,4 +6,4 @@ export type TReview = {
   user: Omit<TUser, 'email' | 'token' >;
   comment: string;
   rating: number;
-}
+};
