@@ -7,7 +7,7 @@ import Rating from '../rating/rating.tsx';
 type TOfferCardProps = {
   offer: TOffer;
   view: 'horizontal' | 'vertical';
-  onAddActive?: () => void;
+  onAddActive?: (id: string) => void;
 }
 
 function OfferCard({ offer, view, onAddActive }: TOfferCardProps): React.JSX.Element {
@@ -19,7 +19,7 @@ function OfferCard({ offer, view, onAddActive }: TOfferCardProps): React.JSX.Ele
   return (
     <article
       className={`${view === 'horizontal' ? 'cities__card' : 'favorites__card'} place-card`}
-      onMouseOver={onAddActive}
+      onMouseOver={() => onAddActive ? onAddActive(id) : null}
     >
       {isPremium &&
         <div className="place-card__mark">

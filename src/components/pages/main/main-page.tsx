@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { TCity, TOffers } from '../../../types/offers.ts';
+import CitiesList from '../../cities-list/cities-list.tsx';
+import { TCity, TOffer, TOffers } from '../../../types/offers.ts';
 import OfferList from '../../offer-list/offer-list.tsx';
 import Map from '../../map/map.tsx';
-import CitiesList from '../../cities-list/cities-list.tsx';
+
 
 type TMainPageProps = {
   offers: TOffers;
@@ -11,6 +12,14 @@ type TMainPageProps = {
 }
 
 function MainPage({ offers, city }: TMainPageProps): React.JSX.Element {
+  const [selectedOffer, setSelectedOffer] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
+
+  function handleSelectedOffer(id: string) {
+    if (selectedOffer?.id !== id) {
+      setSelectedOffer({ id });
+    }
+  }
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -43,10 +52,10 @@ function MainPage({ offers, city }: TMainPageProps): React.JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList offers={offers}/>
+              <OfferList offers={offers} onAddActive={handleSelectedOffer}/>
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} city={city}/>
+              <Map offers={offers} city={city} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>

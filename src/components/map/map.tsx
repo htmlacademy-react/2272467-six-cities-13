@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { TCity, TOffers } from '../../types/offers.ts';
+import { TCity, TOffer, TOffers } from '../../types/offers.ts';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
 import leaflet, { Marker, layerGroup } from 'leaflet';
@@ -8,6 +8,7 @@ import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../constants/marker.t
 type TMapProps = {
   offers: TOffers;
   city: TCity;
+  selectedOffer: Pick<TOffer, 'id'> | undefined;
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -22,14 +23,14 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ offers, city }: TMapProps): React.JSX.Element {
+function Map({ offers, city, selectedOffer }: TMapProps): React.JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      offers.forEach(({ location }) => {
+      offers.forEach(({ location, ...offer }) => {
         const marker = new Marker({
           lat: location.latitude,
           lng: location.longitude
@@ -37,7 +38,9 @@ function Map({ offers, city }: TMapProps): React.JSX.Element {
 
         marker
           .setIcon(
-            defaultCustomIcon
+            selectedOffer !== undefined && offer.id === selectedOffer.id
+              ? currentCustomIcon
+              : defaultCustomIcon
           )
           .addTo(markerLayer);
       });
@@ -46,7 +49,7 @@ function Map({ offers, city }: TMapProps): React.JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers]);
+  }, [map, offers, selectedOffer]);
 
   return (
     <div
