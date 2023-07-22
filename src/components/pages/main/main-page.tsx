@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import CitiesList from '../../cities-list/cities-list.tsx';
 import { TCity, TOffer, TOffers } from '../../../types/offers.ts';
@@ -13,6 +13,7 @@ type TMainPageProps = {
 
 function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
   const [selectedCity, setSelectedCity] = useState<TCity>(cities[0]);
+  const [offersList, setOffersList] = useState<TOffers>(offers);
 
   const [
     selectedOffer,
@@ -20,9 +21,10 @@ function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
   ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
 
   function handelSelectedCity(city: TCity) {
-    if (selectedCity.id !== city.id) {
-      setSelectedCity(city);
-    }
+    const offersListByCity = offers.filter((offer) => offer.city.name === city.name);
+
+    setSelectedCity(city);
+    setOffersList(offersListByCity);
   }
 
   function handleSelectedOffer(id: string) {
@@ -30,6 +32,10 @@ function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
       setSelectedOffer({ id });
     }
   }
+
+  useEffect(() => {
+    handelSelectedCity(selectedCity);
+  }, []);
 
   return (
     <div className="page page--gray page--main">
@@ -47,7 +53,7 @@ function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
+              <b className="places__found">{offersList.length} places to stay in {selectedCity.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -63,10 +69,10 @@ function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList offers={offers} onSelectedOffer={handleSelectedOffer}/>
+              <OfferList offers={offersList} onSelectedOffer={handleSelectedOffer}/>
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} selectedCity={selectedCity} selectedOffer={selectedOffer}/>
+              <Map offers={offersList} selectedCity={selectedCity} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>

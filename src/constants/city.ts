@@ -5,9 +5,9 @@ export const cities: TCity[] = [
     id: crypto.randomUUID(),
     name: 'Paris',
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
-      zoom: 10
+      latitude: 48.8534,
+      longitude: 2.3488,
+      zoom: 8
     }
   },
   {
