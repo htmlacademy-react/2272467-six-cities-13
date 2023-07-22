@@ -15,17 +15,17 @@ import { TReview } from './types/review.ts';
 
 type AppMainProps = {
   offers: TOffers;
-  city: TCity;
+  cities: TCity[];
   reviews: TReview[];
 }
 
-function App({ offers, city, reviews }: AppMainProps): React.JSX.Element {
+function App({ offers, cities, reviews }: AppMainProps): React.JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<Layout/>}>
-            <Route index element={<MainPage offers={offers} city={city}/>}/>
+            <Route index element={<MainPage offers={offers} cities={cities}/>}/>
             <Route path={AppRoute.Offer} element={<OfferPage reviews={reviews}/>}>
               <Route path={`${AppRoute.Offer}/:id`}/>
             </Route>

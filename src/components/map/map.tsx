@@ -7,7 +7,7 @@ import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../constants/marker.t
 
 type TMapProps = {
   offers: TOffers;
-  city: TCity;
+  selectedCity: TCity;
   selectedOffer: Pick<TOffer, 'id'> | undefined;
 }
 
@@ -23,9 +23,9 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ offers, city, selectedOffer }: TMapProps): React.JSX.Element {
+function Map({ offers, selectedCity, selectedOffer }: TMapProps): React.JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, selectedCity);
 
   useEffect(() => {
     if (map) {
@@ -49,7 +49,7 @@ function Map({ offers, city, selectedOffer }: TMapProps): React.JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, selectedOffer, selectedCity]);
 
   return (
     <div

@@ -8,11 +8,22 @@ import Map from '../../map/map.tsx';
 
 type TMainPageProps = {
   offers: TOffers;
-  city: TCity;
+  cities: TCity[];
 }
 
-function MainPage({ offers, city }: TMainPageProps): React.JSX.Element {
-  const [selectedOffer, setSelectedOffer] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
+function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
+  const [selectedCity, setSelectedCity] = useState<TCity>(cities[0]);
+
+  const [
+    selectedOffer,
+    setSelectedOffer
+  ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
+
+  function handelSelectedCity(city: TCity) {
+    if (selectedCity.id !== city.id) {
+      setSelectedCity(city);
+    }
+  }
 
   function handleSelectedOffer(id: string) {
     if (selectedOffer?.id !== id) {
@@ -29,14 +40,14 @@ function MainPage({ offers, city }: TMainPageProps): React.JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList/>
+            <CitiesList onSelectedCity={handelSelectedCity}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -52,10 +63,10 @@ function MainPage({ offers, city }: TMainPageProps): React.JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList offers={offers} onAddActive={handleSelectedOffer}/>
+              <OfferList offers={offers} onSelectedOffer={handleSelectedOffer}/>
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} city={city} selectedOffer={selectedOffer}/>
+              <Map offers={offers} selectedCity={selectedCity} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>
