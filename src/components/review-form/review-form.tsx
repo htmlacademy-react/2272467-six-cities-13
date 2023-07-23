@@ -41,6 +41,7 @@ function ReviewForm(): React.JSX.Element {
           .map(([rating, title]) => (
             <Fragment key={rating}>
               <input
+                required
                 className="form__rating-input visually-hidden"
                 name="rating"
                 defaultValue={rating}
@@ -66,6 +67,9 @@ function ReviewForm(): React.JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={''}
+        maxLength={300}
+        minLength={50}
+        required
         onChange={handelTextChange}
       />
       <div className="reviews__button-wrapper">
@@ -75,7 +79,7 @@ function ReviewForm(): React.JSX.Element {
           your stay with at least{' '}
           <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={false}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit">Submit</button>
       </div>
     </form>
   );
