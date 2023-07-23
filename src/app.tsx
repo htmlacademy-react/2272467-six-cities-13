@@ -26,7 +26,7 @@ function App({ offers, cities, reviews }: AppMainProps): React.JSX.Element {
         <Routes>
           <Route path={AppRoute.Main} element={<Layout/>}>
             <Route index element={<MainPage offers={offers} cities={cities}/>}/>
-            <Route path={`${AppRoute.Offer}/:id`}element={<OfferPage reviews={reviews}/>}/>
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferPage reviews={reviews}/>}/>
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <FavoritesPage offers={offers}/>
