@@ -160,8 +160,8 @@ function OfferPage({ reviews, offers }: TOfferPageProps): React.JSX.Element {
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
+            <OfferList offers={offers} page={'offer'}/>
           </section>
-          <OfferList offers={offers} page={'offer'}/>
         </div>
       </main>
     </div>
