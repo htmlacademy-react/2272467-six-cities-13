@@ -72,7 +72,7 @@ function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
               <OfferList offers={offersList} onSelectedOffer={handleSelectedOffer} page={'main'}/>
             </section>
             <div className="cities__right-section">
-              <Map offers={offersList} selectedCity={selectedCity} selectedOffer={selectedOffer}/>
+              <Map offers={offersList} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>
             </div>
           </div>
         </div>

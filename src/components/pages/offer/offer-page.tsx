@@ -5,6 +5,7 @@ import ReviewList from '../../review-list/review-list.tsx';
 import { TReview } from '../../../types/review.ts';
 import OfferList from '../../offer-list/offer-list.tsx';
 import { TOffers } from '../../../types/offers.ts';
+import Map from '../../map/map.tsx';
 
 type TOfferPageProps = {
   reviews: TReview[];
@@ -12,6 +13,8 @@ type TOfferPageProps = {
 }
 
 function OfferPage({ reviews, offers }: TOfferPageProps): React.JSX.Element {
+  const currentOffer = offers[0];
+
   return (
     <div className="page">
       <Helmet>
@@ -153,7 +156,7 @@ function OfferPage({ reviews, offers }: TOfferPageProps): React.JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map"/>
+          <Map offers={offers} selectedCity={currentOffer.city} selectedOffer={currentOffer} page={'offer'}/>
         </section>
         <div className="container">
           <section className="near-places places">
