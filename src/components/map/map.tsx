@@ -9,7 +9,7 @@ import cn from 'classnames';
 type TMapProps = {
   offers: TOffers;
   selectedCity: Omit<TCity, 'id'>;
-  selectedOffer: TOffer | undefined;
+  selectedOffer: Pick<TOffer, 'id'> | undefined;
   page: 'main' | 'offer';
 }
 
