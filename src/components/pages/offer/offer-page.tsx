@@ -6,6 +6,7 @@ import { TReview } from '../../../types/review.ts';
 import OfferList from '../../offer-list/offer-list.tsx';
 import { TOffers } from '../../../types/offers.ts';
 import Map from '../../map/map.tsx';
+import { useParams } from 'react-router-dom';
 
 type TOfferPageProps = {
   reviews: TReview[];
@@ -13,7 +14,8 @@ type TOfferPageProps = {
 }
 
 function OfferPage({ reviews, offers }: TOfferPageProps): React.JSX.Element {
-  const currentOffer = offers[0];
+  const { id } = useParams();
+  const currentOffer = offers.find((offer) => offer.id === id);
 
   return (
     <div className="page">
