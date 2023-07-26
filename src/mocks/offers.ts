@@ -102,14 +102,14 @@ export const offers: TOffers = [
     city: {
       name: 'Paris',
       location: {
-        latitude: 52.35514938496378,
-        longitude: 4.64536342324233,
+        latitude: 48.8534,
+        longitude: 2.3488,
         zoom: 8
       }
     },
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      latitude: 48.8634213123,
+      longitude: 2.34821312318,
       zoom: 8
     },
     isFavorite: true,
@@ -125,8 +125,8 @@ export const offers: TOffers = [
     city: {
       name: 'Paris',
       location: {
-        latitude: 48.8534213123,
-        longitude: 2.34821312318,
+        latitude: 48.8534,
+        longitude: 2.3488,
         zoom: 8
       }
     },
@@ -137,7 +137,7 @@ export const offers: TOffers = [
     },
     isFavorite: true,
     isPremium: false,
-    rating: 1,
+    rating: 3,
     previewImage: 'img/room.jpg'
   }
 ];

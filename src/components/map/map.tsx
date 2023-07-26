@@ -47,6 +47,9 @@ function Map({ offers, selectedCity, selectedOffer, page }: TMapProps): React.JS
           .addTo(markerLayer);
       });
 
+      map.setView({ lat: selectedCity.location.latitude, lng: selectedCity.location.longitude },
+        selectedCity.location.zoom);
+
       return () => {
         map.removeLayer(markerLayer);
       };

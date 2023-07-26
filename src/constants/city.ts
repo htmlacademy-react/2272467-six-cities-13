@@ -7,15 +7,15 @@ export const cities: TCity[] = [
     location: {
       latitude: 48.8534,
       longitude: 2.3488,
-      zoom: 8
+      zoom: 10
     }
   },
   {
     id: crypto.randomUUID(),
     name: 'Cologne',
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 50.8936,
+      longitude: 7.0731,
       zoom: 10
     }
   },
@@ -23,8 +23,8 @@ export const cities: TCity[] = [
     id: crypto.randomUUID(),
     name:  'Brussels',
     location: {
-      latitude: 90.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 50.846707,
+      longitude: 4.352472,
       zoom: 10
     }
   },
@@ -32,8 +32,8 @@ export const cities: TCity[] = [
     id: crypto.randomUUID(),
     name: 'Amsterdam',
     location: {
-      latitude: 12.3909553943508,
-      longitude: 5.85309666406198,
+      latitude: 52.374,
+      longitude: 4.88969,
       zoom: 10
     }
   },
@@ -41,8 +41,8 @@ export const cities: TCity[] = [
     id: crypto.randomUUID(),
     name: 'Hamburg',
     location: {
-      latitude: 32.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 53.5753,
+      longitude: 10.0153,
       zoom: 10
     }
   },
@@ -50,9 +50,9 @@ export const cities: TCity[] = [
     id: crypto.randomUUID(),
     name: 'Dusseldorf',
     location: {
-      latitude: 51.3909553943508,
-      longitude: 42.85309666406198,
-      zoom: 5
+      latitude: 51.2217,
+      longitude: 6.77616,
+      zoom: 10
     }
   }
 ];
