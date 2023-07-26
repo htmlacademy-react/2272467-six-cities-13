@@ -2,41 +2,57 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
 import { TOffer } from '../../types/offers.ts';
+import Rating from '../rating/rating.tsx';
+import cn from 'classnames';
 
 type TOfferCardProps = {
   offer: TOffer;
-  view: 'horizontal' | 'vertical';
-  onAddActive?: () => void;
+  typeView: 'cities' | 'favorite' | 'near';
+  onSelectedOffer?: (id: string) => void;
 }
 
-function OfferCard({ offer, view, onAddActive }: TOfferCardProps): React.JSX.Element {
+function OfferCard({ offer, typeView, onSelectedOffer }: TOfferCardProps): React.JSX.Element {
   const {
     id, title, type, price,
-    isPremium, previewImage
+    isPremium, previewImage, rating
   } = offer;
 
   return (
     <article
-      className={`${view === 'horizontal' ? 'cities__card' : 'favorites__card'} place-card`}
-      onMouseOver={onAddActive}
+      className={cn(
+        'place-card',
+        { 'cities__card': typeView === 'cities' },
+        { 'favorites__card': typeView === 'favorite' },
+        { 'near-places__card': typeView === 'near' }
+      )}
+      onMouseOver={() => onSelectedOffer ? onSelectedOffer(id) : null}
     >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
       <div
-        className={`${view === 'horizontal' ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}
+        className={cn(
+          'place-card__image-wrapper',
+          { 'cities__image-wrapper': typeView === 'cities' },
+          { 'favorites__image-wrapper': typeView === 'favorite' },
+          { 'near-places__image-wrapper': typeView === 'near' }
+        )}
       >
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img className="place-card__image"
             src={previewImage}
-            width={view === 'horizontal' ? 260 : 150}
-            height={view === 'horizontal' ? 200 : 110}
+            width={typeView === 'favorite' ? 150 : 260}
+            height={typeView === 'favorite' ? 110 : 200}
             alt="Place image"
           />
         </Link>
       </div>
-      <div className={`${view === 'horizontal' ? '' : 'favorites__card-info'} "place-card__info"`}>
+      <div className={cn(
+        'place-card__info',
+        { 'favorites__card-info': typeView === 'favorite' }
+      )}
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -49,12 +65,7 @@ function OfferCard({ offer, view, onAddActive }: TOfferCardProps): React.JSX.Ele
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating rating={rating} style={'offer'}/>
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
