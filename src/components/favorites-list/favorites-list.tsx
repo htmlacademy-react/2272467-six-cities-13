@@ -19,7 +19,7 @@ function FavoritesList({ offers }: TFavoritesListProps): React.JSX.Element {
           </div>
         </div>
         <div className="favorites__places">
-          {offers.map((item) => <OfferCard key={item.id} offer={item} typeView={'favorite'}/>)}
+          {offers.map((item) => <OfferCard key={item.id} offer={item} block={'favorite'}/>)}
         </div>
       </li>
     </ul>

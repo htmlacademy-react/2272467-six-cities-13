@@ -19,7 +19,7 @@ function OfferList({ offers, onSelectedOffer, page }: TOfferListProps): React.JS
     >
       {
         offers.map((offer) => (
-          <OfferCard key={offer.id} offer={offer} typeView={page === 'main' ? 'cities' : 'near'} onSelectedOffer={onSelectedOffer}/>)
+          <OfferCard key={offer.id} offer={offer} block={page === 'main' ? 'cities' : 'near'} onSelectedOffer={onSelectedOffer}/>)
         )
       }
     </div>
