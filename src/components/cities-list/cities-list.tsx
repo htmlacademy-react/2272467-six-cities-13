@@ -3,12 +3,12 @@ import { cities } from '../../constants/city.ts';
 import { TCity } from '../../types/offers.ts';
 
 
-type CitiesListProps = {
+type TCitiesListProps = {
   onSelectedCity: (city: TCity) => void;
   selectedCity: TCity;
 }
 
-function CitiesList({ onSelectedCity, selectedCity }: CitiesListProps): React.JSX.Element {
+function CitiesList({ onSelectedCity, selectedCity }: TCitiesListProps): React.JSX.Element {
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city) => (
