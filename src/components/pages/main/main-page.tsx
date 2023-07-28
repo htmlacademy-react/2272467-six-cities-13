@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import CitiesList from '../../cities-list/cities-list.tsx';
-import { TCity, TOffer, TOffers } from '../../../types/offers.ts';
-import OfferList from '../../offer-list/offer-list.tsx';
-import Map from '../../map/map.tsx';
-import SortForm from '../../sort-form/sort-form.tsx';
+import { TCity, TOffers } from '../../../types/offers.ts';
 import CitiesBlock from '../../cities-block/cities-block.tsx';
 
 
