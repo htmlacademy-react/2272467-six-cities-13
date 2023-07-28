@@ -46,7 +46,7 @@ function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList onSelectedCity={handelSelectedCity}/>
+            <CitiesList onSelectedCity={handelSelectedCity} selectedCity={selectedCity}/>
           </section>
         </div>
         <div className="cities">
