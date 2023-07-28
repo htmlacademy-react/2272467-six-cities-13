@@ -1,7 +1,7 @@
-import { TOffers } from '../types/offers.ts';
+import { TOffer } from '../types/offers.ts';
 import { offerType } from '../constants/offer.ts';
 
-export const offers: TOffers = [
+export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Canal View Prinsengracht',

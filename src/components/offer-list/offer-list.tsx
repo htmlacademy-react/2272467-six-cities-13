@@ -1,10 +1,10 @@
 import React from 'react';
-import { TOffers } from '../../types/offers.ts';
+import { TOffer } from '../../types/offers.ts';
 import OfferCard from '../offer-card/offer-card.tsx';
 import cn from 'classnames';
 
 type TOfferListProps = {
-  offers: TOffers;
+  offers: TOffer[];
   onSelectedOffer?: (id: string) => void;
   page: 'main' | 'offer';
 }

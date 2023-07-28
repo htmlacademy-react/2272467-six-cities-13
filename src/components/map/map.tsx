@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { TCity, TOffer, TOffers } from '../../types/offers.ts';
+import { TCity, TOffer } from '../../types/offers.ts';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
 import leaflet, { Marker, layerGroup } from 'leaflet';
@@ -7,7 +7,7 @@ import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../constants/marker.t
 import cn from 'classnames';
 
 type TMapProps = {
-  offers: TOffers;
+  offers: TOffer[];
   selectedCity: Omit<TCity, 'id'>;
   selectedOffer: Pick<TOffer, 'id'> | undefined;
   page: 'main' | 'offer';

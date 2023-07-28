@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import SortForm from '../sort-form/sort-form.tsx';
 import OfferList from '../offer-list/offer-list.tsx';
 import Map from '../map/map.tsx';
-import { TCity, TOffer, TOffers } from '../../types/offers.ts';
+import { TCity, TOffer } from '../../types/offers.ts';
 
 type citiesBlockProps = {
-  offersList: TOffers;
+  offersList: TOffer[];
   selectedCity: TCity;
 }
 

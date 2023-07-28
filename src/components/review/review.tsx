@@ -10,7 +10,6 @@ type TReviewProps = {
 
 function Review({ review }: TReviewProps): React.JSX.Element {
   const { date, user, comment, rating } = review;
-
   const { name, avatarUrl } = user;
 
   return (

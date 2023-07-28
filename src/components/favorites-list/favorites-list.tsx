@@ -1,10 +1,10 @@
 import React from 'react';
-import { TOffers } from '../../types/offers.ts';
+import { TOffer } from '../../types/offers.ts';
 import OfferCard from '../offer-card/offer-card.tsx';
 
 
 type TFavoritesListProps = {
-  offers: TOffers;
+  offers: TOffer[];
 }
 
 function FavoritesList({ offers }: TFavoritesListProps): React.JSX.Element {
