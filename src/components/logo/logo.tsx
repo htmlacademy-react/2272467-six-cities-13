@@ -9,7 +9,7 @@ type TLogoProps = {
 function Logo({ block } : TLogoProps): React.JSX.Element {
   return (
     <Link to={AppRoute.Main} className="header__logo-link header__logo-link--active">
-      <img className={`${block}__logo`} src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+      <img className={`${block}__logo`} src="img/logo.svg" alt="6 cities logo" width={block === 'header' ? 81 : 64} height={block === 'header' ? 41 : 33}/>
     </Link>
   );
 }
