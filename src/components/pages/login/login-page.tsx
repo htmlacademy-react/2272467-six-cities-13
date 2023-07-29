@@ -12,7 +12,7 @@ function LoginPage(): React.JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo/>
+              <Logo block={'header'}/>
             </div>
           </div>
         </div>

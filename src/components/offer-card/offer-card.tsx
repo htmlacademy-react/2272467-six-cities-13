@@ -7,11 +7,11 @@ import cn from 'classnames';
 
 type TOfferCardProps = {
   offer: TOffer;
-  typeView: 'cities' | 'favorite' | 'near';
+  block: 'cities' | 'favorite' | 'near';
   onSelectedOffer?: (id: string) => void;
 }
 
-function OfferCard({ offer, typeView, onSelectedOffer }: TOfferCardProps): React.JSX.Element {
+function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JSX.Element {
   const {
     id, title, type, price,
     isPremium, previewImage, rating
@@ -21,9 +21,9 @@ function OfferCard({ offer, typeView, onSelectedOffer }: TOfferCardProps): React
     <article
       className={cn(
         'place-card',
-        { 'cities__card': typeView === 'cities' },
-        { 'favorites__card': typeView === 'favorite' },
-        { 'near-places__card': typeView === 'near' }
+        { 'cities__card': block === 'cities' },
+        { 'favorites__card': block === 'favorite' },
+        { 'near-places__card': block === 'near' }
       )}
       onMouseOver={() => onSelectedOffer ? onSelectedOffer(id) : null}
     >
@@ -34,23 +34,23 @@ function OfferCard({ offer, typeView, onSelectedOffer }: TOfferCardProps): React
       <div
         className={cn(
           'place-card__image-wrapper',
-          { 'cities__image-wrapper': typeView === 'cities' },
-          { 'favorites__image-wrapper': typeView === 'favorite' },
-          { 'near-places__image-wrapper': typeView === 'near' }
+          { 'cities__image-wrapper': block === 'cities' },
+          { 'favorites__image-wrapper': block === 'favorite' },
+          { 'near-places__image-wrapper': block === 'near' }
         )}
       >
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img className="place-card__image"
             src={previewImage}
-            width={typeView === 'favorite' ? 150 : 260}
-            height={typeView === 'favorite' ? 110 : 200}
+            width={block === 'favorite' ? 150 : 260}
+            height={block === 'favorite' ? 110 : 200}
             alt="Place image"
           />
         </Link>
       </div>
       <div className={cn(
         'place-card__info',
-        { 'favorites__card-info': typeView === 'favorite' }
+        { 'favorites__card-info': block === 'favorite' }
       )}
       >
         <div className="place-card__price-wrapper">

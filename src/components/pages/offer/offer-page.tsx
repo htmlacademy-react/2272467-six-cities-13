@@ -4,13 +4,14 @@ import ReviewForm from '../../review-form/review-form.tsx';
 import ReviewList from '../../review-list/review-list.tsx';
 import { TReview } from '../../../types/review.ts';
 import OfferList from '../../offer-list/offer-list.tsx';
-import { TOffers } from '../../../types/offers.ts';
+import { TOffer } from '../../../types/offers.ts';
 import Map from '../../map/map.tsx';
 import { useParams } from 'react-router-dom';
 
+
 type TOfferPageProps = {
   reviews: TReview[];
-  offers: TOffers;
+  offers: TOffer[];
 }
 
 function OfferPage({ reviews, offers }: TOfferPageProps): React.JSX.Element {

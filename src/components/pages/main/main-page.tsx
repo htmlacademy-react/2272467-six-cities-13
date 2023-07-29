@@ -1,36 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import CitiesList from '../../cities-list/cities-list.tsx';
-import { TCity, TOffer, TOffers } from '../../../types/offers.ts';
-import OfferList from '../../offer-list/offer-list.tsx';
-import Map from '../../map/map.tsx';
+import { TCity, TOffer } from '../../../types/offers.ts';
+import CitiesBlock from '../../cities-block/cities-block.tsx';
 
 
 type TMainPageProps = {
-  offers: TOffers;
+  offers: TOffer[];
   cities: TCity[];
 }
 
 function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
   const [selectedCity, setSelectedCity] = useState<TCity>(cities[0]);
-  const [offersList, setOffersList] = useState<TOffers>(offers);
-
-  const [
-    selectedOffer,
-    setSelectedOffer
-  ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
+  const [offersList, setOffersList] = useState<TOffer[]>(offers);
 
   function handelSelectedCity(city: TCity) {
     const offersListByCity = offers.filter((offer) => offer.city.name === city.name);
 
-    setSelectedCity(city);
     setOffersList(offersListByCity);
-  }
-
-  function handleSelectedOffer(id: string) {
-    if (selectedOffer?.id !== id) {
-      setSelectedOffer({ id });
-    }
+    setSelectedCity(city);
   }
 
   useEffect(() => {
@@ -46,36 +34,10 @@ function MainPage({ offers, cities }: TMainPageProps): React.JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList onSelectedCity={handelSelectedCity}/>
+            <CitiesList onSelectedCity={handelSelectedCity} selectedCity={selectedCity}/>
           </section>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersList.length} places to stay in {selectedCity.name}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
-              <OfferList offers={offersList} onSelectedOffer={handleSelectedOffer} page={'main'}/>
-            </section>
-            <div className="cities__right-section">
-              <Map offers={offersList} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>
-            </div>
-          </div>
-        </div>
+        <CitiesBlock offersList={offersList} selectedCity={selectedCity}/>
       </main>
     </div>
   );

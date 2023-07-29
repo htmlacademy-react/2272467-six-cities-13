@@ -1,12 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { TOffers } from '../../../types/offers.ts';
+import { TOffer } from '../../../types/offers.ts';
 import FavoritesList from '../../favorites-list/favorites-list.tsx';
 import Footer from '../../footer/footer.tsx';
 
 
 type TFavoritesPageProps = {
-  offers: TOffers;
+  offers: TOffer[];
 }
 
 function FavoritesPage({ offers }: TFavoritesPageProps): React.JSX.Element {

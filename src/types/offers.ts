@@ -24,5 +24,3 @@ export type TOffer = {
   rating: number;
   previewImage: string;
 }
-
-export type TOffers = TOffer[];

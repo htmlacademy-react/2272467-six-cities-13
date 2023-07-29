@@ -10,11 +10,11 @@ import { AppRoute } from './constants/app-route.ts';
 import { AuthorizationStatus } from './constants/authorization-status.ts';
 import Layout from './components/layout/layout.tsx';
 import { HelmetProvider } from 'react-helmet-async';
-import { TCity, TOffers } from './types/offers.ts';
+import { TCity, TOffer } from './types/offers.ts';
 import { TReview } from './types/review.ts';
 
 type AppMainProps = {
-  offers: TOffers;
+  offers: TOffer[];
   cities: TCity[];
   reviews: TReview[];
 }
