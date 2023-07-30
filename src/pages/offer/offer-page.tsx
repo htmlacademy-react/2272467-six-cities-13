@@ -1,11 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import ReviewForm from '../../review-form/review-form.tsx';
-import ReviewList from '../../review-list/review-list.tsx';
-import { TReview } from '../../../types/review.ts';
-import OfferList from '../../offer-list/offer-list.tsx';
-import { TOffer } from '../../../types/offers.ts';
-import Map from '../../map/map.tsx';
+import ReviewForm from '../../components/review-form/review-form.tsx';
+import ReviewList from '../../components/review-list/review-list.tsx';
+import { TReview } from '../../types/review.ts';
+import OfferList from '../../components/offer-list/offer-list.tsx';
+import { TOffer } from '../../types/offers.ts';
+import Map from '../../components/map/map.tsx';
 import { useParams } from 'react-router-dom';
 
 

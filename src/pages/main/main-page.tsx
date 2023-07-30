@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import CitiesList from '../../cities-list/cities-list.tsx';
-import { TCity, TOffer } from '../../../types/offers.ts';
-import CitiesBlock from '../../cities-block/cities-block.tsx';
+import CitiesList from '../../components/cities-list/cities-list.tsx';
+import { TCity, TOffer } from '../../types/offers.ts';
+import CitiesBlock from '../../components/cities-block/cities-block.tsx';
 
 
 type TMainPageProps = {

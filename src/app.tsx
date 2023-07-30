@@ -1,10 +1,10 @@
 import React from 'react';
-import MainPage from './components/pages/main/main-page.tsx';
+import MainPage from './pages/main/main-page.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './components/not-found/not-found-page.tsx';
-import OfferPage from './components/pages/offer/offer-page.tsx';
-import LoginPage from './components/pages/login/login-page.tsx';
-import FavoritesPage from './components/pages/favorites/favorites-page.tsx';
+import OfferPage from './pages/offer/offer-page.tsx';
+import LoginPage from './pages/login/login-page.tsx';
+import FavoritesPage from './pages/favorites/favorites-page.tsx';
 import PrivateRoute from './components/private-route/private-route.tsx';
 import { AppRoute } from './constants/app-route.ts';
 import { AuthorizationStatus } from './constants/authorization-status.ts';
