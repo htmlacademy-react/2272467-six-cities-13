@@ -1,22 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import { TReview } from '../../types/review.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
-import { TOffer } from '../../types/offers.ts';
 import Map from '../../components/map/map.tsx';
 import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getNearOffers, getOffers } from '../../store/action.ts';
 
 
 type TOfferPageProps = {
   reviews: TReview[];
-  offers: TOffer[];
 }
 
-function OfferPage({ reviews, offers }: TOfferPageProps): React.JSX.Element {
+function OfferPage({ reviews }: TOfferPageProps): React.JSX.Element {
+  const dispatch = useAppDispatch();
   const { id } = useParams();
+
+  const offers = useAppSelector((state) => state.offers);
   const currentOffer = offers.find((offer) => offer.id === id);
+  const nearOffers = useAppSelector((state) => state.nearOffers);
+
+  useEffect(() => {
+    dispatch(getOffers());
+    dispatch(getNearOffers());
+  }, [dispatch]);
 
   return (
     <div className="page">
@@ -166,7 +175,7 @@ function OfferPage({ reviews, offers }: TOfferPageProps): React.JSX.Element {
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <OfferList offers={offers} page={'offer'}/>
+            <OfferList offers={nearOffers} page={'offer'}/>
           </section>
         </div>
       </main>
