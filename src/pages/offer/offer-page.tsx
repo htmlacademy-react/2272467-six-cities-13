@@ -17,7 +17,6 @@ function OfferPage(): React.JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const currentOffer = useAppSelector((state) => state.offer);
   const nearOffers = useAppSelector((state) => state.nearOffers);
-  const reviews = useAppSelector((state) => state.reviews);
 
   useEffect(() => {
     dispatch(getOffers());
@@ -159,10 +158,7 @@ function OfferPage(): React.JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">{reviews.length}</span>
-                </h2>
-                <ReviewList reviews={reviews}/>
+                <ReviewList/>
                 <ReviewForm/>
               </section>
             </div>
