@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { getNearOffers, getOffer, getOffers, getReview, setCurrentCity } from './action.ts';
+import { dropOffer, getNearOffers, getOffer, getOffers, getReview, setCurrentCity } from './action.ts';
 import { City } from '../constants/city.ts';
 import { TOffer } from '../types/offers.ts';
 import { offers } from '../mocks/offers.ts';
@@ -38,6 +38,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getOffer, (state, action) => {
       state.offer = offers.find((offer) => offer.id === action.payload);
+    })
+    .addCase(dropOffer, (state) => {
+      state.offer = undefined;
     });
 });
 

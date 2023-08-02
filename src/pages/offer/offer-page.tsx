@@ -5,8 +5,9 @@ import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getOffer, getOffers, getReview } from '../../store/action.ts';
+import { dropOffer, getOffer, getOffers, getReview } from '../../store/action.ts';
 import NearOffersBlock from '../../components/near-offers-block/near-offers-block.tsx';
+import NotFoundPage from '../../components/not-found/not-found-page.tsx';
 
 
 function OfferPage(): React.JSX.Element {
@@ -18,10 +19,20 @@ function OfferPage(): React.JSX.Element {
   const currentOffer = useAppSelector((state) => state.offer);
 
   useEffect(() => {
-    dispatch(getOffers());
-    dispatch(getReview());
-    dispatch(getOffer(id));
+    if (id) {
+      dispatch(getOffers());
+      dispatch(getReview());
+      dispatch(getOffer(id));
+    }
+
+    return () => {
+      dispatch(dropOffer);
+    };
   }, [dispatch]);
+
+  if (!currentOffer) {
+    return <NotFoundPage/>;
+  }
 
   return (
     <div className="page">

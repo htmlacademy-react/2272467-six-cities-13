@@ -10,3 +10,5 @@ export const getNearOffers = createAction('nearOffers/get');
 export const getReview = createAction('review/get');
 
 export const getOffer = createAction<string>('offer/get');
+
+export const dropOffer = createAction('offer/drop');
