@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import SortForm from '../sort-form/sort-form.tsx';
 import OfferList from '../offer-list/offer-list.tsx';
 import Map from '../map/map.tsx';
-import { TCity, TOffer } from '../../types/offers.ts';
+import { TOffer } from '../../types/offers.ts';
+import { City } from '../../constants/city.ts';
 
 type citiesBlockProps = {
   offers: TOffer[];
-  selectedCity: TCity;
+  selectedCity: City;
 }
 
 function CitiesBlock({ offers, selectedCity }: citiesBlockProps): React.JSX.Element {
@@ -26,7 +27,7 @@ function CitiesBlock({ offers, selectedCity }: citiesBlockProps): React.JSX.Elem
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
+          <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
           <SortForm/>
           <OfferList offers={offers} onSelectedOffer={handleSelectedOffer} page={'main'}/>
         </section>

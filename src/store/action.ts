@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
-import { TCity } from '../types/offers.ts';
+import { City } from '../constants/city.ts';
 
-export const setCurrentCity = createAction<TCity>('offers/setCurrentCity');
+export const setCurrentCity = createAction<City>('offers/setCurrentCity');
 
 export const getOffers = createAction('offers/get');
 

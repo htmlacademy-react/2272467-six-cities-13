@@ -10,7 +10,7 @@ function MainPage(): React.JSX.Element {
 
   const offers = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.currentCity);
-  const offersByCity = offers.filter((offer) => offer.city.name === selectedCity.name);
+  const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
 
   useEffect(() => {
     dispatch(getOffers());

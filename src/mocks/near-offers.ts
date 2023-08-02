@@ -1,5 +1,6 @@
 import { TOffer } from '../types/offers.ts';
 import { OfferType } from '../constants/offer.ts';
+import { City } from '../constants/city.ts';
 
 export const nearOffers: TOffer[] = [
   {
@@ -8,7 +9,7 @@ export const nearOffers: TOffer[] = [
     type: OfferType.Apartment,
     price: 132,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.3909553943508,
         longitude: 4.85309666406198,
@@ -31,7 +32,7 @@ export const nearOffers: TOffer[] = [
     type: OfferType.Room,
     price: 200,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.3909553943508,
         longitude: 4.929309666406198,
@@ -54,7 +55,7 @@ export const nearOffers: TOffer[] = [
     type: OfferType.Hotel,
     price: 210,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.35514938496378,
         longitude: 4.64536342324233,

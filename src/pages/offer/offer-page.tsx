@@ -13,6 +13,7 @@ function OfferPage(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
+  const selectedCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
   const currentOffer = offers.find((offer) => offer.id === id);
   const nearOffers = useAppSelector((state) => state.nearOffers);
@@ -165,7 +166,7 @@ function OfferPage(): React.JSX.Element {
               </section>
             </div>
           </div>
-          <Map offers={offers} selectedCity={currentOffer.city} selectedOffer={currentOffer} page={'offer'}/>
+          <Map offers={offers} selectedCity={selectedCity} selectedOffer={currentOffer} page={'offer'}/>
         </section>
         <div className="container">
           <section className="near-places places">

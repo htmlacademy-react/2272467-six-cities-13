@@ -1,4 +1,5 @@
-import { offerType } from '../constants/offer.ts';
+import { OfferType } from '../constants/offer.ts';
+import { City } from '../constants/city.ts';
 
 type TLocation = {
   latitude: number;
@@ -7,17 +8,16 @@ type TLocation = {
 }
 
 export type TCity = {
-  id: string;
-  name: string;
+  name: City;
   location: TLocation;
 }
 
 export type TOffer = {
   id: string;
   title: string;
-  type: offerType;
+  type: OfferType;
   price: number;
-  city: Omit<TCity, 'id'>;
+  city: TCity;
   location: TLocation;
   isFavorite: boolean;
   isPremium: boolean;
