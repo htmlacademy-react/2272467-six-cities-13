@@ -8,3 +8,5 @@ export const getOffers = createAction('offers/get');
 export const getNearOffers = createAction('nearOffers/get');
 
 export const getReview = createAction('review/get');
+
+export const getOffer = createAction<string>('offer/get');

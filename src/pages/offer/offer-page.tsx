@@ -6,7 +6,7 @@ import OfferList from '../../components/offer-list/offer-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getNearOffers, getOffers, getReview } from '../../store/action.ts';
+import { getNearOffers, getOffer, getOffers, getReview } from '../../store/action.ts';
 
 
 function OfferPage(): React.JSX.Element {
@@ -15,7 +15,7 @@ function OfferPage(): React.JSX.Element {
 
   const selectedCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
-  const currentOffer = offers.find((offer) => offer.id === id);
+  const currentOffer = useAppSelector((state) => state.offer);
   const nearOffers = useAppSelector((state) => state.nearOffers);
   const reviews = useAppSelector((state) => state.reviews);
 
@@ -23,6 +23,7 @@ function OfferPage(): React.JSX.Element {
     dispatch(getOffers());
     dispatch(getNearOffers());
     dispatch(getReview());
+    dispatch(getOffer(id));
   }, [dispatch]);
 
   return (

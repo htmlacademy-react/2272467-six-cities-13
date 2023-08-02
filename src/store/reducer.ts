@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { getNearOffers, getOffers, getReview, setCurrentCity } from './action.ts';
+import { getNearOffers, getOffer, getOffers, getReview, setCurrentCity } from './action.ts';
 import { City } from '../constants/city.ts';
 import { TOffer } from '../types/offers.ts';
 import { offers } from '../mocks/offers.ts';
@@ -13,11 +13,13 @@ const initialState: {
   offers: TOffer[];
   nearOffers: TOffer[];
   reviews: TReview[];
+  offer: TOffer | undefined;
 } = {
   currentCity: City.Paris,
   offers: [],
   nearOffers: [],
   reviews: [],
+  offer: undefined
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -33,6 +35,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getReview, (state) => {
       state.reviews = reviews;
+    })
+    .addCase(getOffer, (state, action) => {
+      state.offer = offers.find((offer) => offer.id === action.payload);
     });
 });
 
