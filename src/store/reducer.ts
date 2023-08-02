@@ -1,18 +1,23 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { getNearOffers, getOffers, setCurrentCity } from './action.ts';
+import { getNearOffers, getOffers, getReview, setCurrentCity } from './action.ts';
 import { cities } from '../constants/city.ts';
 import { TCity, TOffer } from '../types/offers.ts';
 import { offers } from '../mocks/offers.ts';
 import { nearOffers } from '../mocks/near-offers.ts';
+import { TReview } from '../types/review.ts';
+import { reviews } from '../mocks/reviews.ts';
+
 
 const initialState: {
   currentCity: TCity;
   offers: TOffer[];
   nearOffers: TOffer[];
+  reviews: TReview[];
 } = {
   currentCity: cities[0],
   offers: [],
   nearOffers: [],
+  reviews: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -25,6 +30,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getNearOffers, (state) => {
       state.nearOffers = nearOffers;
+    })
+    .addCase(getReview, (state) => {
+      state.reviews = reviews;
     });
 });
 
