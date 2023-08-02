@@ -1,14 +1,15 @@
 import { TOffer } from '../types/offers.ts';
-import { offerType } from '../constants/offer.ts';
+import { OfferType } from '../constants/offer.ts';
+import { City } from '../constants/city.ts';
 
 export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Canal View Prinsengracht',
-    type: offerType.Apartment,
+    type: OfferType.Apartment,
     price: 132,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.3909553943508,
         longitude: 4.85309666406198,
@@ -28,10 +29,10 @@ export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Nice, cozy, warm big bed apartment',
-    type: offerType.Room,
+    type: OfferType.Room,
     price: 200,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.3909553943508,
         longitude: 4.929309666406198,
@@ -51,10 +52,10 @@ export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Wood and stone place',
-    type: offerType.Hotel,
+    type: OfferType.Hotel,
     price: 210,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.35514938496378,
         longitude: 4.64536342324233,
@@ -74,10 +75,10 @@ export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: offerType.House,
+    type: OfferType.House,
     price: 180,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.35514938496378,
         longitude: 4.64536342324233,
@@ -97,10 +98,10 @@ export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: offerType.House,
+    type: OfferType.House,
     price: 180,
     city: {
-      name: 'Paris',
+      name: City.Paris,
       location: {
         latitude: 48.8534,
         longitude: 2.3488,
@@ -120,10 +121,10 @@ export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: offerType.House,
+    type: OfferType.House,
     price: 180,
     city: {
-      name: 'Paris',
+      name: City.Paris,
       location: {
         latitude: 48.8534,
         longitude: 2.3488,

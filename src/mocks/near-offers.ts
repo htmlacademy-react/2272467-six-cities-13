@@ -1,11 +1,11 @@
 import { TOffer } from '../types/offers.ts';
-import { offerType } from '../constants/offer.ts';
+import { OfferType } from '../constants/offer.ts';
 
 export const nearOffers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Canal View Prinsengracht',
-    type: offerType.Apartment,
+    type: OfferType.Apartment,
     price: 132,
     city: {
       name: 'Amsterdam',
@@ -28,7 +28,7 @@ export const nearOffers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Nice, cozy, warm big bed apartment',
-    type: offerType.Room,
+    type: OfferType.Room,
     price: 200,
     city: {
       name: 'Amsterdam',
@@ -51,7 +51,7 @@ export const nearOffers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Wood and stone place',
-    type: offerType.Hotel,
+    type: OfferType.Hotel,
     price: 210,
     city: {
       name: 'Amsterdam',
