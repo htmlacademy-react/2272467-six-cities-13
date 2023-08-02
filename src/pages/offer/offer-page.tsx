@@ -7,24 +7,22 @@ import OfferList from '../../components/offer-list/offer-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getNearOffers, getOffers } from '../../store/action.ts';
+import { getNearOffers, getOffers, getReview } from '../../store/action.ts';
 
 
-type TOfferPageProps = {
-  reviews: TReview[];
-}
-
-function OfferPage({ reviews }: TOfferPageProps): React.JSX.Element {
+function OfferPage(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
   const offers = useAppSelector((state) => state.offers);
   const currentOffer = offers.find((offer) => offer.id === id);
   const nearOffers = useAppSelector((state) => state.nearOffers);
+  const reviews = useAppSelector((state) => state.reviews);
 
   useEffect(() => {
     dispatch(getOffers());
     dispatch(getNearOffers());
+    dispatch(getReview());
   }, [dispatch]);
 
   return (
