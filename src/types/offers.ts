@@ -1,5 +1,6 @@
 import { OfferType } from '../constants/offer.ts';
 import { City } from '../constants/city.ts';
+import { TUser } from './user.ts';
 
 type TLocation = {
   latitude: number;
@@ -8,14 +9,16 @@ type TLocation = {
 }
 
 export type TCity = {
-  name: City;
+  name: keyof typeof City;
   location: TLocation;
 }
+
+type TOfferHost = Omit<TUser, 'email' | 'token'>;
 
 export type TOffer = {
   id: string;
   title: string;
-  type: OfferType;
+  type: keyof typeof OfferType;
   price: number;
   city: TCity;
   location: TLocation;
@@ -23,4 +26,10 @@ export type TOffer = {
   isPremium: boolean;
   rating: number;
   previewImage: string;
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  images: string[];
+  maxAdults: number;
+  host: TOfferHost;
 }
