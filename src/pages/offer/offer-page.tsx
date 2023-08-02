@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import ReviewList from '../../components/review-list/review-list.tsx';
-import OfferList from '../../components/offer-list/offer-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getNearOffers, getOffer, getOffers, getReview } from '../../store/action.ts';
+import { getOffer, getOffers, getReview } from '../../store/action.ts';
+import NearOffersBlock from '../../components/near-offers-block/near-offers-block.tsx';
 
 
 function OfferPage(): React.JSX.Element {
@@ -16,11 +16,9 @@ function OfferPage(): React.JSX.Element {
   const selectedCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
   const currentOffer = useAppSelector((state) => state.offer);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
 
   useEffect(() => {
     dispatch(getOffers());
-    dispatch(getNearOffers());
     dispatch(getReview());
     dispatch(getOffer(id));
   }, [dispatch]);
@@ -166,12 +164,7 @@ function OfferPage(): React.JSX.Element {
           <Map offers={offers} selectedCity={selectedCity} selectedOffer={currentOffer} page={'offer'}/>
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">
-              Other places in the neighbourhood
-            </h2>
-            <OfferList offers={nearOffers} page={'offer'}/>
-          </section>
+          <NearOffersBlock/>
         </div>
       </main>
     </div>
