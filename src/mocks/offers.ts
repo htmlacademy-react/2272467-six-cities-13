@@ -273,7 +273,7 @@ export const offers: TOffer[] = [
     },
     isFavorite: true,
     isPremium: false,
-    rating: 3,
+    rating: 3.5,
     previewImage: 'img/room.jpg',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     bedrooms: 3,
