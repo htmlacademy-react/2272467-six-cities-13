@@ -27,7 +27,7 @@ function Review({ review }: TReviewProps): React.JSX.Element {
         <span className="reviews__user-name">{name}</span>
       </div>
       <div className="reviews__info">
-        <Rating rating={rating} style={'review'}/>
+        <Rating rating={rating} block={'review'}/>
         <p className="reviews__text">
           {comment}
         </p>
