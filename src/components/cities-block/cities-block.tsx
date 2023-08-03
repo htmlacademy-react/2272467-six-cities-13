@@ -11,9 +11,10 @@ import { sorting } from '../../utils/sorting.ts';
 type citiesBlockProps = {
   offers: TOffer[];
   selectedCity: City;
+  offerIsEmpty: boolean;
 }
 
-function CitiesBlock({ offers, selectedCity }: citiesBlockProps): React.JSX.Element {
+function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): React.JSX.Element {
   const [
     selectedOffer,
     setSelectedOffer
@@ -35,15 +36,25 @@ function CitiesBlock({ offers, selectedCity }: citiesBlockProps): React.JSX.Elem
 
   return (
     <div className="cities">
-      <div className="cities__places-container container">
-        <section className="cities__places places">
-          <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
-          <SortingForm selectedSorting={selectedSorting} handleSelectedSorting={handleSelectedSorting}/>
-          <OfferList offers={sortOffers} onSelectedOffer={handleSelectedOffer} page={'main'}/>
-        </section>
+      <div className={`cities__places-container container ${offerIsEmpty ? 'cities__places-container--empty' : ''}`}>
+        {offerIsEmpty
+          ? <section className="cities__no-places">
+            <div className="cities__status-wrapper tabs__content">
+              <b className="cities__status">No places to stay available</b>
+              <p className="cities__status-description">We could not find any property available at the moment
+                in {selectedCity}
+              </p>
+            </div>
+          </section>
+          : <section className="cities__places places">
+            <h2 className="visually-hidden">Places</h2>
+            <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
+            <SortingForm selectedSorting={selectedSorting} handleSelectedSorting={handleSelectedSorting}/>
+            <OfferList offers={sortOffers} onSelectedOffer={handleSelectedOffer} page={'main'}/>
+          </section>}
         <div className="cities__right-section">
-          <Map offers={offers} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>
+          {offerIsEmpty ||
+            <Map offers={offers} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>}
         </div>
       </div>
     </div>
