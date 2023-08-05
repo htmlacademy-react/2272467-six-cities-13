@@ -27,8 +27,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setCurrentCity, (state, action) => {
       state.currentCity = action.payload;
     })
-    .addCase(getOffers, (state) => {
-      state.offers = offers;
+    .addCase(getOffers, (state, action) => {
+      state.offers = action.payload;
     })
     .addCase(getNearOffers, (state) => {
       state.nearOffers = nearOffers;

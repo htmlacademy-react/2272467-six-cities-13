@@ -4,7 +4,9 @@ import App from './app.tsx';
 import { Provider } from 'react-redux';
 import { offers } from './mocks/offers.ts';
 import { store } from './store';
+import { fetchOffers } from './store/api-actions/offers-api.ts';
 
+store.dispatch(fetchOffers());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

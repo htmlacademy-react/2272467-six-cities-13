@@ -1,21 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import CitiesBlock from '../../components/cities-block/cities-block.tsx';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getOffers } from '../../store/action.ts';
+import { useAppSelector } from '../../hooks';
+import Preloader from '../../components/preloader/preloader.tsx';
 
 function MainPage(): React.JSX.Element {
-  const dispatch = useAppDispatch();
-
   const offers = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.currentCity);
   const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
   const offerIsEmpty = offersByCity.length < 1;
 
-  useEffect(() => {
-    dispatch(getOffers());
-  },[dispatch]);
+  if (offerIsEmpty) {
+    return <Preloader/>;
+  }
 
   return (
     <div className="page page--gray page--main">
