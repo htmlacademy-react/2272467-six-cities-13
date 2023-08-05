@@ -14,8 +14,8 @@ function sortHighToLow(a: TOffer, b: TOffer) {
 }
 
 export const sorting: Record<TSorting, (offers: TOffer[]) => TOffer[]> = {
-  Popular: (offers: TOffer[]) => offers.slice(),
-  PriceHighToLow: (offers: TOffer[]) => offers.slice().sort(sortHighToLow),
-  PriceLowToHigh: (offers: TOffer[]) => offers.slice().sort(sortLowToHigh),
-  TopRatedFirst: (offers: TOffer[]) => offers.slice().sort(sortByRating)
+  Popular: (offers: TOffer[]) => [...offers],
+  PriceHighToLow: (offers: TOffer[]) => [...offers].sort(sortHighToLow),
+  PriceLowToHigh: (offers: TOffer[]) => [...offers].sort(sortLowToHigh),
+  TopRatedFirst: (offers: TOffer[]) => [...offers].sort(sortByRating)
 };
