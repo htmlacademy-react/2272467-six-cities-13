@@ -5,10 +5,11 @@ import 'leaflet/dist/leaflet.css';
 import leaflet, { Marker, layerGroup } from 'leaflet';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../constants/marker.ts';
 import cn from 'classnames';
+import { City } from '../../constants/city.ts';
 
 type TMapProps = {
   offers: TOffer[];
-  selectedCity: Omit<TCity, 'id'>;
+  selectedCity: City;
   selectedOffer: Pick<TOffer, 'id'> | undefined;
   page: 'main' | 'offer';
 }
@@ -25,9 +26,64 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
+function getLocationCity(city: City): Pick<TCity, 'location'> {
+  switch (city) {
+    case City.Paris:
+      return {
+        location: {
+          latitude: 48.8534,
+          longitude: 2.3488,
+          zoom: 10
+        }
+      };
+    case City.Cologne:
+      return {
+        location: {
+          latitude: 50.8936,
+          longitude: 7.0731,
+          zoom: 10
+        }
+      };
+    case City.Brussels:
+      return {
+        location: {
+          latitude: 50.846707,
+          longitude: 4.352472,
+          zoom: 10
+        }
+      };
+    case City.Amsterdam:
+      return {
+        location: {
+          latitude: 52.374,
+          longitude: 4.88969,
+          zoom: 10
+        }
+      };
+    case City.Hamburg:
+      return {
+        location: {
+          latitude: 53.5753,
+          longitude: 10.0153,
+          zoom: 10
+        }
+      };
+    case City.Dusseldorf:
+      return {
+        location: {
+          latitude: 51.2217,
+          longitude: 6.77616,
+          zoom: 10
+        }
+      };
+  }
+}
+
+
 function Map({ offers, selectedCity, selectedOffer, page }: TMapProps): React.JSX.Element {
+  const cityLocation = getLocationCity(selectedCity);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, selectedCity);
+  const map = useMap(mapRef, cityLocation);
 
   useEffect(() => {
     if (map) {
@@ -47,14 +103,14 @@ function Map({ offers, selectedCity, selectedOffer, page }: TMapProps): React.JS
           .addTo(markerLayer);
       });
 
-      map.setView({ lat: selectedCity.location.latitude, lng: selectedCity.location.longitude },
-        selectedCity.location.zoom);
+      map.setView({ lat: cityLocation.location.latitude, lng: cityLocation.location.longitude },
+        cityLocation.location.zoom);
 
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer, selectedCity]);
+  }, [map, offers, selectedOffer, cityLocation]);
 
   return (
     <div

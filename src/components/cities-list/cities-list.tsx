@@ -1,25 +1,27 @@
 import React from 'react';
-import { cities } from '../../constants/city.ts';
-import { TCity } from '../../types/offers.ts';
+import { useAppDispatch } from '../../hooks';
+import { setCurrentCity } from '../../store/action.ts';
+import { City } from '../../constants/city.ts';
 
 
 type TCitiesListProps = {
-  onSelectedCity: (city: TCity) => void;
-  selectedCity: TCity;
+  selectedCity: City;
 }
 
-function CitiesList({ onSelectedCity, selectedCity }: TCitiesListProps): React.JSX.Element {
+function CitiesList({ selectedCity }: TCitiesListProps): React.JSX.Element {
+  const dispatch = useAppDispatch();
+
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((city) => (
-        <li key={city.id} className="locations__item">
+      {Object.values(City).map((city) => (
+        <li key={city} className="locations__item">
           <a className={
-            `locations__item-link ${selectedCity.name === city.name ? 'tabs__item--active' : 'tabs__item'}`
+            `locations__item-link ${selectedCity === city ? 'tabs__item--active' : 'tabs__item'}`
           }
           href="#"
-          onClick={() => onSelectedCity(city)}
+          onClick={() => dispatch(setCurrentCity(city))}
           >
-            <span>{city.name}</span>
+            <span>{city}</span>
           </a>
         </li>
       ))}

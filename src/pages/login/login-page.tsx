@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import Logo from '../../logo/logo.tsx';
+import Logo from '../../components/logo/logo.tsx';
 
 function LoginPage(): React.JSX.Element {
   return (

@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import SortForm from '../sort-form/sort-form.tsx';
 import OfferList from '../offer-list/offer-list.tsx';
 import Map from '../map/map.tsx';
-import { TCity, TOffer } from '../../types/offers.ts';
+import { TOffer } from '../../types/offers.ts';
+import { City } from '../../constants/city.ts';
 
 type citiesBlockProps = {
-  offersList: TOffer[];
-  selectedCity: TCity;
+  offers: TOffer[];
+  selectedCity: City;
 }
 
-function CitiesBlock({ offersList, selectedCity }: citiesBlockProps): React.JSX.Element {
+function CitiesBlock({ offers, selectedCity }: citiesBlockProps): React.JSX.Element {
   const [
     selectedOffer,
     setSelectedOffer
@@ -26,12 +27,12 @@ function CitiesBlock({ offersList, selectedCity }: citiesBlockProps): React.JSX.
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{offersList.length} places to stay in {selectedCity.name}</b>
+          <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
           <SortForm/>
-          <OfferList offers={offersList} onSelectedOffer={handleSelectedOffer} page={'main'}/>
+          <OfferList offers={offers} onSelectedOffer={handleSelectedOffer} page={'main'}/>
         </section>
         <div className="cities__right-section">
-          <Map offers={offersList} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>
+          <Map offers={offers} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>
         </div>
       </div>
     </div>

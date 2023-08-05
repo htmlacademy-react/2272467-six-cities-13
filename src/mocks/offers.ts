@@ -1,11 +1,12 @@
 import { TOffer } from '../types/offers.ts';
-import { offerType } from '../constants/offer.ts';
+import { OfferType } from '../constants/offer.ts';
+import { City } from '../constants/city.ts';
 
 export const offers: TOffer[] = [
   {
     id: crypto.randomUUID(),
     title: 'Canal View Prinsengracht',
-    type: offerType.Apartment,
+    type: OfferType.Apartment,
     price: 132,
     city: {
       name: 'Amsterdam',
@@ -23,15 +24,43 @@ export const offers: TOffer[] = [
     isFavorite: false,
     isPremium: true,
     rating: 3,
-    previewImage: 'img/apartment-01.jpg'
+    previewImage: 'img/apartment-01.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
+    bedrooms: 3,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true
+    },
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/studio-photos.jpg',
+    ],
+    maxAdults: 4
   },
   {
     id: crypto.randomUUID(),
     title: 'Nice, cozy, warm big bed apartment',
-    type: offerType.Room,
+    type: OfferType.Room,
     price: 200,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.3909553943508,
         longitude: 4.929309666406198,
@@ -46,15 +75,38 @@ export const offers: TOffer[] = [
     isFavorite: false,
     isPremium: true,
     rating: 5,
-    previewImage: 'img/apartment-03.jpg'
+    previewImage: 'img/apartment-03.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
+    bedrooms: 3,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine'
+    ],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true
+    },
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/studio-photos.jpg',
+    ],
+    maxAdults: 2
   },
   {
     id: crypto.randomUUID(),
     title: 'Wood and stone place',
-    type: offerType.Hotel,
+    type: OfferType.Hotel,
     price: 210,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.35514938496378,
         longitude: 4.64536342324233,
@@ -69,15 +121,43 @@ export const offers: TOffer[] = [
     isFavorite: true,
     isPremium: false,
     rating: 4,
-    previewImage: 'img/room.jpg'
+    previewImage: 'img/room.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
+    bedrooms: 3,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true
+    },
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/studio-photos.jpg',
+    ],
+    maxAdults: 4
   },
   {
     id: crypto.randomUUID(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: offerType.House,
+    type: OfferType.House,
     price: 180,
     city: {
-      name: 'Amsterdam',
+      name: City.Amsterdam,
       location: {
         latitude: 52.35514938496378,
         longitude: 4.64536342324233,
@@ -92,15 +172,43 @@ export const offers: TOffer[] = [
     isFavorite: true,
     isPremium: false,
     rating: 1,
-    previewImage: 'img/room.jpg'
+    previewImage: 'img/room.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
+    bedrooms: 3,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true
+    },
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/studio-photos.jpg',
+    ],
+    maxAdults: 4
   },
   {
     id: crypto.randomUUID(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: offerType.House,
+    type: OfferType.House,
     price: 180,
     city: {
-      name: 'Paris',
+      name: City.Paris,
       location: {
         latitude: 48.8534,
         longitude: 2.3488,
@@ -115,15 +223,43 @@ export const offers: TOffer[] = [
     isFavorite: true,
     isPremium: false,
     rating: 1,
-    previewImage: 'img/room.jpg'
+    previewImage: 'img/room.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
+    bedrooms: 3,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true
+    },
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/studio-photos.jpg',
+    ],
+    maxAdults: 4
   },
   {
     id: crypto.randomUUID(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: offerType.House,
+    type: OfferType.House,
     price: 180,
     city: {
-      name: 'Paris',
+      name: City.Paris,
       location: {
         latitude: 48.8534,
         longitude: 2.3488,
@@ -137,7 +273,35 @@ export const offers: TOffer[] = [
     },
     isFavorite: true,
     isPremium: false,
-    rating: 3,
-    previewImage: 'img/room.jpg'
+    rating: 3.5,
+    previewImage: 'img/room.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
+    bedrooms: 3,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true
+    },
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/studio-photos.jpg',
+    ],
+    maxAdults: 4
   }
 ];

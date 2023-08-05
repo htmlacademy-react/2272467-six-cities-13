@@ -1,8 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { TOffer } from '../../../types/offers.ts';
-import FavoritesList from '../../favorites-list/favorites-list.tsx';
-import Footer from '../../footer/footer.tsx';
+import { TOffer } from '../../types/offers.ts';
+import FavoritesList from '../../components/favorites-list/favorites-list.tsx';
+import Footer from '../../components/footer/footer.tsx';
 
 
 type TFavoritesPageProps = {

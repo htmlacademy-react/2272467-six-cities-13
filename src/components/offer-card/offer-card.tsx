@@ -65,7 +65,7 @@ function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JS
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <Rating rating={rating} style={'offer'}/>
+        <Rating rating={rating} block={'place'}/>
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
