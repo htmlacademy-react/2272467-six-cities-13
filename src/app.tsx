@@ -7,7 +7,6 @@ import LoginPage from './pages/login/login-page.tsx';
 import FavoritesPage from './pages/favorites/favorites-page.tsx';
 import PrivateRoute from './components/private-route/private-route.tsx';
 import { AppRoute } from './constants/app-route.ts';
-import { AuthorizationStatus } from './constants/authorization-status.ts';
 import Layout from './components/layout/layout.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { TOffer } from './types/offers.ts';
