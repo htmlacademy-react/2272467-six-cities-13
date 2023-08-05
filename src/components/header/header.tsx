@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
 import Logo from '../logo/logo.tsx';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
+import { logoutAction } from '../../store/api-actions/user-api.ts';
 
 function Header(): React.JSX.Element {
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
@@ -27,9 +29,13 @@ function Header(): React.JSX.Element {
                   </Link>
                 </li>}
               <li className="header__nav-item">
-                <Link to={AppRoute.Login} className="header__nav-link">
-                  <span className="header__signout">{authorizationStatus === AuthorizationStatus.Auth ? 'Sign out' : 'Sign in'}</span>
-                </Link>
+                {authorizationStatus === AuthorizationStatus.Auth
+                  ?
+                  <span className="header__signout" onClick={() => dispatch(logoutAction())}>Sign out</span>
+                  :
+                  <Link to={AppRoute.Login} className="header__nav-link">
+                    <span className="header__signin">Sign in</span>
+                  </Link>}
               </li>
             </ul>
           </nav>
