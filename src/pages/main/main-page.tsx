@@ -11,6 +11,7 @@ function MainPage(): React.JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.currentCity);
   const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
+  const offerIsEmpty = offersByCity.length < 1;
 
   useEffect(() => {
     dispatch(getOffers());
@@ -21,14 +22,14 @@ function MainPage(): React.JSX.Element {
       <Helmet>
         <title>Main</title>
       </Helmet>
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index ${offerIsEmpty ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
             <CitiesList selectedCity={selectedCity}/>
           </section>
         </div>
-        <CitiesBlock offers={offersByCity} selectedCity={selectedCity}/>
+        <CitiesBlock offers={offersByCity} selectedCity={selectedCity} offerIsEmpty={offerIsEmpty}/>
       </main>
     </div>
   );
