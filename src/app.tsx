@@ -21,7 +21,7 @@ function App(): React.JSX.Element {
         <Routes>
           <Route path={AppRoute.Main} element={<Layout/>}>
             <Route index element={<MainPage/>}/>
-            <Route path={`${AppRoute.Offer}/:id`} element={<OfferPage/>}/>
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferPage authorizationStatus = {authorizationStatus}/>}/>
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
                 <FavoritesPage/>

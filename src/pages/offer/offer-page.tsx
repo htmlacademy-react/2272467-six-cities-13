@@ -9,15 +9,20 @@ import { dropOffer } from '../../store/action.ts';
 import NearOffersBlock from '../../components/near-offers-block/near-offers-block.tsx';
 import Rating from '../../components/rating/rating.tsx';
 import { fetchOffer } from '../../store/api-actions/offers-api.ts';
-import Preloader from '../../components/preloader/preloader.tsx';
+import NotFoundPage from '../../components/not-found/not-found-page.tsx';
+import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 
+type TOfferPageProps = {
+  authorizationStatus: AuthorizationStatus;
+}
 
-function OfferPage(): React.JSX.Element {
+function OfferPage({ authorizationStatus }: TOfferPageProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const selectedCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
   const currentOffer = useAppSelector((state) => state.offer);
+
 
   useEffect(() => {
     if (id) {
@@ -30,7 +35,7 @@ function OfferPage(): React.JSX.Element {
   }, [dispatch, id]);
 
   if (!currentOffer) {
-    return <Preloader/>;
+    return <NotFoundPage/>;
   }
 
   return (
@@ -115,7 +120,7 @@ function OfferPage(): React.JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <ReviewList id={id}/>
-                <ReviewForm/>
+                {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm/>}
               </section>
             </div>
           </div>
