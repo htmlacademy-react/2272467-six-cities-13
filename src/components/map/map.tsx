@@ -120,6 +120,15 @@ function Map({ offers, selectedCity, selectedOffer, page }: TMapProps): React.JS
         { 'offer__map': page === 'offer' }
       )}
       ref={mapRef}
+      style={page === 'offer' ?
+        {
+          height: '100%',
+          minHeight: '500px',
+          width: '100%',
+          maxWidth: '1144px',
+          margin: '0 auto'
+        }
+        : {}}
     >
     </div>
   );
