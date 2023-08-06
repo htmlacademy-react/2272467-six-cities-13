@@ -6,6 +6,7 @@ import { offers } from './mocks/offers.ts';
 import { store } from './store';
 import { fetchOffers } from './store/api-actions/offers-api.ts';
 import { checkAuthAction } from './store/api-actions/user-api.ts';
+import ErrorMessage from './components/error-message/error-message.tsx';
 
 store.dispatch(fetchOffers());
 store.dispatch(checkAuthAction());
@@ -17,6 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage/>
       <App
         offers={offers}
       />

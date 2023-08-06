@@ -16,3 +16,5 @@ export const getOffer = createAction<string>('offer/get');
 export const dropOffer = createAction('offer/drop');
 
 export const requireAuthorizationStatus = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const setError = createAction<string | null>('error/set');
