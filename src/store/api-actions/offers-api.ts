@@ -37,7 +37,7 @@ export const fetchNearOffer = createAsyncThunk<void, Pick<TOffer, 'id'>, {
 }>(
   'data/fetchOffer',
   async ({ id }, { dispatch, extra: api }) => {
-    const { data } = await api.get<TOffer>(`${ApiRoute.Offers}/${id}/nearby`);
+    const { data } = await api.get<TOffer[]>(`${ApiRoute.Offers}/${id}/nearby`);
 
     dispatch(getNearOffers(data));
   }

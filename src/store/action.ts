@@ -2,14 +2,15 @@ import { createAction } from '@reduxjs/toolkit';
 import { City } from '../constants/city.ts';
 import { TOffer } from '../types/offers.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
+import { TReview } from '../types/review.ts';
 
 export const setCurrentCity = createAction<City>('offers/setCurrentCity');
 
 export const getOffers = createAction<TOffer[]>('offers/get');
 
-export const getNearOffers = createAction<TOffer>('nearOffers/get');
+export const getNearOffers = createAction<TOffer[]>('nearOffers/get');
 
-export const getReview = createAction('review/get');
+export const getReviews = createAction<TReview[]>('review/get');
 
 export const getOffer = createAction<TOffer>('offer/get');
 

@@ -4,15 +4,13 @@ import {
   getNearOffers,
   getOffer,
   getOffers,
-  getReview,
+  getReviews,
   requireAuthorizationStatus,
   setCurrentCity, setError
 } from './action.ts';
 import { City } from '../constants/city.ts';
 import { TOffer } from '../types/offers.ts';
-import { nearOffers } from '../mocks/near-offers.ts';
 import { TReview } from '../types/review.ts';
-import { reviews } from '../mocks/reviews.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
 
 
@@ -45,8 +43,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(getNearOffers, (state, action) => {
       state.nearOffers = action.payload;
     })
-    .addCase(getReview, (state) => {
-      state.reviews = reviews;
+    .addCase(getReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(getOffer, (state, action) => {
       state.offer = action.payload;
