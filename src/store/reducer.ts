@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  dropOffer,
+  dropOffer, getFavoritesOffers,
   getNearOffers,
   getOffer,
   getOffers,
@@ -22,6 +22,7 @@ const initialState: {
   offer: TOffer | null;
   authorizationStatus: AuthorizationStatus;
   error: string | null;
+  favoritesOffers: TOffer[];
 } = {
   currentCity: City.Paris,
   offers: [],
@@ -29,7 +30,8 @@ const initialState: {
   reviews: [],
   offer: null,
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null
+  error: null,
+  favoritesOffers: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -57,6 +59,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(getFavoritesOffers, (state, action) => {
+      state.favoritesOffers = action.payload;
     });
 });
 
