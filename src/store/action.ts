@@ -7,7 +7,7 @@ export const setCurrentCity = createAction<City>('offers/setCurrentCity');
 
 export const getOffers = createAction<TOffer[]>('offers/get');
 
-export const getNearOffers = createAction('nearOffers/get');
+export const getNearOffers = createAction<TOffer>('nearOffers/get');
 
 export const getReview = createAction('review/get');
 

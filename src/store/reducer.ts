@@ -42,8 +42,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(getOffers, (state, action) => {
       state.offers = action.payload;
     })
-    .addCase(getNearOffers, (state) => {
-      state.nearOffers = nearOffers;
+    .addCase(getNearOffers, (state, action) => {
+      state.nearOffers = action.payload;
     })
     .addCase(getReview, (state) => {
       state.reviews = reviews;
