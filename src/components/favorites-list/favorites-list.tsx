@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import OfferCard from '../offer-card/offer-card.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavoritesOffers } from '../../store/api-actions/favorites-offers.ts';
+import { fetchFavoritesOffers } from '../../store/api-actions/favorites-offers-action.ts';
 
 function FavoritesList(): React.JSX.Element {
   const dispatch = useAppDispatch();

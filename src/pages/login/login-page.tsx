@@ -1,10 +1,10 @@
 import React, { FormEvent, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo.tsx';
-import { loginAction } from '../../store/api-actions/user-api.ts';
 import { AppRoute } from '../../constants/app-route.ts';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
+import { loginAction } from '../../store/api-actions/user-action.ts';
 
 function LoginPage(): React.JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);

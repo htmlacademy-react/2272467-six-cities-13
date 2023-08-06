@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import Review from '../review/review.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchReviews } from '../../store/api-actions/review-api.ts';
 import { TOffer } from '../../types/offers.ts';
+import { fetchReviews } from '../../store/api-actions/review-action.ts';
 
 type ReviewListProps = {
   id: Pick<TOffer, 'id'> | undefined;

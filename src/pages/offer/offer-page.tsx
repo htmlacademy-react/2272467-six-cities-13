@@ -8,9 +8,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { dropOffer } from '../../store/action.ts';
 import NearOffersBlock from '../../components/near-offers-block/near-offers-block.tsx';
 import Rating from '../../components/rating/rating.tsx';
-import { fetchOffer } from '../../store/api-actions/offers-api.ts';
 import NotFoundPage from '../../components/not-found/not-found-page.tsx';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
+import { fetchOffer } from '../../store/api-actions/offers-action.ts';
 
 type TOfferPageProps = {
   authorizationStatus: AuthorizationStatus;

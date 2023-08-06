@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import OfferList from '../offer-list/offer-list.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchNearOffer } from '../../store/api-actions/offers-api.ts';
 import { TOffer } from '../../types/offers.ts';
+import { fetchNearOffer } from '../../store/api-actions/offers-action.ts';
 
 
 type nearOfferBlockProps = {

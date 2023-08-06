@@ -4,7 +4,7 @@ import { AppRoute } from '../../constants/app-route.ts';
 import Logo from '../logo/logo.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
-import { logoutAction } from '../../store/api-actions/user-api.ts';
+import { logoutAction } from '../../store/api-actions/user-action.ts';
 
 function Header(): React.JSX.Element {
   const dispatch = useAppDispatch();
