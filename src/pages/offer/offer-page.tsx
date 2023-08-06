@@ -5,10 +5,12 @@ import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { dropOffer, getOffer, getOffers, getReview } from '../../store/action.ts';
+import { dropOffer, getReview } from '../../store/action.ts';
 import NearOffersBlock from '../../components/near-offers-block/near-offers-block.tsx';
 import NotFoundPage from '../../components/not-found/not-found-page.tsx';
 import Rating from '../../components/rating/rating.tsx';
+import { fetchOffer } from '../../store/api-actions/offers-api.ts';
+import Preloader from '../../components/preloader/preloader.tsx';
 
 
 function OfferPage(): React.JSX.Element {
@@ -20,9 +22,8 @@ function OfferPage(): React.JSX.Element {
 
   useEffect(() => {
     if (id) {
-      dispatch(getOffers());
       dispatch(getReview());
-      dispatch(getOffer(id));
+      dispatch(fetchOffer({ id }));
     }
 
     return () => {
@@ -31,7 +32,7 @@ function OfferPage(): React.JSX.Element {
   }, [dispatch, id]);
 
   if (!currentOffer) {
-    return <NotFoundPage/>;
+    return <Preloader/>;
   }
 
   return (

@@ -49,7 +49,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.reviews = reviews;
     })
     .addCase(getOffer, (state, action) => {
-      state.offer = state.offers.find((offer) => offer.id === action.payload);
+      state.offer = action.payload;
     })
     .addCase(dropOffer, (state) => {
       state.offer = null;
