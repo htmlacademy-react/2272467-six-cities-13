@@ -11,7 +11,7 @@ const ratingAndTitle = {
 function ReviewForm(): React.JSX.Element {
   const [formData, setFormData] = useState(
     {
-      rating: 0,
+      rating: '',
       text: ''
     }
   );
