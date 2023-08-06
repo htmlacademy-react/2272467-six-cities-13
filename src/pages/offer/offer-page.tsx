@@ -11,6 +11,7 @@ import Rating from '../../components/rating/rating.tsx';
 import NotFoundPage from '../../components/not-found/not-found-page.tsx';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { fetchOffer } from '../../store/api-actions/offers-action.ts';
+import Preloader from '../../components/preloader/preloader.tsx';
 
 type TOfferPageProps = {
   authorizationStatus: AuthorizationStatus;
@@ -22,7 +23,7 @@ function OfferPage({ authorizationStatus }: TOfferPageProps): React.JSX.Element 
   const selectedCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
   const currentOffer = useAppSelector((state) => state.offer);
-
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
 
   useEffect(() => {
     if (id) {
@@ -34,7 +35,10 @@ function OfferPage({ authorizationStatus }: TOfferPageProps): React.JSX.Element 
     };
   }, [dispatch, id]);
 
-  if (!currentOffer) {
+
+  if (isOffersLoading) {
+    return <Preloader/>;
+  } else if (!currentOffer) {
     return <NotFoundPage/>;
   }
 

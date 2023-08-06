@@ -21,3 +21,5 @@ export const requireAuthorizationStatus = createAction<AuthorizationStatus>('use
 export const setError = createAction<string | null>('error/set');
 
 export const getFavoritesOffers = createAction<TOffer[]>('favorite/get');
+
+export const setOffersLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');

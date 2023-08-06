@@ -6,7 +6,7 @@ import {
   getOffers,
   getReviews,
   requireAuthorizationStatus,
-  setCurrentCity, setError
+  setCurrentCity, setError, setOffersLoadingStatus
 } from './action.ts';
 import { City } from '../constants/city.ts';
 import { TOffer } from '../types/offers.ts';
@@ -23,6 +23,7 @@ const initialState: {
   authorizationStatus: AuthorizationStatus;
   error: string | null;
   favoritesOffers: TOffer[];
+  isOffersLoading: boolean;
 } = {
   currentCity: City.Paris,
   offers: [],
@@ -31,7 +32,8 @@ const initialState: {
   offer: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
-  favoritesOffers: []
+  favoritesOffers: [],
+  isOffersLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -62,6 +64,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getFavoritesOffers, (state, action) => {
       state.favoritesOffers = action.payload;
+    })
+    .addCase(setOffersLoadingStatus, (state, action) => {
+      state.isOffersLoading = action.payload;
     });
 });
 

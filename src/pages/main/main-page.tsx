@@ -10,9 +10,10 @@ function MainPage(): React.JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.currentCity);
   const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
   const offerIsEmpty = offersByCity.length < 1;
 
-  if (offerIsEmpty) {
+  if (isOffersLoading) {
     return <Preloader/>;
   }
 
