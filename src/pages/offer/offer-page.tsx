@@ -10,7 +10,7 @@ import NearOffersBlock from '../../components/near-offers-block/near-offers-bloc
 import Rating from '../../components/rating/rating.tsx';
 import NotFoundPage from '../../components/not-found/not-found-page.tsx';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
-import { fetchOffer } from '../../store/api-actions/offers-action.ts';
+import { fetchNearOffer, fetchOffer } from '../../store/api-actions/offers-action.ts';
 import Preloader from '../../components/preloader/preloader.tsx';
 
 type TOfferPageProps = {
@@ -20,21 +20,23 @@ type TOfferPageProps = {
 function OfferPage({ authorizationStatus }: TOfferPageProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
+
   const selectedCity = useAppSelector((state) => state.currentCity);
-  const offers = useAppSelector((state) => state.offers);
   const currentOffer = useAppSelector((state) => state.offer);
+  const nearOffers = useAppSelector((state) => state.nearOffers);
   const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const currentAndNearOffers = [...nearOffers.slice(0,3), currentOffer];
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOffer({ id }));
+      dispatch(fetchNearOffer({ id }));
     }
 
     return () => {
       dispatch(dropOffer);
     };
   }, [dispatch, id]);
-
 
   if (isOffersLoading) {
     return <Preloader/>;
@@ -51,7 +53,7 @@ function OfferPage({ authorizationStatus }: TOfferPageProps): React.JSX.Element 
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {currentOffer.images.map((image) => (
+              {currentOffer.images.slice(0, 6).map((image) => (
                 <div key={image} className="offer__image-wrapper">
                   <img
                     className="offer__image"
@@ -128,10 +130,10 @@ function OfferPage({ authorizationStatus }: TOfferPageProps): React.JSX.Element 
               </section>
             </div>
           </div>
-          <Map offers={offers} selectedCity={selectedCity} selectedOffer={currentOffer} page={'offer'}/>
+          <Map offers={currentAndNearOffers} selectedCity={selectedCity} selectedOffer={currentOffer} page={'offer'}/>
         </section>
         <div className="container">
-          <NearOffersBlock id={id}/>
+          <NearOffersBlock nearOffers={nearOffers}/>
         </div>
       </main>
     </div>
