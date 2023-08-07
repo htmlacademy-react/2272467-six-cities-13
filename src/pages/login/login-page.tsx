@@ -5,6 +5,7 @@ import { AppRoute } from '../../constants/app-route.ts';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions/user-action.ts';
+import { processErrorHandle } from '../../utils/error.ts';
 
 function LoginPage(): React.JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -13,9 +14,16 @@ function LoginPage(): React.JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
+      const re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/;
+
+      if (!re.test(passwordRef.current?.value)) {
+        processErrorHandle('The password must contain at least one large letter and number, and contain at least 8 characters.');
+        return;
+      }
 
       dispatch(loginAction({
         login: loginRef.current.value,

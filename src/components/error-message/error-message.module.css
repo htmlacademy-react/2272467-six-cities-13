@@ -7,4 +7,5 @@
   background-color: #e56a6a;
   color: #ffffff;
   border-radius: 5px;
+  z-index: 1000;
 }

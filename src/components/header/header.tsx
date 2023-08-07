@@ -22,8 +22,7 @@ function Header(): React.JSX.Element {
               {authorizationStatus === AuthorizationStatus.Auth &&
                 <li className="header__nav-item user">
                   <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <span className="header__favorite-count">3</span>
                   </Link>
@@ -31,12 +30,13 @@ function Header(): React.JSX.Element {
               <li className="header__nav-item">
                 {authorizationStatus === AuthorizationStatus.Auth
                   ?
-                  <a href={'#'} className="header__nav-link">
+                  <a className="header__nav-link">
                     <span className="header__signout" onClick={() => dispatch(logoutAction())}>Sign out</span>
                   </a>
                   :
                   <Link to={AppRoute.Login} className="header__nav-link">
-                    <span className="header__signin">Sign in</span>
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__login">Sign in</span>
                   </Link>}
               </li>
             </ul>
