@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 function Layout(): React.JSX.Element {
   return (
     <Fragment>
-      <Header/>
+      <Header typeView={'withNavigation'}/>
       <main>
         <Outlet/>
       </main>

@@ -1,11 +1,11 @@
 import React, { FormEvent, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import Logo from '../../components/logo/logo.tsx';
 import { AppRoute } from '../../constants/app-route.ts';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions/user-action.ts';
 import { processErrorHandle } from '../../utils/error.ts';
+import Header from '../../components/header/header.tsx';
 
 function LoginPage(): React.JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -13,7 +13,6 @@ function LoginPage(): React.JSX.Element {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -38,16 +37,7 @@ function LoginPage(): React.JSX.Element {
       <Helmet>
         <title>Authorization</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo block={'header'}/>
-            </div>
-          </div>
-        </div>
-      </header>
-
+      <Header typeView={'withoutNavigation'}/>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
