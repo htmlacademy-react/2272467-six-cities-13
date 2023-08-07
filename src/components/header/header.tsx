@@ -31,7 +31,12 @@ function Header(): React.JSX.Element {
               <li className="header__nav-item">
                 {authorizationStatus === AuthorizationStatus.Auth
                   ?
-                  <span className="header__signout" onClick={() => dispatch(logoutAction())}>Sign out</span>
+                  <span className="header__signout" onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(logoutAction());
+                  }}
+                  >Sign out
+                  </span>
                   :
                   <Link to={AppRoute.Login} className="header__nav-link">
                     <span className="header__signin">Sign in</span>
