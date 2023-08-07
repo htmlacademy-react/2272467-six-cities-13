@@ -36,7 +36,12 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
                   {authorizationStatus === AuthorizationStatus.Auth
                     ?
                     <a className="header__nav-link">
-                      <span className="header__signout" onClick={() => dispatch(logoutAction())}>Sign out</span>
+                     <span className="header__signout" onClick={(e) => {
+                       e.preventDefault();
+                       dispatch(logoutAction());
+                     }}
+                     >Sign out
+                  </span>
                     </a>
                     :
                     <Link to={AppRoute.Login} className="header__nav-link">
