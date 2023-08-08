@@ -3,6 +3,7 @@ import { City } from '../constants/city.ts';
 import { TOffer } from './offers.ts';
 import { TReview } from './review.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
+import { TSorting } from './sorting.ts';
 
 export type TInitialState = {
   currentCity: City;
@@ -13,7 +14,7 @@ export type TInitialState = {
   isOffersLoading: boolean;
   reviews: TReview[];
   authorizationStatus: AuthorizationStatus;
-  error: string | null;
+  currentSorting: TSorting;
 }
 
 export type State = ReturnType<typeof store.getState>;

@@ -7,6 +7,7 @@ import { SortDescription } from '../../constants/sort-description.ts';
 import { TSorting } from '../../types/sorting.ts';
 import { sorting } from '../../utils/sorting.ts';
 import SortingForm from '../sorting-form/sorting-form.tsx';
+import { useAppSelector } from '../../hooks';
 
 type citiesBlockProps = {
   offers: TOffer[];
@@ -19,17 +20,12 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
     selectedOffer,
     setSelectedOffer
   ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
-
-  const [selectedSorting, setSelectedSorting] = useState<TSorting>(SortDescription.Popular);
+  const selectedSorting = useAppSelector((state) => state.currentSorting);
 
   function handleSelectedOffer(id: string) {
     if (selectedOffer?.id !== id) {
       setSelectedOffer({ id });
     }
-  }
-
-  function handleSelectedSorting(sort: TSorting) {
-    setSelectedSorting(sort);
   }
 
   const sortOffers = sorting[selectedSorting](offers).map((offer) => offer);
@@ -51,7 +47,7 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
-            <SortingForm selectedSorting={selectedSorting} handleSelectedSorting={handleSelectedSorting}/>
+            <SortingForm selectedSorting={selectedSorting}/>
             <OfferList offers={sortOffers} onSelectedOffer={handleSelectedOffer} page={'main'}/>
           </section>}
         <div className="cities__right-section">

@@ -3,6 +3,7 @@ import { City } from '../constants/city.ts';
 import { TOffer } from '../types/offers.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
 import { TReview } from '../types/review.ts';
+import { TSorting } from '../types/sorting.ts';
 
 export const setCurrentCity = createAction<City>('offers/setCurrentCity');
 
@@ -20,4 +21,6 @@ export const requireAuthorizationStatus = createAction<AuthorizationStatus>('use
 
 export const getFavoritesOffers = createAction<TOffer[]>('favorite/get');
 
-export const setOffersLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+export const setOffersLoadingStatus = createAction<boolean>('data/setOffersLoadingStatus');
+
+export const setCurrentSorting = createAction<TSorting>('sorting/set');

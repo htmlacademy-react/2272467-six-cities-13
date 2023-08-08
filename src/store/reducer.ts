@@ -7,12 +7,13 @@ import {
   getOffers,
   getReviews,
   requireAuthorizationStatus,
-  setCurrentCity,
+  setCurrentCity, setCurrentSorting,
   setOffersLoadingStatus
 } from './action.ts';
 import { City } from '../constants/city.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
 import { TInitialState } from '../types/state.ts';
+import { SortDescription } from '../constants/sort-description.ts';
 
 
 const initialState: TInitialState = {
@@ -24,7 +25,7 @@ const initialState: TInitialState = {
   isOffersLoading: false,
   reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null
+  currentSorting: SortDescription.Popular
 };
 const reducer = createReducer(initialState, (builder) => {
   builder
@@ -54,6 +55,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;
+    })
+    .addCase(setCurrentSorting, (state, action) => {
+      state.currentSorting = action.payload;
     });
 });
 
