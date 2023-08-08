@@ -1,41 +1,32 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  dropOffer, getFavoritesOffers,
+  dropOffer,
+  getFavoritesOffers,
   getNearOffers,
   getOffer,
   getOffers,
   getReviews,
   requireAuthorizationStatus,
-  setCurrentCity, setError, setOffersLoadingStatus
+  setCurrentCity,
+  setError,
+  setOffersLoadingStatus
 } from './action.ts';
 import { City } from '../constants/city.ts';
-import { TOffer } from '../types/offers.ts';
-import { TReview } from '../types/review.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
+import { TInitialState } from '../types/state.ts';
 
 
-const initialState: {
-  currentCity: City;
-  offers: TOffer[];
-  nearOffers: TOffer[];
-  reviews: TReview[];
-  offer: TOffer | null;
-  authorizationStatus: AuthorizationStatus;
-  error: string | null;
-  favoritesOffers: TOffer[];
-  isOffersLoading: boolean;
-} = {
+const initialState: TInitialState = {
   currentCity: City.Paris,
   offers: [],
-  nearOffers: [],
-  reviews: [],
   offer: null,
-  authorizationStatus: AuthorizationStatus.Unknown,
-  error: null,
   favoritesOffers: [],
-  isOffersLoading: false
+  nearOffers: [],
+  isOffersLoading: false,
+  reviews: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
+  error: null
 };
-
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setCurrentCity, (state, action) => {
