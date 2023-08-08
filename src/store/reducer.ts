@@ -8,7 +8,6 @@ import {
   getReviews,
   requireAuthorizationStatus,
   setCurrentCity,
-  setError,
   setOffersLoadingStatus
 } from './action.ts';
 import { City } from '../constants/city.ts';
@@ -49,9 +48,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     })
     .addCase(getFavoritesOffers, (state, action) => {
       state.favoritesOffers = action.payload;

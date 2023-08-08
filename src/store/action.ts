@@ -18,8 +18,6 @@ export const dropOffer = createAction('offer/drop');
 
 export const requireAuthorizationStatus = createAction<AuthorizationStatus>('user/requireAuthorization');
 
-export const setError = createAction<string | null>('error/set');
-
 export const getFavoritesOffers = createAction<TOffer[]>('favorite/get');
 
 export const setOffersLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');

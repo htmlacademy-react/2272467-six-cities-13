@@ -4,8 +4,8 @@ import { AppRoute } from '../../constants/app-route.ts';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions/user-action.ts';
-import { processErrorHandle } from '../../utils/error.ts';
 import Header from '../../components/header/header.tsx';
+import { toast } from 'react-toastify';
 
 function LoginPage(): React.JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -20,7 +20,7 @@ function LoginPage(): React.JSX.Element {
       const re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/;
 
       if (!re.test(passwordRef.current?.value)) {
-        processErrorHandle('The password must contain at least one large letter and number, and contain at least 8 characters.');
+        toast.warn('The password must contain at least one large letter and number, and contain at least 8 characters.');
         return;
       }
 
