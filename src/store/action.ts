@@ -4,7 +4,6 @@ import { TOffer } from '../types/offers.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
 import { TReview } from '../types/review.ts';
 import { TSorting } from '../types/sorting.ts';
-import { TUser } from '../types/user.ts';
 
 export const setCurrentCity = createAction<City>('offers/setCurrentCity');
 

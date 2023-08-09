@@ -4,7 +4,7 @@ import { AppDispatch, State } from '../../types/state.ts';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../constants/api-route.ts';
 import { TAddReview, TReview } from '../../types/review.ts';
-import { addReview, getReviews, pushReview } from '../action.ts';
+import { addReview, getReviews } from '../action.ts';
 
 export const fetchReviews = createAsyncThunk<void, Pick<TOffer, 'id'>, {
   dispatch: AppDispatch;
