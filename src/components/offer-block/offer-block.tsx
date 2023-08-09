@@ -118,7 +118,7 @@ function OfferBlock(): React.JSX.Element {
             </div>
             <section className="offer__reviews reviews">
               <ReviewList id={id}/>
-              {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm/>}
+              {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm id={id}/>}
             </section>
           </div>
         </div>
