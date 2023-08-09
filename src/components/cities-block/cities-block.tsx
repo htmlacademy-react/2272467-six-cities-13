@@ -3,8 +3,6 @@ import OfferList from '../offer-list/offer-list.tsx';
 import Map from '../map/map.tsx';
 import { TOffer } from '../../types/offers.ts';
 import { City } from '../../constants/city.ts';
-import { SortDescription } from '../../constants/sort-description.ts';
-import { TSorting } from '../../types/sorting.ts';
 import { sorting } from '../../utils/sorting.ts';
 import SortingForm from '../sorting-form/sorting-form.tsx';
 import { useAppSelector } from '../../hooks';

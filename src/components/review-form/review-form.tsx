@@ -1,8 +1,7 @@
 import React, { ChangeEvent, Fragment, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { TOffer } from '../../types/offers.ts';
-import { addReviews } from '../../store/api-actions/review-action.ts';
-import { toast } from 'react-toastify';
+import { addReviews, fetchReviews } from '../../store/api-actions/review-action.ts';
 
 const ratingAndTitle = {
   '1': 'terribly',
@@ -24,7 +23,6 @@ const initialState = {
 
 function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
-
   const [formData, setFormData] = useState(initialState);
 
   function handelTextChange(e: ChangeEvent<HTMLTextAreaElement>) {
@@ -48,11 +46,12 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
       dispatch(addReviews({
         id,
         reviewData: { comment, rating }
-      })).then(() => setFormData(initialState));
+      })).then(() => {
+        setFormData(initialState);
+        dispatch(fetchReviews({ id }));
+      });
     }
   }
-
-  console.log(formData);
 
   return (
     <form className="reviews__form form" onSubmit={(e) => {
