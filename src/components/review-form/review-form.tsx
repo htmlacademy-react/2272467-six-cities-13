@@ -30,28 +30,29 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
 
   function handelCommentChange(e: ChangeEvent<HTMLTextAreaElement>) {
     const comment = e.target.value;
-
-    if (comment.length >= 50) {
-      setCommentValid(true);
-    } else {
-      setCommentValid(false);
-    }
-
     setFormData({
       ...formData,
       comment
     });
   }
 
-  function handelRatingChange(e: ChangeEvent<HTMLInputElement>) {
-    const rating = Number(e.target.value);
+  useEffect(() => {
+    if (formData.comment.length >= 50) {
+      setCommentValid(true);
+    } else {
+      setCommentValid(false);
+    }
 
-    if (rating !== 0) {
+    if (formData.rating !== 0) {
       setRatingValid(true);
     } else {
       setRatingValid(false);
     }
+  }, [formData]);
 
+
+  function handelRatingChange(e: ChangeEvent<HTMLInputElement>) {
+    const rating = Number(e.target.value);
     setFormData({
       ...formData,
       rating
@@ -64,7 +65,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
     } else {
       setFormValid(false);
     }
-  }, [ratingValid, commentValid]);
+  }, [ratingValid, commentValid, formData]);
 
   function handelSubmit() {
     if (id) {
