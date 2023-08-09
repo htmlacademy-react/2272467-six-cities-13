@@ -5,6 +5,7 @@ import CitiesBlock from '../../components/cities-block/cities-block.tsx';
 import { useAppSelector } from '../../hooks';
 import Preloader from '../../components/preloader/preloader.tsx';
 
+
 function MainPage(): React.JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.currentCity);

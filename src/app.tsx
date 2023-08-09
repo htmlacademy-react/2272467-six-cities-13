@@ -7,16 +7,18 @@ import LoginPage from './pages/login/login-page.tsx';
 import FavoritesPage from './pages/favorites/favorites-page.tsx';
 import PrivateRoute from './components/private-route/private-route.tsx';
 import { AppRoute } from './constants/app-route.ts';
-import { AuthorizationStatus } from './constants/authorization-status.ts';
 import Layout from './components/layout/layout.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { TOffer } from './types/offers.ts';
+import { useAppSelector } from './hooks';
 
 type AppMainProps = {
   offers: TOffer[];
 }
 
 function App({ offers }: AppMainProps): React.JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -25,7 +27,7 @@ function App({ offers }: AppMainProps): React.JSX.Element {
             <Route index element={<MainPage/>}/>
             <Route path={`${AppRoute.Offer}/:id`} element={<OfferPage/>}/>
             <Route path={AppRoute.Favorites} element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
                 <FavoritesPage offers={offers}/>
               </PrivateRoute>
             }
