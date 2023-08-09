@@ -1,7 +1,7 @@
-import React, { ChangeEvent, Fragment, useState } from 'react';
+import React, { ChangeEvent, Fragment, useEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { TOffer } from '../../types/offers.ts';
-import { addReviews, fetchReviews } from '../../store/api-actions/review-action.ts';
+import { submitReview } from '../../store/api-actions/review-action.ts';
 
 const ratingAndTitle = {
   '1': 'terribly',
@@ -18,37 +18,63 @@ type ReviewFormProps = {
 const initialState = {
   comment: '',
   rating: 0,
-  isDisabled: false
 };
 
 function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState(initialState);
+  const [ratingValid, setRatingValid] = useState(false);
+  const [commentValid, setCommentValid] = useState(false);
+  const [formValid, setFormValid] = useState(false);
+  const [formSendsData, setFormSendsData] = useState(false);
 
-  function handelTextChange(e: ChangeEvent<HTMLTextAreaElement>) {
+  function handelCommentChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    const comment = e.target.value;
+
+    if (comment.length >= 50) {
+      setCommentValid(true);
+    } else {
+      setCommentValid(false);
+    }
+
     setFormData({
       ...formData,
-      comment: e.target.value
+      comment
     });
   }
 
   function handelRatingChange(e: ChangeEvent<HTMLInputElement>) {
+    const rating = Number(e.target.value);
+
+    if (rating !== 0) {
+      setRatingValid(true);
+    } else {
+      setRatingValid(false);
+    }
+
     setFormData({
       ...formData,
-      rating: Number(e.target.value)
+      rating
     });
   }
 
+  useEffect(() => {
+    if (commentValid && ratingValid) {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  }, [ratingValid, commentValid]);
+
   function handelSubmit() {
     if (id) {
-      const { comment, rating } = formData;
-      setFormData({ ...formData, isDisabled: true });
-      dispatch(addReviews({
+      setFormSendsData(true);
+      dispatch(submitReview({
         id,
-        reviewData: { comment, rating }
+        reviewData: formData
       })).then(() => {
         setFormData(initialState);
-        dispatch(fetchReviews({ id }));
+        setFormSendsData(false);
       });
     }
   }
@@ -75,7 +101,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
                 id={`${rating}-stars`}
                 type="radio"
                 onChange={handelRatingChange}
-                disabled={formData.isDisabled}
+                disabled={formSendsData}
               />
               <label
                 htmlFor={`${rating}-stars`}
@@ -98,8 +124,8 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
         maxLength={300}
         minLength={50}
         required
-        onChange={handelTextChange}
-        disabled={formData.isDisabled}
+        onChange={handelCommentChange}
+        disabled={formSendsData}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -108,7 +134,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
           your stay with at least{' '}
           <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={formData.isDisabled}>Submit
+        <button className="reviews__submit form__submit button" type="submit" disabled={!formValid || formSendsData}>Submit
         </button>
       </div>
     </form>

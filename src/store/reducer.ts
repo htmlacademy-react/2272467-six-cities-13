@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
+  addReview,
   dropOffer,
   getFavoritesOffers,
   getNearOffers,
@@ -58,6 +59,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCurrentSorting, (state, action) => {
       state.currentSorting = action.payload;
+    })
+    .addCase(addReview, (state, action) => {
+      state.reviews.push(action.payload);
     });
 });
 
