@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { TCity, TOffer } from '../../types/offers.ts';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
-import leaflet, { Marker, layerGroup } from 'leaflet';
-import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../constants/marker.ts';
+import { Marker, layerGroup } from 'leaflet';
 import cn from 'classnames';
 import { City } from '../../constants/city.ts';
+import { currentCustomIcon, defaultCustomIcon } from '../../constants/map.ts';
+
 
 type TMapProps = {
   offers: TOffer[];
@@ -13,18 +14,6 @@ type TMapProps = {
   selectedOffer: Pick<TOffer, 'id'> | undefined;
   page: 'main' | 'offer';
 }
-
-const defaultCustomIcon = leaflet.icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-});
-
-const currentCustomIcon = leaflet.icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-});
 
 function getLocationCity(city: City): Pick<TCity, 'location'> {
   switch (city) {
@@ -120,6 +109,15 @@ function Map({ offers, selectedCity, selectedOffer, page }: TMapProps): React.JS
         { 'offer__map': page === 'offer' }
       )}
       ref={mapRef}
+      style={page === 'offer' ?
+        {
+          height: '100%',
+          minHeight: '500px',
+          width: '100%',
+          maxWidth: '1144px',
+          margin: '0 auto'
+        }
+        : {}}
     >
     </div>
   );

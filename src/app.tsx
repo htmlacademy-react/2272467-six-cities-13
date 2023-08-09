@@ -9,14 +9,10 @@ import PrivateRoute from './components/private-route/private-route.tsx';
 import { AppRoute } from './constants/app-route.ts';
 import Layout from './components/layout/layout.tsx';
 import { HelmetProvider } from 'react-helmet-async';
-import { TOffer } from './types/offers.ts';
 import { useAppSelector } from './hooks';
+import 'react-toastify/dist/ReactToastify.css';
 
-type AppMainProps = {
-  offers: TOffer[];
-}
-
-function App({ offers }: AppMainProps): React.JSX.Element {
+function App(): React.JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
@@ -28,7 +24,7 @@ function App({ offers }: AppMainProps): React.JSX.Element {
             <Route path={`${AppRoute.Offer}/:id`} element={<OfferPage/>}/>
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
-                <FavoritesPage offers={offers}/>
+                <FavoritesPage/>
               </PrivateRoute>
             }
             >

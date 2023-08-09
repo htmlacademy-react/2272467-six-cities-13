@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { SortDescription } from '../../constants/sort-description.ts';
 import { TSorting } from '../../types/sorting.ts';
+import { setCurrentSorting } from '../../store/action.ts';
+import { useAppDispatch } from '../../hooks';
 
 type TSortingForm = {
   selectedSorting: TSorting;
-  handleSelectedSorting: (sort: TSorting) => void;
 }
 
-function SortingForm({ selectedSorting, handleSelectedSorting }: TSortingForm): React.JSX.Element {
+function SortingForm({ selectedSorting }: TSortingForm): React.JSX.Element {
+  const dispatch = useAppDispatch();
   const [isOpened, setIsOpened] = useState(false);
 
   const iconStyle = {
@@ -41,7 +43,7 @@ function SortingForm({ selectedSorting, handleSelectedSorting }: TSortingForm): 
         {Object.entries(SortDescription).map(([type,value]) => (
           <li key={type} onClick={(e) => {
             e.stopPropagation();
-            handleSelectedSorting(type);
+            dispatch(setCurrentSorting(type as TSorting));
           }}
           className={`places__option ${selectedSorting === type ? 'places__option--active' : ''}`}
           tabIndex={0}

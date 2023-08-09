@@ -1,39 +1,33 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
+  addReview,
   dropOffer,
+  getFavoritesOffers,
   getNearOffers,
   getOffer,
   getOffers,
-  getReview,
+  getReviews,
   requireAuthorizationStatus,
-  setCurrentCity, setError
+  setCurrentCity, setCurrentSorting,
+  setOffersLoadingStatus
 } from './action.ts';
 import { City } from '../constants/city.ts';
-import { TOffer } from '../types/offers.ts';
-import { nearOffers } from '../mocks/near-offers.ts';
-import { TReview } from '../types/review.ts';
-import { reviews } from '../mocks/reviews.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
+import { TInitialState } from '../types/state.ts';
+import { SortDescription } from '../constants/sort-description.ts';
 
 
-const initialState: {
-  currentCity: City;
-  offers: TOffer[];
-  nearOffers: TOffer[];
-  reviews: TReview[];
-  offer: TOffer | null;
-  authorizationStatus: AuthorizationStatus;
-  error: string | null;
-} = {
+const initialState: TInitialState = {
   currentCity: City.Paris,
   offers: [],
-  nearOffers: [],
-  reviews: [],
   offer: null,
+  favoritesOffers: [],
+  nearOffers: [],
+  isOffersLoading: false,
+  reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null
+  currentSorting: SortDescription.Popular
 };
-
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setCurrentCity, (state, action) => {
@@ -42,14 +36,14 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(getOffers, (state, action) => {
       state.offers = action.payload;
     })
-    .addCase(getNearOffers, (state) => {
-      state.nearOffers = nearOffers;
+    .addCase(getNearOffers, (state, action) => {
+      state.nearOffers = action.payload;
     })
-    .addCase(getReview, (state) => {
-      state.reviews = reviews;
+    .addCase(getReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(getOffer, (state, action) => {
-      state.offer = state.offers.find((offer) => offer.id === action.payload);
+      state.offer = action.payload;
     })
     .addCase(dropOffer, (state) => {
       state.offer = null;
@@ -57,8 +51,17 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
+    .addCase(getFavoritesOffers, (state, action) => {
+      state.favoritesOffers = action.payload;
+    })
+    .addCase(setOffersLoadingStatus, (state, action) => {
+      state.isOffersLoading = action.payload;
+    })
+    .addCase(setCurrentSorting, (state, action) => {
+      state.currentSorting = action.payload;
+    })
+    .addCase(addReview, (state, action) => {
+      state.reviews.push(action.payload);
     });
 });
 

@@ -1,10 +1,11 @@
 import React, { FormEvent, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import Logo from '../../components/logo/logo.tsx';
-import { loginAction } from '../../store/api-actions/user-api.ts';
 import { AppRoute } from '../../constants/app-route.ts';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
+import { loginAction } from '../../store/api-actions/user-action.ts';
+import Header from '../../components/header/header.tsx';
+import { toast } from 'react-toastify';
 
 function LoginPage(): React.JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -16,6 +17,12 @@ function LoginPage(): React.JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
+      const re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/;
+
+      if (!re.test(passwordRef.current?.value)) {
+        toast.warn('The password must contain at least one large letter and number, and contain at least 8 characters.');
+        return;
+      }
 
       dispatch(loginAction({
         login: loginRef.current.value,
@@ -30,21 +37,12 @@ function LoginPage(): React.JSX.Element {
       <Helmet>
         <title>Authorization</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo block={'header'}/>
-            </div>
-          </div>
-        </div>
-      </header>
-
+      <Header typeView={'withoutNavigation'}/>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
+            <form className="login__form form" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required

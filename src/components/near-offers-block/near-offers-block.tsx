@@ -1,23 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import OfferList from '../offer-list/offer-list.tsx';
-import { getNearOffers } from '../../store/action.ts';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { TOffer } from '../../types/offers.ts';
 
-function NearOffersBlock(): React.JSX.Element {
-  const dispatch = useAppDispatch();
 
-  const nearOffers = useAppSelector((state) => state.nearOffers);
+type nearOfferBlockProps = {
+  nearOffers: TOffer[];
+}
 
-  useEffect(() => {
-    dispatch(getNearOffers());
-  }, [dispatch]);
-
+function NearOffersBlock({ nearOffers }: nearOfferBlockProps): React.JSX.Element {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">
         Other places in the neighbourhood
       </h2>
-      <OfferList offers={nearOffers} page={'offer'}/>
+      <OfferList offers={nearOffers.slice(0, 3)} page={'offer'}/>
     </section>
   );
 }

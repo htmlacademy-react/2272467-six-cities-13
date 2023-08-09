@@ -1,13 +1,16 @@
-import React from 'react';
-import { TOffer } from '../../types/offers.ts';
+import React, { useEffect } from 'react';
 import OfferCard from '../offer-card/offer-card.tsx';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavoritesOffers } from '../../store/api-actions/favorites-offers-action.ts';
 
+function FavoritesList(): React.JSX.Element {
+  const dispatch = useAppDispatch();
+  const favoritesOffers = useAppSelector((state) => state.favoritesOffers);
 
-type TFavoritesListProps = {
-  offers: TOffer[];
-}
+  useEffect(() => {
+    dispatch(fetchFavoritesOffers());
+  }, [dispatch]);
 
-function FavoritesList({ offers }: TFavoritesListProps): React.JSX.Element {
   return (
     <ul className="favorites__list">
       <li className="favorites__locations-items">
@@ -19,7 +22,7 @@ function FavoritesList({ offers }: TFavoritesListProps): React.JSX.Element {
           </div>
         </div>
         <div className="favorites__places">
-          {offers.map((item) => <OfferCard key={item.id} offer={item} block={'favorite'}/>)}
+          {favoritesOffers.map((offer) => <OfferCard key={offer.id} offer={offer} block={'favorite'}/>)}
         </div>
       </li>
     </ul>
