@@ -8,6 +8,7 @@ import reviewSlices from './slices/review-slices.ts';
 import currentSortingSlices from './slices/current-sorting-slices.ts';
 import userSlices from './slices/user-slices.ts';
 import favoritesOffersSlices from './slices/favorites-offers-slices.ts';
+import reviewFormSlices from './slices/review-form-slices.ts';
 
 export const api = createApi();
 
@@ -19,6 +20,7 @@ export const store = configureStore({
     favoritesOffers: favoritesOffersSlices,
     nearOffers: nearOffersSlices,
     reviews: reviewSlices,
+    reviewForm: reviewFormSlices,
     currentSorting: currentSortingSlices,
     user: userSlices
   },
