@@ -9,7 +9,7 @@ import {
   getReviews,
   requireAuthorizationStatus,
   setCurrentCity, setCurrentSorting,
-  setOffersLoadingStatus
+  setOffersLoadingStatus, setUser
 } from './action.ts';
 import { City } from '../constants/city.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
@@ -26,7 +26,8 @@ const initialState: TInitialState = {
   isOffersLoading: false,
   reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
-  currentSorting: SortDescription.Popular
+  currentSorting: SortDescription.Popular,
+  user: null
 };
 const reducer = createReducer(initialState, (builder) => {
   builder
@@ -62,6 +63,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(addReview, (state, action) => {
       state.reviews.push(action.payload);
+    })
+    .addCase(setUser, (state, action) => {
+      state.user = action.payload;
     });
 });
 

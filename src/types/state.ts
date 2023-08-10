@@ -4,6 +4,7 @@ import { TOffer } from './offers.ts';
 import { TReview } from './review.ts';
 import { AuthorizationStatus } from '../constants/authorization-status.ts';
 import { TSorting } from './sorting.ts';
+import { TUser } from './user.ts';
 
 export type TInitialState = {
   currentCity: City;
@@ -15,6 +16,7 @@ export type TInitialState = {
   reviews: TReview[];
   authorizationStatus: AuthorizationStatus;
   currentSorting: TSorting;
+  user: TUser | null;
 }
 
 export type State = ReturnType<typeof store.getState>;
