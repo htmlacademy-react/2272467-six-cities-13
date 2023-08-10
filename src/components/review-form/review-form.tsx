@@ -46,7 +46,6 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
     }
   }
 
-  console.log(formData);
   return (
     <form className="reviews__form form" onSubmit={(e) => {
       e.preventDefault();
