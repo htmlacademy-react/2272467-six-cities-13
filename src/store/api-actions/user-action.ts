@@ -3,9 +3,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../constants/api-route.ts';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
-import { requireAuthorizationStatus, setUser } from '../action.ts';
 import { dropToken, saveToken } from '../../services/token.ts';
 import { AuthData, TUser } from '../../types/user.ts';
+import { setAuthorizationStatus, setUser } from '../slices/user-slices.ts';
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -16,10 +16,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     try {
       const { data } = await api.get<TUser>(ApiRoute.Login);
-      dispatch(requireAuthorizationStatus(AuthorizationStatus.Auth));
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
       dispatch(setUser(data));
     } catch {
-      dispatch(requireAuthorizationStatus(AuthorizationStatus.NotAuth));
+      dispatch(setAuthorizationStatus(AuthorizationStatus.NotAuth));
     }
   }
 );
@@ -33,7 +33,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({ login: email, password }, { dispatch, extra: api }) => {
     const { data} = await api.post<TUser>(ApiRoute.Login, { email, password });
     saveToken(data.token);
-    dispatch(requireAuthorizationStatus(AuthorizationStatus.Auth));
+    dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
     dispatch(setUser(data));
   },
 );
@@ -47,6 +47,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(ApiRoute.Logout);
     dropToken();
-    dispatch(requireAuthorizationStatus(AuthorizationStatus.NotAuth));
+    dispatch(setAuthorizationStatus(AuthorizationStatus.NotAuth));
   },
 );

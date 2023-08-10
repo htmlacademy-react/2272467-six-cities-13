@@ -12,8 +12,8 @@ type THeaderProps = {
 
 function Header({ typeView }: THeaderProps): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
+  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
+  const user = useAppSelector((state) => state.user.user);
 
   return (
     <header className="header">

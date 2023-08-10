@@ -6,21 +6,22 @@ import Map from '../map/map.tsx';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
-import { fetchNearOffer, fetchOffer } from '../../store/api-actions/offers-action.ts';
-import { dropOffer } from '../../store/action.ts';
 import NearOffersBlock from '../near-offers-block/near-offers-block.tsx';
 import Preloader from '../preloader/preloader.tsx';
 import NotFoundPage from '../not-found/not-found-page.tsx';
+import { fetchNearOffer } from '../../store/api-actions/near-offers-action.ts';
+import { fetchOffer } from '../../store/api-actions/offer-action.ts';
+import { dropOffer } from '../../store/slices/offer-slices.ts';
 
 function OfferBlock(): React.JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const selectedCity = useAppSelector((state) => state.currentCity);
-  const currentOffer = useAppSelector((state) => state.offer);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const selectedCity = useAppSelector((state) => state.currentCity.currentCity);
+  const currentOffer = useAppSelector((state) => state.offer.offer);
+  const nearOffers = useAppSelector((state) => state.nearOffers.nearOffers);
+  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
+  const isOfferLoading = useAppSelector((state) => state.offer.isLoading);
   const currentAndNearOffers = [...nearOffers.slice(0, 3), currentOffer];
 
   useEffect(() => {
@@ -34,7 +35,7 @@ function OfferBlock(): React.JSX.Element {
     };
   }, [dispatch, id]);
 
-  if (isOffersLoading) {
+  if (isOfferLoading) {
     return <Preloader/>;
   } else if (!currentOffer) {
     return <NotFoundPage/>;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch } from '../../hooks';
-import { setCurrentCity } from '../../store/action.ts';
 import { City } from '../../constants/city.ts';
+import { setCurrentCity } from '../../store/slices/current-city-slices.ts';
 
 
 type TCitiesListProps = {

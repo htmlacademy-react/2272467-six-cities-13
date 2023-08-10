@@ -5,7 +5,7 @@ import { fetchFavoritesOffers } from '../../store/api-actions/favorites-offers-a
 
 function FavoritesList(): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const favoritesOffers = useAppSelector((state) => state.favoritesOffers);
+  const favoritesOffers = useAppSelector((state) => state.favoritesOffers.favoritesOffers);
 
   useEffect(() => {
     dispatch(fetchFavoritesOffers());

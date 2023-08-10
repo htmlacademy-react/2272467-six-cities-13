@@ -7,10 +7,10 @@ import Preloader from '../../components/preloader/preloader.tsx';
 
 
 function MainPage(): React.JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const selectedCity = useAppSelector((state) => state.currentCity);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const selectedCity = useAppSelector((state) => state.currentCity.currentCity);
   const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const isOffersLoading = useAppSelector((state) => state.offers.isLoading);
   const offerIsEmpty = offersByCity.length < 1;
 
   if (isOffersLoading) {

@@ -3,7 +3,8 @@ import { AppDispatch, State } from '../../types/state.ts';
 import { AxiosInstance } from 'axios';
 import { TOffer } from '../../types/offers.ts';
 import { ApiRoute } from '../../constants/api-route.ts';
-import { getFavoritesOffers } from '../action.ts';
+import { setFavoritesOffers } from '../slices/favorites-offers-slices.ts';
+
 
 export const fetchFavoritesOffers = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -13,6 +14,6 @@ export const fetchFavoritesOffers = createAsyncThunk<void, undefined, {
   'data/fetchFavoritesOffers',
   async (_arg, { dispatch, extra: api }) => {
     const { data } = await api.get<TOffer[]>(ApiRoute.Favorite);
-    dispatch(getFavoritesOffers(data));
+    dispatch(setFavoritesOffers(data));
   },
 );

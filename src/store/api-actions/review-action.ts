@@ -4,7 +4,7 @@ import { AppDispatch, State } from '../../types/state.ts';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../constants/api-route.ts';
 import { TAddReview, TReview } from '../../types/review.ts';
-import { addReview, getReviews } from '../action.ts';
+import { addReview, setReviews } from '../slices/review-slices.ts';
 
 export const fetchReviews = createAsyncThunk<void, Pick<TOffer, 'id'>, {
   dispatch: AppDispatch;
@@ -15,7 +15,7 @@ export const fetchReviews = createAsyncThunk<void, Pick<TOffer, 'id'>, {
   async ({ id }, { dispatch, extra: api }) => {
     const { data } = await api.get<TReview[]>(`${ApiRoute.Comments}/${id}`);
 
-    dispatch(getReviews(data));
+    dispatch(setReviews(data));
   }
 );
 
@@ -24,7 +24,7 @@ export const submitReview = createAsyncThunk<void, { id: TOffer['id']; reviewDat
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/addReviews',
+  'data/addReview',
   async ({ id, reviewData }, { dispatch, extra: api }) => {
     const { data } = await api.post<TReview>(`${ApiRoute.Comments}/${id}`, reviewData);
 

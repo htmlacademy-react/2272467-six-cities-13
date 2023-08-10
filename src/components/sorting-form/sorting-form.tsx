@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SortDescription } from '../../constants/sort-description.ts';
 import { TSorting } from '../../types/sorting.ts';
-import { setCurrentSorting } from '../../store/action.ts';
 import { useAppDispatch } from '../../hooks';
+import { setCurrentSorting } from '../../store/slices/current-sorting-slices.ts';
 
 type TSortingForm = {
   selectedSorting: TSorting;

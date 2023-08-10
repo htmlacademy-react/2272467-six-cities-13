@@ -18,7 +18,7 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
     selectedOffer,
     setSelectedOffer
   ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
-  const selectedSorting = useAppSelector((state) => state.currentSorting);
+  const selectedSorting = useAppSelector((state) => state.currentSorting.currentSorting);
 
   function handleSelectedOffer(id: string) {
     if (selectedOffer?.id !== id) {
