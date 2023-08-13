@@ -12,7 +12,7 @@ export const fetchOffer = createAsyncThunk<TOffer, Pick<TOffer, 'id'>, {
   'data/fetchOffer',
   async ({ id }, { extra: api }) => {
     const { data } = await api.get<TOffer>(`${ApiRoute.Offers}/${id}`);
-    console.log(data);
+
     return data;
   }
 );
