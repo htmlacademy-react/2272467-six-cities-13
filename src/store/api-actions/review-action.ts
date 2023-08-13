@@ -4,8 +4,8 @@ import { AppDispatch, State } from '../../types/state.ts';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../constants/api-route.ts';
 import { TAddReview, TReview } from '../../types/review.ts';
-import { addReview } from '../slices/review-slices.ts';
-import { clearFormReview, setFormReviewSendsStatus } from '../slices/review-form-slices.ts';
+import { addReview } from '../review/review-slices.ts';
+import { clearFormReview, setFormReviewSendsStatus } from '../review-form/review-form-slices.ts';
 import { toast } from 'react-toastify';
 
 export const fetchReviews = createAsyncThunk<TReview[], Pick<TOffer, 'id'>, {

@@ -11,17 +11,20 @@ import Preloader from '../preloader/preloader.tsx';
 import NotFoundPage from '../not-found/not-found-page.tsx';
 import { fetchNearOffer } from '../../store/api-actions/near-offers-action.ts';
 import { fetchOffer } from '../../store/api-actions/offer-action.ts';
-import { dropOffer } from '../../store/slices/offer-slices.ts';
+import { dropOffer } from '../../store/offer/offer-slices.ts';
+import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
+import { getOffer, getOfferIsLoadingStatus } from '../../store/offer/offer-selector.ts';
+import { getNearOffer } from '../../store/near-offers/near-offers-selector.ts';
 
 function OfferBlock(): React.JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const selectedCity = useAppSelector((state) => state.currentCity.currentCity);
-  const currentOffer = useAppSelector((state) => state.offer.offer);
-  const nearOffers = useAppSelector((state) => state.nearOffers.nearOffers);
+  const selectedCity = useAppSelector(getCurrentCity);
+  const currentOffer = useAppSelector(getOffer);
+  const nearOffers = useAppSelector(getNearOffer);
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
-  const isOfferLoading = useAppSelector((state) => state.offer.isLoading);
+  const isOfferLoading = useAppSelector(getOfferIsLoadingStatus);
   const currentAndNearOffers = [...nearOffers.slice(0, 3), currentOffer];
 
   useEffect(() => {

@@ -4,13 +4,15 @@ import CitiesList from '../../components/cities-list/cities-list.tsx';
 import CitiesBlock from '../../components/cities-block/cities-block.tsx';
 import { useAppSelector } from '../../hooks';
 import Preloader from '../../components/preloader/preloader.tsx';
+import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
+import { getOffers, getOffersIsLoadingStatus } from '../../store/offers/offers-selector.ts';
 
 
 function MainPage(): React.JSX.Element {
-  const offers = useAppSelector((state) => state.offers.offers);
-  const selectedCity = useAppSelector((state) => state.currentCity.currentCity);
+  const offers = useAppSelector(getOffers);
+  const selectedCity = useAppSelector(getCurrentCity);
   const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
-  const isOffersLoading = useAppSelector((state) => state.offers.isLoading);
+  const isOffersLoading = useAppSelector(getOffersIsLoadingStatus);
   const offerIsEmpty = offersByCity.length < 1;
 
   if (isOffersLoading) {

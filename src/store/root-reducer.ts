@@ -1,13 +1,13 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import currentCitySlices from './slices/current-city-slices.ts';
-import offersSlices from './slices/offers-slices.ts';
-import offerSlices from './slices/offer-slices.ts';
-import favoritesOffersSlices from './slices/favorites-offers-slices.ts';
-import nearOffersSlices from './slices/near-offers-slices.ts';
-import reviewSlices from './slices/review-slices.ts';
-import reviewFormSlices from './slices/review-form-slices.ts';
-import currentSortingSlices from './slices/current-sorting-slices.ts';
-import userSlices from './slices/user-slices.ts';
+import currentCitySlices from './current-city/current-city-slices.ts';
+import offersSlices from './offers/offers-slices.ts';
+import offerSlices from './offer/offer-slices.ts';
+import favoritesOffersSlices from './favorites-offers/favorites-offers-slices.ts';
+import nearOffersSlices from './near-offers/near-offers-slices.ts';
+import reviewSlices from './review/review-slices.ts';
+import reviewFormSlices from './review-form/review-form-slices.ts';
+import currentSortingSlices from './current-sorting/current-sorting-slices.ts';
+import userSlices from './user/user-slices.ts';
 
 export const rootReducer = combineReducers({
   currentCity: currentCitySlices,

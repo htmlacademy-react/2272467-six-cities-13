@@ -6,6 +6,7 @@ import { City } from '../../constants/city.ts';
 import { sorting } from '../../utils/sorting.ts';
 import SortingForm from '../sorting-form/sorting-form.tsx';
 import { useAppSelector } from '../../hooks';
+import { getCurrentSorting } from '../../store/current-sorting/current-sorting-selector.ts';
 
 type citiesBlockProps = {
   offers: TOffer[];
@@ -18,7 +19,7 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
     selectedOffer,
     setSelectedOffer
   ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
-  const selectedSorting = useAppSelector((state) => state.currentSorting.currentSorting);
+  const selectedSorting = useAppSelector(getCurrentSorting);
 
   function handleSelectedOffer(id: string) {
     if (selectedOffer?.id !== id) {

@@ -5,6 +5,7 @@ import Logo from '../logo/logo.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { logoutAction } from '../../store/api-actions/user-action.ts';
+import { getAuthorizationStatus, getUser } from '../../store/user/user-selector.ts';
 
 type THeaderProps = {
   typeView: 'withNavigation' | 'withoutNavigation';
@@ -12,8 +13,8 @@ type THeaderProps = {
 
 function Header({ typeView }: THeaderProps): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
-  const user = useAppSelector((state) => state.user.user);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
 
   return (
     <header className="header">

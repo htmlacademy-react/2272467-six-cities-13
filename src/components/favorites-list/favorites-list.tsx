@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import OfferCard from '../offer-card/offer-card.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavoritesOffers } from '../../store/api-actions/favorites-offers-action.ts';
+import { getFavoritesOffers } from '../../store/favorites-offers/favorites-offers-selector.ts';
 
 function FavoritesList(): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const favoritesOffers = useAppSelector((state) => state.favoritesOffers.favoritesOffers);
+  const favoritesOffers = useAppSelector(getFavoritesOffers);
 
   useEffect(() => {
     dispatch(fetchFavoritesOffers());
