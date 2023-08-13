@@ -13,7 +13,7 @@ import { fetchNearOffer } from '../../store/api-actions/near-offers-action.ts';
 import { fetchOffer } from '../../store/api-actions/offer-action.ts';
 import { dropOffer } from '../../store/offer/offer-slices.ts';
 import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
-import { getOffer, getOfferIsLoadingStatus } from '../../store/offer/offer-selector.ts';
+import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from '../../store/offer/offer-selector.ts';
 import { getNearOffer } from '../../store/near-offers/near-offers-selector.ts';
 
 function OfferBlock(): React.JSX.Element {
@@ -25,6 +25,7 @@ function OfferBlock(): React.JSX.Element {
   const nearOffers = useAppSelector(getNearOffer);
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const isOfferLoading = useAppSelector(getOfferIsLoadingStatus);
+  const hasError = useAppSelector(getOfferErrorStatus);
   const currentAndNearOffers = [...nearOffers.slice(0, 3), currentOffer];
 
   useEffect(() => {
@@ -40,7 +41,9 @@ function OfferBlock(): React.JSX.Element {
 
   if (isOfferLoading) {
     return <Preloader/>;
-  } else if (!currentOffer) {
+  }
+
+  if (hasError || !currentOffer) {
     return <NotFoundPage/>;
   }
 
