@@ -1,25 +1,32 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
+import { fetchFavoritesOffers } from '../api-actions/favorites-offers-action.ts';
 
 type TFavoritesOffersState = {
   favoritesOffers: TOffer[];
+  isLoading: boolean;
 }
 
 const initialState: TFavoritesOffersState = {
-  favoritesOffers: []
+  favoritesOffers: [],
+  isLoading: false
 };
 
 const favoritesOffersSlices = createSlice({
   name: 'favoritesOffers',
   initialState,
-  reducers: {
-    setFavoritesOffers(state, action: PayloadAction<TOffer[]>) {
-      state.favoritesOffers = action.payload;
-    }
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(fetchFavoritesOffers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchFavoritesOffers.fulfilled, (state, action) => {
+        state.favoritesOffers = action.payload;
+        state.isLoading = false;
+      });
   }
 });
 
 export default favoritesOffersSlices.reducer;
-
-export const { setFavoritesOffers } = favoritesOffersSlices.actions;
 

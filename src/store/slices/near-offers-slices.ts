@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
+import { fetchNearOffer } from '../api-actions/near-offers-action.ts';
 
 type TNearOffersState = {
   nearOffers: TOffer[];
@@ -12,14 +13,14 @@ const initialState: TNearOffersState = {
 const nearOfferSlices = createSlice({
   name: 'nearOffers',
   initialState,
-  reducers: {
-    setNearOffers(state, action: PayloadAction<TOffer[]>) {
-      state.nearOffers = action.payload;
-    }
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(fetchNearOffer.fulfilled, (state, action) => {
+        state.nearOffers = action.payload;
+      });
   }
 });
 
 export default nearOfferSlices.reducer;
-
-export const { setNearOffers } = nearOfferSlices.actions;
 

@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
+import { fetchOffers } from '../api-actions/offers-action.ts';
 
 type TOffersState = {
   offers: TOffer[];
@@ -14,17 +15,18 @@ const initialState: TOffersState = {
 const offersSlices = createSlice({
   name: 'offers',
   initialState,
-  reducers: {
-    setOffers(state, action: PayloadAction<TOffer[]>) {
-      state.offers = action.payload;
-    },
-    setOffersLoadingStatus(state, action: PayloadAction<boolean>) {
-      state.isLoading = action.payload;
-    }
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(fetchOffers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchOffers.fulfilled, (state, action) => {
+        state.offers = action.payload;
+        state.isLoading = false;
+      });
   }
 });
 
 export default offersSlices.reducer;
-
-export const { setOffers, setOffersLoadingStatus } = offersSlices.actions;
 

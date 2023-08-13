@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TReview } from '../../types/review.ts';
+import { fetchReviews } from '../api-actions/review-action.ts';
 
 type TReviewsState = {
   reviews: TReview[];
@@ -13,16 +14,19 @@ const reviewsSlices = createSlice({
   name: 'reviews',
   initialState,
   reducers: {
-    setReviews(state, action: PayloadAction<TReview[]>) {
-      state.reviews = action.payload;
-    },
     addReview(state, action: PayloadAction<TReview>) {
       state.reviews.push(action.payload);
     }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchReviews.fulfilled, (state, action) => {
+        state.reviews = action.payload;
+      });
   }
 });
 
 export default reviewsSlices.reducer;
 
-export const { setReviews, addReview } = reviewsSlices.actions;
+export const { addReview } = reviewsSlices.actions;
 

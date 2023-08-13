@@ -3,18 +3,17 @@ import { TOffer } from '../../types/offers.ts';
 import { AppDispatch, State } from '../../types/state.ts';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../constants/api-route.ts';
-import { setNearOffers } from '../slices/near-offers-slices.ts';
 
 
-export const fetchNearOffer = createAsyncThunk<void, Pick<TOffer, 'id'>, {
+export const fetchNearOffer = createAsyncThunk<TOffer[], Pick<TOffer, 'id'>, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffer',
-  async ({ id }, { dispatch, extra: api }) => {
+  'data/fetchNearOffer',
+  async ({ id }, { extra: api }) => {
     const { data } = await api.get<TOffer[]>(`${ApiRoute.Offers}/${id}/nearby`);
 
-    dispatch(setNearOffers(data));
+    return data;
   }
 );

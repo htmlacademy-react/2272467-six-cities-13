@@ -4,20 +4,20 @@ import { AppDispatch, State } from '../../types/state.ts';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../constants/api-route.ts';
 import { TAddReview, TReview } from '../../types/review.ts';
-import { addReview, setReviews } from '../slices/review-slices.ts';
+import { addReview } from '../slices/review-slices.ts';
 import { clearFormReview, setFormReviewSendsStatus } from '../slices/review-form-slices.ts';
 import { toast } from 'react-toastify';
 
-export const fetchReviews = createAsyncThunk<void, Pick<TOffer, 'id'>, {
+export const fetchReviews = createAsyncThunk<TReview[], Pick<TOffer, 'id'>, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchReviews',
-  async ({ id }, { dispatch, extra: api }) => {
+  async ({ id }, { extra: api }) => {
     const { data } = await api.get<TReview[]>(`${ApiRoute.Comments}/${id}`);
 
-    dispatch(setReviews(data));
+    return data;
   }
 );
 
