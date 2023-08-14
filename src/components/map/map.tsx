@@ -20,49 +20,49 @@ function getLocationCity(city: City): Pick<TCity, 'location'> {
     case City.Paris:
       return {
         location: {
-          latitude: 48.8534,
-          longitude: 2.3488,
-          zoom: 10
+          latitude: 48.85661,
+          longitude: 2.351499,
+          zoom: 13
         }
       };
     case City.Cologne:
       return {
         location: {
-          latitude: 50.8936,
-          longitude: 7.0731,
-          zoom: 10
+          latitude: 50.938361,
+          longitude: 6.959974,
+          zoom: 13
         }
       };
     case City.Brussels:
       return {
         location: {
-          latitude: 50.846707,
-          longitude: 4.352472,
-          zoom: 10
+          latitude: 50.846557,
+          longitude: 4.351697,
+          zoom: 13
         }
       };
     case City.Amsterdam:
       return {
         location: {
-          latitude: 52.374,
-          longitude: 4.88969,
-          zoom: 10
+          latitude: 52.37454,
+          longitude: 4.897976,
+          zoom: 13
         }
       };
     case City.Hamburg:
       return {
         location: {
-          latitude: 53.5753,
-          longitude: 10.0153,
-          zoom: 10
+          latitude: 53.550341,
+          longitude: 10.000654,
+          zoom: 13
         }
       };
     case City.Dusseldorf:
       return {
         location: {
-          latitude: 51.2217,
-          longitude: 6.77616,
-          zoom: 10
+          latitude: 51.225402,
+          longitude: 6.776314,
+          zoom: 13
         }
       };
   }
