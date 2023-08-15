@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { submitReview } from '../api-actions/review-action.ts';
 
 type TReviewsFormState = {
   comment: string;
@@ -27,13 +28,19 @@ const reviewsFormSlices = createSlice({
     setFormReviewValid(state, action: PayloadAction<boolean>) {
       state.isValid = action.payload;
     },
-    setFormReviewSendsStatus(state, action: PayloadAction<boolean>) {
-      state.isSends = action.payload;
-    },
     clearFormReview(state) {
       state.comment = '';
       state.rating = null;
     }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(submitReview.pending, (state) => {
+        state.isSends = true;
+      })
+      .addCase(submitReview.fulfilled, (state) => {
+        state.isSends = false;
+      });
   }
 });
 
@@ -43,7 +50,6 @@ export const {
   updateComment,
   updateRating,
   setFormReviewValid,
-  setFormReviewSendsStatus,
   clearFormReview
 } = reviewsFormSlices.actions;
 

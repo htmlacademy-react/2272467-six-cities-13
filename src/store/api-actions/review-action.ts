@@ -5,7 +5,7 @@ import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../constants/api-route.ts';
 import { TAddReview, TReview } from '../../types/review.ts';
 import { addReview } from '../review/review-slices.ts';
-import { clearFormReview, setFormReviewSendsStatus } from '../review-form/review-form-slices.ts';
+import { clearFormReview } from '../review-form/review-form-slices.ts';
 import { toast } from 'react-toastify';
 
 export const fetchReviews = createAsyncThunk<TReview[], Pick<TOffer, 'id'>, {
@@ -26,9 +26,8 @@ export const submitReview = createAsyncThunk<void, { id: TOffer['id']; reviewDat
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/addReview',
+  'data/submit',
   async ({ id, reviewData }, { dispatch, extra: api }) => {
-    dispatch(setFormReviewSendsStatus(true));
     try {
       const { data } = await api.post<TReview>(`${ApiRoute.Comments}/${id}`, reviewData);
       dispatch(addReview(data));
@@ -37,6 +36,5 @@ export const submitReview = createAsyncThunk<void, { id: TOffer['id']; reviewDat
     } catch {
       toast.error('There was an error sending data, try again!');
     }
-    dispatch(setFormReviewSendsStatus(false));
   }
 );
