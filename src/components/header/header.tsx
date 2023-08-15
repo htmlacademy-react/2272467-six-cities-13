@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { logoutAction } from '../../store/api-actions/user-action.ts';
 import { getAuthorizationStatus, getUser } from '../../store/user/user-selector.ts';
+import { getFavoritesOffers } from '../../store/favorites-offers/favorites-offers-selector.ts';
 
 type THeaderProps = {
   typeView: 'withNavigation' | 'withoutNavigation';
@@ -15,6 +16,7 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const user = useAppSelector(getUser);
+  const favoritesOffers = useAppSelector(getFavoritesOffers);
 
   return (
     <header className="header">
@@ -31,7 +33,7 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
                     <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                       <span className="header__user-name user__name">{user.email}</span>
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">{favoritesOffers.length}</span>
                     </Link>
                   </li>}
                 <li className="header__nav-item">

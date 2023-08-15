@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { TOffer } from '../../types/offers.ts';
 import OfferCard from '../offer-card/offer-card.tsx';
 import cn from 'classnames';
@@ -26,4 +26,4 @@ function OfferList({ offers, onSelectedOffer, page }: TOfferListProps): React.JS
   );
 }
 
-export default OfferList;
+export default memo(OfferList);

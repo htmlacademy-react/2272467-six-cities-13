@@ -17,3 +17,15 @@ export const fetchFavoritesOffers = createAsyncThunk<TOffer[], undefined, {
     return data;
   },
 );
+
+export const favoritesOffersChangeStatus = createAsyncThunk<void, { id: TOffer['id']; status: 0 | 1 }, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'favoritesOffers/changeStatus',
+  async ({ id, status }, { dispatch, extra: api }) => {
+    await api.post<TOffer>(`${ApiRoute.Favorite}/${id}/${status}`);
+    dispatch(fetchFavoritesOffers());
+  },
+);

@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
-import { fetchFavoritesOffers } from '../api-actions/favorites-offers-action.ts';
+import {
+  fetchFavoritesOffers
+} from '../api-actions/favorites-offers-action.ts';
 
 type TFavoritesOffersState = {
   favoritesOffers: TOffer[];
