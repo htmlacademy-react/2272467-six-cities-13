@@ -5,6 +5,8 @@ import Logo from '../logo/logo.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { logoutAction } from '../../store/api-actions/user-action.ts';
+import { getAuthorizationStatus, getUser } from '../../store/user/user-selector.ts';
+import { getFavoritesOffers } from '../../store/favorites-offers/favorites-offers-selector.ts';
 
 type THeaderProps = {
   typeView: 'withNavigation' | 'withoutNavigation';
@@ -12,7 +14,9 @@ type THeaderProps = {
 
 function Header({ typeView }: THeaderProps): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
+  const favoritesOffers = useAppSelector(getFavoritesOffers);
 
   return (
     <header className="header">
@@ -24,25 +28,25 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
           {typeView === 'withNavigation' &&
             <nav className="header__nav">
               <ul className="header__nav-list">
-                {authorizationStatus === AuthorizationStatus.Auth &&
+                {authorizationStatus === AuthorizationStatus.Auth && user &&
                   <li className="header__nav-item user">
                     <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__user-name user__name">{user.email}</span>
+                      <span className="header__favorite-count">{favoritesOffers.length}</span>
                     </Link>
                   </li>}
                 <li className="header__nav-item">
                   {authorizationStatus === AuthorizationStatus.Auth
                     ?
-                    <a className="header__nav-link">
+                    <Link to={'#'} className="header__nav-link">
                       <span className="header__signout" onClick={(e) => {
                         e.preventDefault();
                         dispatch(logoutAction());
                       }}
                       >Sign out
                       </span>
-                    </a>
+                    </Link>
                     :
                     <Link to={AppRoute.Login} className="header__nav-link">
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>

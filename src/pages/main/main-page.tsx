@@ -4,14 +4,17 @@ import CitiesList from '../../components/cities-list/cities-list.tsx';
 import CitiesBlock from '../../components/cities-block/cities-block.tsx';
 import { useAppSelector } from '../../hooks';
 import Preloader from '../../components/preloader/preloader.tsx';
+import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
+import { getOffers, getOffersIsLoadingStatus } from '../../store/offers/offers-selector.ts';
+import cn from 'classnames';
 
 
 function MainPage(): React.JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const selectedCity = useAppSelector((state) => state.currentCity);
+  const offers = useAppSelector(getOffers);
+  const selectedCity = useAppSelector(getCurrentCity);
   const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
-  const offerIsEmpty = offersByCity.length < 1;
+  const isOffersLoading = useAppSelector(getOffersIsLoadingStatus);
+  const offerIsEmpty = offersByCity.length === 0;
 
   if (isOffersLoading) {
     return <Preloader/>;
@@ -22,8 +25,11 @@ function MainPage(): React.JSX.Element {
       <Helmet>
         <title>Main</title>
       </Helmet>
-      <main className={`page__main page__main--index ${offerIsEmpty ? 'page__main--index-empty' : ''}`}>
-        <h1 className="visually-hidden">Cities</h1>
+      <main className={cn(
+        'page__main page__main--index',
+        { 'page__main--index-empty': offerIsEmpty })}
+      >
+        < h1 className='visually-hidden'>Cities</h1>
         <div className="tabs">
           <section className="locations container">
             <CitiesList selectedCity={selectedCity}/>

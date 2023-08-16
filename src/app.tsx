@@ -13,7 +13,7 @@ import { useAppSelector } from './hooks';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App(): React.JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
 
   return (
     <HelmetProvider>

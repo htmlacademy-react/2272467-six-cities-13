@@ -1,15 +1,22 @@
-import React, { FormEvent, useRef } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../../constants/app-route.ts';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions/user-action.ts';
 import Header from '../../components/header/header.tsx';
-import { toast } from 'react-toastify';
 
 function LoginPage(): React.JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [loginError, setLoginError] = useState<{text: string; isVisible: boolean}>({
+    text: 'The entered email is incorrect.',
+    isVisible: false
+  });
+  const [passwordError, setPasswordError] = useState<{text: string; isVisible: boolean}>({
+    text: 'The password must contain at least one large letter and number, and contain at least 8 characters.',
+    isVisible: false
+  });
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -17,10 +24,18 @@ function LoginPage(): React.JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
-      const re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/;
+      const regPass = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/;
+      const regEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
-      if (!re.test(passwordRef.current?.value)) {
-        toast.warn('The password must contain at least one large letter and number, and contain at least 8 characters.');
+      if (!regEmail.test(loginRef.current?.value)) {
+        setLoginError({...loginError, isVisible: true});
+        setTimeout(() => setLoginError({...loginError, isVisible: false}), 5000);
+        return;
+      }
+
+      if (!regPass.test(passwordRef.current?.value)) {
+        setPasswordError({...passwordError, isVisible: true});
+        setTimeout(() => setPasswordError({...passwordError, isVisible: false}), 5000);
         return;
       }
 
@@ -44,6 +59,7 @@ function LoginPage(): React.JSX.Element {
             <h1 className="login__title">Sign in</h1>
             <form className="login__form form" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
+                {loginError.isVisible && <div style={{color: 'red'}}>{loginError.text}</div>}
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required
                   ref={loginRef}
@@ -54,6 +70,7 @@ function LoginPage(): React.JSX.Element {
                 <input className="login__input form__input" type="password" name="password" placeholder="Password"
                   required ref={passwordRef}
                 />
+                {passwordError.isVisible && <div style={{color: 'red'}}>{passwordError.text}</div>}
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>

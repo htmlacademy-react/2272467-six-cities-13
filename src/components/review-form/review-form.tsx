@@ -1,7 +1,9 @@
-import React, { ChangeEvent, Fragment, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import React, { ChangeEvent, Fragment, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { TOffer } from '../../types/offers.ts';
 import { submitReview } from '../../store/api-actions/review-action.ts';
+import { setFormReviewValid, updateComment, updateRating } from '../../store/review-form/review-form-slices.ts';
+import { getReviewForm } from '../../store/review-form/review-form-selector.ts';
 
 const ratingAndTitle = {
   '1': 'terribly',
@@ -15,75 +17,40 @@ type ReviewFormProps = {
   id: TOffer['id'] | undefined;
 }
 
-const initialState = {
-  comment: '',
-  rating: 0,
-};
-
 function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const [formData, setFormData] = useState(initialState);
-  const [ratingValid, setRatingValid] = useState(false);
-  const [commentValid, setCommentValid] = useState(false);
-  const [formValid, setFormValid] = useState(false);
-  const [formSendsData, setFormSendsData] = useState(false);
+  const formData = useAppSelector(getReviewForm);
 
   function handelCommentChange(e: ChangeEvent<HTMLTextAreaElement>) {
-    const comment = e.target.value;
-    setFormData({
-      ...formData,
-      comment
-    });
+    dispatch(updateComment(e.target.value));
   }
-
-  useEffect(() => {
-    if (formData.comment.length >= 50) {
-      setCommentValid(true);
-    } else {
-      setCommentValid(false);
-    }
-
-    if (formData.rating !== 0) {
-      setRatingValid(true);
-    } else {
-      setRatingValid(false);
-    }
-  }, [formData]);
-
 
   function handelRatingChange(e: ChangeEvent<HTMLInputElement>) {
-    const rating = Number(e.target.value);
-    setFormData({
-      ...formData,
-      rating
-    });
+    dispatch(updateRating(Number(e.target.value)));
   }
 
   useEffect(() => {
-    if (commentValid && ratingValid) {
-      setFormValid(true);
+    if (formData.comment.length >= 50 && formData.rating !== null) {
+      dispatch(setFormReviewValid(true));
     } else {
-      setFormValid(false);
+      dispatch(setFormReviewValid(false));
     }
-  }, [ratingValid, commentValid, formData]);
+  }, [dispatch, formData]);
 
-  function handelSubmit() {
+  function handelFormSubmit() {
+    const { comment, rating } = formData;
     if (id) {
-      setFormSendsData(true);
       dispatch(submitReview({
         id,
-        reviewData: formData
-      })).then(() => {
-        setFormData(initialState);
-        setFormSendsData(false);
-      });
+        reviewData: { comment, rating }
+      }));
     }
   }
 
   return (
     <form className="reviews__form form" onSubmit={(e) => {
       e.preventDefault();
-      handelSubmit();
+      handelFormSubmit();
     }}
     >
       <label className="reviews__label form__label" htmlFor="review">
@@ -98,11 +65,12 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
                 required
                 className="form__rating-input visually-hidden"
                 name="rating"
-                defaultValue={rating}
                 id={`${rating}-stars`}
                 type="radio"
+                value={rating}
+                checked={String(formData.rating) === rating}
                 onChange={handelRatingChange}
-                disabled={formSendsData}
+                disabled={formData.isSends}
               />
               <label
                 htmlFor={`${rating}-stars`}
@@ -126,7 +94,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
         minLength={50}
         required
         onChange={handelCommentChange}
-        disabled={formSendsData}
+        disabled={formData.isSends}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -135,7 +103,9 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
           your stay with at least{' '}
           <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!formValid || formSendsData}>Submit
+        <button className="reviews__submit form__submit button" type="submit"
+          disabled={!formData.isValid || formData.isSends}
+        >Submit
         </button>
       </div>
     </form>

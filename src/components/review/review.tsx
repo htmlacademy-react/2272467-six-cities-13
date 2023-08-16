@@ -9,8 +9,7 @@ type TReviewProps = {
 }
 
 function Review({ review }: TReviewProps): React.JSX.Element {
-  const { date, user, comment, rating } = review;
-  const { name, avatarUrl } = user;
+  const { date, comment, rating, user: { name, avatarUrl } } = review;
 
   return (
     <li className="reviews__item">

@@ -1,30 +1,18 @@
-import React, { useEffect } from 'react';
-import OfferCard from '../offer-card/offer-card.tsx';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavoritesOffers } from '../../store/api-actions/favorites-offers-action.ts';
+import React from 'react';
+import { City } from '../../constants/city.ts';
+import { TOffer } from '../../types/offers.ts';
+import FavoritesListByCity from '../favorites-list-by-city/favorites-list-by-city.tsx';
 
-function FavoritesList(): React.JSX.Element {
-  const dispatch = useAppDispatch();
-  const favoritesOffers = useAppSelector((state) => state.favoritesOffers);
+type TFavoritesListProps = {
+  favoritesOffers: TOffer[];
+}
 
-  useEffect(() => {
-    dispatch(fetchFavoritesOffers());
-  }, [dispatch]);
-
+function FavoritesList({ favoritesOffers }: TFavoritesListProps): React.JSX.Element {
   return (
     <ul className="favorites__list">
-      <li className="favorites__locations-items">
-        <div className="favorites__locations locations locations--current">
-          <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>Amsterdam</span>
-            </a>
-          </div>
-        </div>
-        <div className="favorites__places">
-          {favoritesOffers.map((offer) => <OfferCard key={offer.id} offer={offer} block={'favorite'}/>)}
-        </div>
-      </li>
+      {Object.values(City).map((city) => (
+        <FavoritesListByCity key={city} city={city} favoritesOffers={favoritesOffers}/>
+      ))}
     </ul>
   );
 }

@@ -1,9 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
 import { TOffer } from '../../types/offers.ts';
 import Rating from '../rating/rating.tsx';
 import cn from 'classnames';
+import { favoritesOffersChangeStatus } from '../../store/api-actions/favorites-offers-action.ts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 
 type TOfferCardProps = {
   offer: TOffer;
@@ -14,8 +17,18 @@ type TOfferCardProps = {
 function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JSX.Element {
   const {
     id, title, type, price,
-    isPremium, previewImage, rating
+    isPremium, previewImage, rating, isFavorite
   } = offer;
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
+  const navigate = useNavigate();
+  const [isFavoriteOffer, setIsFavoriteOffer] = useState(isFavorite);
+
+  const handelChangeStatus = () => {
+    dispatch(favoritesOffersChangeStatus({ id, status: !isFavoriteOffer ? 1 : 0 }));
+    setIsFavoriteOffer((prevState) => !prevState);
+  };
+
 
   return (
     <article
@@ -58,7 +71,18 @@ function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JS
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={cn(
+              'place-card__bookmark-button button',
+              { 'place-card__bookmark-button--active': isFavoriteOffer })}
+            type="button" onClick={() => {
+              if (authorizationStatus !== AuthorizationStatus.Auth) {
+                navigate(AppRoute.Login);
+              } else {
+                handelChangeStatus();
+              }
+            }}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

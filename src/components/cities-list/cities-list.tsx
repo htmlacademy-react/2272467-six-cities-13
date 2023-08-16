@@ -1,7 +1,9 @@
 import React from 'react';
 import { useAppDispatch } from '../../hooks';
-import { setCurrentCity } from '../../store/action.ts';
 import { City } from '../../constants/city.ts';
+import { setCurrentCity } from '../../store/current-city/current-city-slices.ts';
+import cn from 'classnames';
+import { Link } from 'react-router-dom';
 
 
 type TCitiesListProps = {
@@ -15,14 +17,15 @@ function CitiesList({ selectedCity }: TCitiesListProps): React.JSX.Element {
     <ul className="locations__list tabs__list">
       {Object.values(City).map((city) => (
         <li key={city} className="locations__item">
-          <a className={
-            `locations__item-link ${selectedCity === city ? 'tabs__item--active' : 'tabs__item'}`
-          }
-          href="#"
+          <Link to={''} className={cn(
+            'locations__item-link',
+            { 'tabs__item--active': selectedCity === city },
+            { 'tabs__item': selectedCity !== city }
+          )}
           onClick={() => dispatch(setCurrentCity(city))}
           >
             <span>{city}</span>
-          </a>
+          </Link>
         </li>
       ))}
     </ul>
