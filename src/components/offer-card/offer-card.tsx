@@ -15,11 +15,11 @@ type TOfferCardProps = {
 }
 
 function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JSX.Element {
-  const dispatch = useAppDispatch();
   const {
     id, title, type, price,
     isPremium, previewImage, rating, isFavorite
   } = offer;
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const navigate = useNavigate();
   const [isFavoriteOffer, setIsFavoriteOffer] = useState(isFavorite);
@@ -28,6 +28,7 @@ function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JS
     dispatch(favoritesOffersChangeStatus({ id, status: !isFavoriteOffer ? 1 : 0 }));
     setIsFavoriteOffer((prevState) => !prevState);
   };
+
 
   return (
     <article

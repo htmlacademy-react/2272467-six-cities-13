@@ -16,6 +16,7 @@ import { getCurrentCity } from '../../store/current-city/current-city-selector.t
 import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from '../../store/offer/offer-selector.ts';
 import { getNearOffer } from '../../store/near-offers/near-offers-selector.ts';
 
+
 function OfferBlock(): React.JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ function OfferBlock(): React.JSX.Element {
   const hasError = useAppSelector(getOfferErrorStatus);
   const currentAndNearOffers = [...nearOffers.slice(0, 3), currentOffer];
 
+
   useEffect(() => {
     if (id) {
       dispatch(fetchOffer({ id }));
@@ -35,7 +37,7 @@ function OfferBlock(): React.JSX.Element {
     }
 
     return () => {
-      dispatch(dropOffer);
+      dispatch(dropOffer());
     };
   }, [dispatch, id]);
 
@@ -47,12 +49,19 @@ function OfferBlock(): React.JSX.Element {
     return <NotFoundPage/>;
   }
 
+  const {
+    images, isPremium, title,
+    rating, bedrooms, maxAdults,
+    price, goods, description,
+    host: { avatarUrl, isPro, name }
+  } = currentOffer;
+
   return (
     <>
       <section className="offer">
         <div className="offer__gallery-container container">
           <div className="offer__gallery">
-            {currentOffer.images.slice(0, 6).map((image) => (
+            {images.slice(0, 6).map((image) => (
               <div key={image} className="offer__image-wrapper">
                 <img
                   className="offer__image"
@@ -65,13 +74,13 @@ function OfferBlock(): React.JSX.Element {
         </div>
         <div className="offer__container container">
           <div className="offer__wrapper">
-            {currentOffer.isPremium &&
+            {isPremium &&
               <div className="offer__mark">
                 <span>Premium</span>
               </div>}
             <div className="offer__name-wrapper">
               <h1 className="offer__name">
-                {currentOffer.title}
+                {title}
               </h1>
               <button className="offer__bookmark-button button" type="button">
                 <svg className="offer__bookmark-icon" width={31} height={33}>
@@ -80,24 +89,24 @@ function OfferBlock(): React.JSX.Element {
                 <span className="visually-hidden">To bookmarks</span>
               </button>
             </div>
-            <Rating rating={currentOffer.rating} block={'offer'}/>
+            <Rating rating={rating} block={'offer'}/>
             <ul className="offer__features">
               <li className="offer__feature offer__feature--entire">Apartment</li>
               <li className="offer__feature offer__feature--bedrooms">
-                {currentOffer.bedrooms} {currentOffer.bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
+                {bedrooms} {bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
               </li>
               <li className="offer__feature offer__feature--adults">
-                Max {currentOffer.maxAdults} {currentOffer.maxAdults === 1 ? 'adult' : 'adults'}
+                Max {maxAdults} {maxAdults === 1 ? 'adult' : 'adults'}
               </li>
             </ul>
             <div className="offer__price">
-              <b className="offer__price-value">€{currentOffer.price}</b>
+              <b className="offer__price-value">€{price}</b>
               <span className="offer__price-text">&nbsp;night</span>
             </div>
             <div className="offer__inside">
               <h2 className="offer__inside-title">What&apos;s inside </h2>
               <ul className="offer__inside-list">
-                {currentOffer.goods.map((item) => (
+                {goods.map((item) => (
                   <li key={item} className="offer__inside-item">{item}</li>
                 ))}
               </ul>
@@ -108,18 +117,18 @@ function OfferBlock(): React.JSX.Element {
                 <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                   <img
                     className="offer__avatar user__avatar"
-                    src={currentOffer.host.avatarUrl}
+                    src={avatarUrl}
                     width={74}
                     height={74}
                     alt="Host avatar"
                   />
                 </div>
-                <span className="offer__user-name">{currentOffer.host.name}</span>
-                {currentOffer.host.isPro && <span className="offer__user-status">Pro</span>}
+                <span className="offer__user-name">{name}</span>
+                {isPro && <span className="offer__user-status">Pro</span>}
               </div>
               <div className="offer__description">
                 <p className="offer__text">
-                  {currentOffer.description}
+                  {description}
                 </p>
               </div>
             </div>

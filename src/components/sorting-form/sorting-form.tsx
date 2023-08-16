@@ -3,6 +3,7 @@ import { SortDescription } from '../../constants/sort-description.ts';
 import { TSorting } from '../../types/sorting.ts';
 import { useAppDispatch } from '../../hooks';
 import { setCurrentSorting } from '../../store/current-sorting/current-sorting-slices.ts';
+import cn from 'classnames';
 
 type TSortingForm = {
   selectedSorting: TSorting;
@@ -39,13 +40,18 @@ function SortingForm({ selectedSorting }: TSortingForm): React.JSX.Element {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpened ? 'places__options--opened' : ''}`}>
-        {Object.entries(SortDescription).map(([type,value]) => (
+      <ul className={cn(
+        'places__options places__options--custom',
+        { 'places__options--opened': isOpened })}
+      >
+        {Object.entries(SortDescription).map(([type, value]) => (
           <li key={type} onClick={(e) => {
             e.stopPropagation();
             dispatch(setCurrentSorting(type as TSorting));
           }}
-          className={`places__option ${selectedSorting === type ? 'places__option--active' : ''}`}
+          className={cn(
+            'places__option',
+            { 'places__option--active': selectedSorting === type })}
           tabIndex={0}
           >{value}
           </li>
