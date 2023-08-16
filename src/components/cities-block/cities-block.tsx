@@ -54,8 +54,7 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
             <OfferList offers={sortOffers} onSelectedOffer={handleSelectedOffer} page={'main'}/>
           </section>}
         <div className="cities__right-section">
-          {offerIsEmpty ||
-            <Map offers={offers} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>}
+          {offerIsEmpty || <Map offers={offers} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>}
         </div>
       </div>
     </div>
