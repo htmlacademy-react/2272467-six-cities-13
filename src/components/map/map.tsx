@@ -15,6 +15,14 @@ type TMapProps = {
   page: 'main' | 'offer';
 }
 
+const styleMap = {
+  height: '100%',
+  minHeight: '500px',
+  width: '100%',
+  maxWidth: '1144px',
+  margin: '0 auto'
+};
+
 function getLocationCity(city: City): Pick<TCity, 'location'> {
   switch (city) {
     case City.Paris:
@@ -109,15 +117,7 @@ function Map({ offers, selectedCity, selectedOffer, page }: TMapProps): React.JS
         { 'offer__map': page === 'offer' }
       )}
       ref={mapRef}
-      style={page === 'offer' ?
-        {
-          height: '100%',
-          minHeight: '500px',
-          width: '100%',
-          maxWidth: '1144px',
-          margin: '0 auto'
-        }
-        : {}}
+      style={page === 'offer' ? styleMap : {}}
     >
     </div>
   );

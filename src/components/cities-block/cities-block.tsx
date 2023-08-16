@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import OfferList from '../offer-list/offer-list.tsx';
 import Map from '../map/map.tsx';
 import { TOffer } from '../../types/offers.ts';
@@ -7,6 +7,7 @@ import { sorting } from '../../utils/sorting.ts';
 import SortingForm from '../sorting-form/sorting-form.tsx';
 import { useAppSelector } from '../../hooks';
 import { getCurrentSorting } from '../../store/current-sorting/current-sorting-selector.ts';
+import cn from 'classnames';
 
 type citiesBlockProps = {
   offers: TOffer[];
@@ -21,17 +22,20 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
   ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
   const selectedSorting = useAppSelector(getCurrentSorting);
 
-  function handleSelectedOffer(id: string) {
+  const handleSelectedOffer = useCallback((id: string) => {
     if (selectedOffer?.id !== id) {
       setSelectedOffer({ id });
     }
-  }
+  }, []);
 
   const sortOffers = sorting[selectedSorting](offers).map((offer) => offer);
 
   return (
     <div className="cities">
-      <div className={`cities__places-container container ${offerIsEmpty ? 'cities__places-container--empty' : ''}`}>
+      <div className={cn(
+        'cities__places-container container',
+        {'cities__places-container--empty':offerIsEmpty })}
+      >
         {offerIsEmpty
           ?
           <section className="cities__no-places">
