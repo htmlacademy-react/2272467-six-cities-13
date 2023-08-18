@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import CitiesBlock from '../../components/cities-block/cities-block.tsx';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Preloader from '../../components/preloader/preloader.tsx';
 import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
 import { getOffers, getOffersIsLoadingStatus } from '../../store/offers/offers-selector.ts';
 import cn from 'classnames';
+import { fetchOffers } from '../../store/api-actions/offers-action.ts';
 
 
 function MainPage(): React.JSX.Element {
+  const dispatch = useAppDispatch();
   const offers = useAppSelector(getOffers);
   const selectedCity = useAppSelector(getCurrentCity);
   const isOffersLoading = useAppSelector(getOffersIsLoadingStatus);
   const offerIsEmpty = offers.length === 0;
+
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
 
   if (isOffersLoading) {
     return <Preloader/>;

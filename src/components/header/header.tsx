@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
 import Logo from '../logo/logo.tsx';
@@ -7,6 +7,7 @@ import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { logoutAction } from '../../store/api-actions/user-action.ts';
 import { getAuthorizationStatus, getUser } from '../../store/user/user-selector.ts';
 import { getFavoritesOffers } from '../../store/favorites-offers/favorites-offers-selector.ts';
+import { fetchFavoritesOffers } from '../../store/api-actions/favorites-offers-action.ts';
 
 type THeaderProps = {
   typeView: 'withNavigation' | 'withoutNavigation';
@@ -17,6 +18,10 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const user = useAppSelector(getUser);
   const favoritesOffers = useAppSelector(getFavoritesOffers);
+
+  useEffect(() => {
+    dispatch(fetchFavoritesOffers());
+  }, [dispatch]);
 
   return (
     <header className="header">
