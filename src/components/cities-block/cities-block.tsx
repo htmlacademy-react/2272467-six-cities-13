@@ -22,19 +22,20 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
   ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
   const selectedSorting = useAppSelector(getCurrentSorting);
 
-  const handleSelectedOffer = useCallback((id: string) => {
+  const handleSelectedOffer = useCallback((id: string | null) => {
     if (selectedOffer?.id !== id) {
       setSelectedOffer({ id });
     }
   }, []);
 
-  const sortOffers = sorting[selectedSorting](offers).map((offer) => offer);
+  const offersByCity = [...offers].filter((offer) => offer.city.name === selectedCity);
+  const sortOffers = sorting[selectedSorting](offersByCity).map((offer) => offer);
 
   return (
     <div className="cities">
       <div className={cn(
         'cities__places-container container',
-        {'cities__places-container--empty':offerIsEmpty })}
+        { 'cities__places-container--empty': offerIsEmpty })}
       >
         {offerIsEmpty
           ?
@@ -49,12 +50,13 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
           :
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
+            <b className="places__found">{sortOffers.length} places to stay in {selectedCity}</b>
             <SortingForm selectedSorting={selectedSorting}/>
             <OfferList offers={sortOffers} onSelectedOffer={handleSelectedOffer} page={'main'}/>
           </section>}
         <div className="cities__right-section">
-          {offerIsEmpty || <Map offers={offers} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>}
+          {offerIsEmpty ||
+            <Map offers={sortOffers} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>}
         </div>
       </div>
     </div>

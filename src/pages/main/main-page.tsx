@@ -12,13 +12,13 @@ import cn from 'classnames';
 function MainPage(): React.JSX.Element {
   const offers = useAppSelector(getOffers);
   const selectedCity = useAppSelector(getCurrentCity);
-  const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
   const isOffersLoading = useAppSelector(getOffersIsLoadingStatus);
-  const offerIsEmpty = offersByCity.length === 0;
+  const offerIsEmpty = offers.length === 0;
 
   if (isOffersLoading) {
     return <Preloader/>;
   }
+
 
   return (
     <div className="page page--gray page--main">
@@ -35,7 +35,7 @@ function MainPage(): React.JSX.Element {
             <CitiesList selectedCity={selectedCity}/>
           </section>
         </div>
-        <CitiesBlock offers={offersByCity} selectedCity={selectedCity} offerIsEmpty={offerIsEmpty}/>
+        <CitiesBlock offers={offers} selectedCity={selectedCity} offerIsEmpty={offerIsEmpty}/>
       </main>
     </div>
   );

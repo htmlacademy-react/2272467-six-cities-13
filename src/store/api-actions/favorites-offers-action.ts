@@ -3,6 +3,7 @@ import { AppDispatch, State } from '../../types/state.ts';
 import { AxiosInstance } from 'axios';
 import { TOffer } from '../../types/offers.ts';
 import { ApiRoute } from '../../constants/api-route.ts';
+import { FavoriteStatus } from '../../constants/offer.ts';
 
 
 export const fetchFavoritesOffers = createAsyncThunk<TOffer[], undefined, {
@@ -18,14 +19,28 @@ export const fetchFavoritesOffers = createAsyncThunk<TOffer[], undefined, {
   },
 );
 
-export const favoritesOffersChangeStatus = createAsyncThunk<void, { id: TOffer['id']; status: 0 | 1 }, {
+export const addFavorite = createAsyncThunk<TOffer, { id: TOffer['id'] }, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/changeStatus',
-  async ({ id, status }, { dispatch, extra: api }) => {
-    await api.post<TOffer>(`${ApiRoute.Favorite}/${id}/${status}`);
-    dispatch(fetchFavoritesOffers());
-  },
+  'data/addFavoritesOffers',
+  async ({ id }, { extra: api }) => {
+    const { data } = await api.post<TOffer>(`${ApiRoute.Favorite}/${id}/${FavoriteStatus.Add}`);
+
+    return data;
+  }
+);
+
+export const deleteFavorite = createAsyncThunk<TOffer, { id: TOffer['id'] }, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/deleteFavoritesOffers',
+  async ({ id }, { extra: api }) => {
+    const { data } = await api.post<TOffer>(`${ApiRoute.Favorite}/${id}/${FavoriteStatus.Delete}`);
+
+    return data;
+  }
 );

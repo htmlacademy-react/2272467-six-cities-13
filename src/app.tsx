@@ -11,9 +11,15 @@ import Layout from './components/layout/layout.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppSelector } from './hooks';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthorizationStatus } from './constants/authorization-status.ts';
+import Preloader from './components/preloader/preloader.tsx';
 
 function App(): React.JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return <Preloader/>;
+  }
 
   return (
     <HelmetProvider>
