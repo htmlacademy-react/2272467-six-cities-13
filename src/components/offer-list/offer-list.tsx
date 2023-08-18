@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 type TOfferListProps = {
   offers: TOffer[];
-  onSelectedOffer?: (id: string) => void;
+  onSelectedOffer?: (id: string | null) => void;
   page: 'main' | 'offer';
 }
 
@@ -26,4 +26,5 @@ function OfferList({ offers, onSelectedOffer, page }: TOfferListProps): React.JS
   );
 }
 
-export default memo(OfferList);
+const OfferListMemo = memo(OfferList);
+export default OfferListMemo;
