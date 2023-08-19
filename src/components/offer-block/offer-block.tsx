@@ -138,7 +138,7 @@ function OfferBlock(): React.JSX.Element {
             </section>
           </div>
         </div>
-        <Map offers={currentAndNearOffers} selectedCity={selectedCity} selectedOffer={currentOffer} page={'offer'}/>
+        <Map offers={currentAndNearOffers} selectedCity={selectedCity} page={'offer'}/>
       </section>
       <div className="container">
         <NearOffersBlock nearOffers={nearOffers}/>

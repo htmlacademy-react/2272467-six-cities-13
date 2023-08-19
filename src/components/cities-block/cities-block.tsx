@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import OfferList from '../offer-list/offer-list.tsx';
 import Map from '../map/map.tsx';
 import { TOffer } from '../../types/offers.ts';
@@ -16,18 +16,7 @@ type citiesBlockProps = {
 }
 
 function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): React.JSX.Element {
-  const [
-    selectedOffer,
-    setSelectedOffer
-  ] = useState<Pick<TOffer, 'id'> | undefined>(undefined);
   const selectedSorting = useAppSelector(getCurrentSorting);
-
-  const handleSelectedOffer = useCallback((id: string | null) => {
-    if (selectedOffer?.id !== id) {
-      setSelectedOffer({ id });
-    }
-  }, []);
-
   const offersByCity = [...offers].filter((offer) => offer.city.name === selectedCity);
   const sortOffers = sorting[selectedSorting](offersByCity).map((offer) => offer);
 
@@ -52,11 +41,11 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{sortOffers.length} places to stay in {selectedCity}</b>
             <SortingForm selectedSorting={selectedSorting}/>
-            <OfferList offers={sortOffers} onSelectedOffer={handleSelectedOffer} page={'main'}/>
+            <OfferList offers={sortOffers} page={'main'}/>
           </section>}
         <div className="cities__right-section">
           {offerIsEmpty ||
-            <Map offers={sortOffers} selectedCity={selectedCity} selectedOffer={selectedOffer} page={'main'}/>}
+            <Map offers={sortOffers} selectedCity={selectedCity} page={'main'}/>}
         </div>
       </div>
     </div>

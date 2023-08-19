@@ -5,14 +5,16 @@ import { TOffer } from '../../types/offers.ts';
 import Rating from '../rating/rating.tsx';
 import cn from 'classnames';
 import Bookmark from '../bookmark/bookmark.tsx';
+import { useAppDispatch } from '../../hooks';
+import { addSelectedOffer } from '../../store/offers/offers-slices.ts';
 
 type TOfferCardProps = {
   offer: TOffer;
   block: 'cities' | 'favorite' | 'near';
-  onSelectedOffer?: (id: string | null) => void;
 }
 
-function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JSX.Element {
+function OfferCard({ offer, block }: TOfferCardProps): React.JSX.Element {
+  const dispatch = useAppDispatch();
   const {
     id, title, type, price,
     isPremium, previewImage, rating, isFavorite
@@ -24,15 +26,19 @@ function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JS
   }, []);
 
   const handleCardMouseOver = () => {
-    if (onSelectedOffer) {
-      onSelectedOffer(id);
+    if (block === 'cities') {
+      dispatch(addSelectedOffer(id));
     }
   };
 
   const handleCardMouseLeave = () => {
-    if (onSelectedOffer) {
-      onSelectedOffer(null);
+    if (block === 'cities') {
+      dispatch(addSelectedOffer(null));
     }
+  };
+
+  const handleCardClick = () => {
+    dispatch(addSelectedOffer(id));
   };
 
   return (
@@ -45,6 +51,7 @@ function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JS
       )}
       onMouseOver={handleCardMouseOver}
       onMouseLeave={handleCardMouseLeave}
+      onClick={handleCardClick}
     >
       {isPremium &&
         <div className="place-card__mark">
