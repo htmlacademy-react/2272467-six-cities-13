@@ -14,7 +14,7 @@ import { fetchOffer } from '../../store/api-actions/offer-action.ts';
 import { dropOffer } from '../../store/offer/offer-slices.ts';
 import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
 import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from '../../store/offer/offer-selectors.ts';
-import { getNearOffer } from '../../store/near-offers/near-offers-selector.ts';
+import { getNearOffer } from '../../store/near-offers/near-offers-selectors.ts';
 
 
 function OfferBlock(): React.JSX.Element {
