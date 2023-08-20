@@ -62,7 +62,7 @@ describe('Offers Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should set "offers" to array with question, "isLoading" to "false" with "fetchOffers.fulfilled"', () => {
+  it('should set "offers" to array with "isLoading" to "false" with "fetchOffers.fulfilled"', () => {
     const mockOffers = makeFakeOffer();
     const expectedState = {
       offers: [mockOffers],

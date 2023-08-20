@@ -5,7 +5,7 @@ import CitiesBlock from '../../components/cities-block/cities-block.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Preloader from '../../components/preloader/preloader.tsx';
 import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
-import { getOffers, getOffersIsLoadingStatus } from '../../store/offers/offers-selector.ts';
+import { getOffers, getOffersIsLoadingStatus } from '../../store/offers/offers-selectors.ts';
 import cn from 'classnames';
 import { fetchOffers } from '../../store/api-actions/offers-action.ts';
 
