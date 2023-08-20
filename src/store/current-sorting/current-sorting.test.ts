@@ -25,7 +25,7 @@ describe('CurrentSorting Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should set current sorting with "setCurrentSorting"', () => {
+  it('should set current sorting with "setCurrentSorting" action', () => {
     const typeSorting = SortingType.Popular;
     const expectedState = {
       currentSorting: typeSorting

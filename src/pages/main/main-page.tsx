@@ -4,7 +4,7 @@ import CitiesList from '../../components/cities-list/cities-list.tsx';
 import CitiesBlock from '../../components/cities-block/cities-block.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Preloader from '../../components/preloader/preloader.tsx';
-import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
+import { getCurrentCity } from '../../store/current-city/current-city-selectors.ts';
 import { getOffers, getOffersIsLoadingStatus } from '../../store/offers/offers-selectors.ts';
 import cn from 'classnames';
 import { fetchOffers } from '../../store/api-actions/offers-action.ts';

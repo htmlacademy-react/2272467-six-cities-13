@@ -4,5 +4,6 @@ export enum NameSpace {
   NearOffers = 'nearOffers',
   FavoritesOffers = 'favoritesOffers',
   Review = 'review',
-  CurrentSorting = 'currentSorting'
+  CurrentSorting = 'currentSorting',
+  CurrentCity = 'currentCity'
 }
