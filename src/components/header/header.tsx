@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { logoutAction } from '../../store/api-actions/user-action.ts';
 import { getAuthorizationStatus, getUser } from '../../store/user/user-selector.ts';
-import { getFavoritesOffers } from '../../store/favorites-offers/favorites-offers-selector.ts';
+import { getFavoritesOffers } from '../../store/favorites-offers/favorites-offers-selectors.ts';
 import { fetchFavoritesOffers } from '../../store/api-actions/favorites-offers-action.ts';
 
 type THeaderProps = {

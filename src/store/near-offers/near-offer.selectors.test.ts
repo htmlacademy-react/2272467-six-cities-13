@@ -4,10 +4,10 @@ import { NameSpace } from '../../constants/name-space.ts';
 import { getNearOffer } from './near-offers-selectors.ts';
 
 describe('NearOffers selectors', () => {
-  const mockOffers = makeFakeOffer();
+  const mockNearOffers = makeFakeOffer();
   const state = {
     [NameSpace.NearOffers]: {
-      nearOffers: [mockOffers]
+      nearOffers: [mockNearOffers]
     }
   };
 

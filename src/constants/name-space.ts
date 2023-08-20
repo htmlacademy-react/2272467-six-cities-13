@@ -2,6 +2,6 @@ export enum NameSpace {
   Offers = 'offers',
   Offer = 'offer',
   NearOffers = 'nearOffers',
-  Favorite = 'favorite',
+  FavoritesOffers = 'favoritesOffers',
   Review = 'review'
 }
