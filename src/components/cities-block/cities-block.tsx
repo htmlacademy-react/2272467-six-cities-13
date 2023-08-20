@@ -6,7 +6,7 @@ import { City } from '../../constants/city.ts';
 import { sorting } from '../../utils/sorting.ts';
 import SortingForm from '../sorting-form/sorting-form.tsx';
 import { useAppSelector } from '../../hooks';
-import { getCurrentSorting } from '../../store/current-sorting/current-sorting-selector.ts';
+import { getCurrentSorting } from '../../store/current-sorting/current-sorting-selectors.ts';
 import cn from 'classnames';
 
 type citiesBlockProps = {

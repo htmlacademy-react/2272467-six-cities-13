@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { SortDescription } from '../../constants/sort-description.ts';
-import { TSorting } from '../../types/sorting.ts';
+import { SortingType } from '../../constants/sort-description.ts';
 import { useAppDispatch } from '../../hooks';
 import { setCurrentSorting } from '../../store/current-sorting/current-sorting-slices.ts';
 import cn from 'classnames';
+import { TSorting } from '../../types/sorting.ts';
 
 type TSortingForm = {
   selectedSorting: TSorting;
@@ -44,7 +44,7 @@ function SortingForm({ selectedSorting }: TSortingForm): React.JSX.Element {
         'places__options places__options--custom',
         { 'places__options--opened': isOpened })}
       >
-        {Object.entries(SortDescription).map(([type, value]) => (
+        {Object.entries(SortingType).map(([type, value]) => (
           <li key={type} onClick={(e) => {
             e.stopPropagation();
             dispatch(setCurrentSorting(type as TSorting));

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SortDescription } from '../../constants/sort-description.ts';
+import { SortingType } from '../../constants/sort-description.ts';
 import { TSorting } from '../../types/sorting.ts';
 
 type TCurrentSortingState = {
@@ -7,7 +7,7 @@ type TCurrentSortingState = {
 }
 
 const initialState: TCurrentSortingState = {
-  currentSorting: SortDescription.Popular
+  currentSorting: SortingType.Popular
 };
 
 const currentSortingSlices = createSlice({

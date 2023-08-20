@@ -1,3 +1,3 @@
-import { SortDescription } from '../constants/sort-description.ts';
+import { SortingType } from '../constants/sort-description.ts';
 
-export type TSorting = keyof typeof SortDescription;
+export type TSorting = keyof typeof SortingType;
