@@ -4,6 +4,7 @@ import { AxiosInstance } from 'axios';
 import { TOffer } from '../../types/offers.ts';
 import { ApiRoute } from '../../constants/api-route.ts';
 import { FavoriteStatus } from '../../constants/offer.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 
 export const fetchFavoritesOffers = createAsyncThunk<TOffer[], undefined, {
@@ -11,7 +12,7 @@ export const fetchFavoritesOffers = createAsyncThunk<TOffer[], undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchFavoritesOffers',
+  `${NameSpace.Data}/fetchFavoritesOffers`,
   async (_arg, { extra: api }) => {
     const { data } = await api.get<TOffer[]>(ApiRoute.Favorite);
 
@@ -24,7 +25,7 @@ export const addFavorite = createAsyncThunk<TOffer, { id: TOffer['id'] }, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/addFavoritesOffers',
+  `${NameSpace.Data}/addFavoritesOffers`,
   async ({ id }, { extra: api }) => {
     const { data } = await api.post<TOffer>(`${ApiRoute.Favorite}/${id}/${FavoriteStatus.Add}`);
 
@@ -37,7 +38,7 @@ export const deleteFavorite = createAsyncThunk<TOffer, { id: TOffer['id'] }, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/deleteFavoritesOffers',
+  `${NameSpace.Data}/deleteFavoritesOffers`,
   async ({ id }, { extra: api }) => {
     const { data } = await api.post<TOffer>(`${ApiRoute.Favorite}/${id}/${FavoriteStatus.Delete}`);
 

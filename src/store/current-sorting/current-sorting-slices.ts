@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SortingType } from '../../constants/sort-description.ts';
 import { TSorting } from '../../types/sorting.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TCurrentSortingState = {
   currentSorting: TSorting;
@@ -11,7 +12,7 @@ const initialState: TCurrentSortingState = {
 };
 
 const currentSortingSlices = createSlice({
-  name: 'currentSorting',
+  name: NameSpace.CurrentSorting,
   initialState,
   reducers: {
     setCurrentSorting(state, action: PayloadAction<TSorting>) {

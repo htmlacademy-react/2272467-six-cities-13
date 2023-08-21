@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TReview } from '../../types/review.ts';
 import { fetchReviews } from '../api-actions/review-action.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TReviewsState = {
   reviews: TReview[];
@@ -11,7 +12,7 @@ const initialState: TReviewsState = {
 };
 
 const reviewsSlices = createSlice({
-  name: 'reviews',
+  name: NameSpace.Reviews,
   initialState,
   reducers: {
     addReview(state, action: PayloadAction<TReview>) {

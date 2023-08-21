@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
 import { fetchNearOffer } from '../api-actions/near-offers-action.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TNearOffersState = {
   nearOffers: TOffer[];
@@ -11,7 +12,7 @@ const initialState: TNearOffersState = {
 };
 
 const nearOfferSlices = createSlice({
-  name: 'nearOffers',
+  name: NameSpace.NearOffers,
   initialState,
   reducers: {},
   extraReducers(builder) {

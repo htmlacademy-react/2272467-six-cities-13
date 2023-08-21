@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
 import { fetchOffers } from '../api-actions/offers-action.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TOffersState = {
   offers: TOffer[];
@@ -15,7 +16,7 @@ const initialState: TOffersState = {
 };
 
 const offersSlices = createSlice({
-  name: 'offers',
+  name: NameSpace.Offers,
   initialState,
   reducers: {
     addSelectedOffer(state, action: PayloadAction<TOffer['id'] | null>) {

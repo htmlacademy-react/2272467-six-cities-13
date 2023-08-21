@@ -4,6 +4,7 @@ import {
   addFavorite, deleteFavorite,
   fetchFavoritesOffers
 } from '../api-actions/favorites-offers-action.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TFavoritesOffersState = {
   favoritesOffers: TOffer[];
@@ -16,7 +17,7 @@ const initialState: TFavoritesOffersState = {
 };
 
 const favoritesOffersSlices = createSlice({
-  name: 'favoritesOffers',
+  name: NameSpace.FavoritesOffers,
   initialState,
   reducers: {},
   extraReducers(builder) {

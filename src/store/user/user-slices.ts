@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { TUser } from '../../types/user.ts';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions/user-action.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TUserState = {
   authorizationStatus: AuthorizationStatus;
@@ -14,7 +15,7 @@ const initialState: TUserState = {
 };
 
 const authorizationStatusSlices = createSlice({
-  name: 'user',
+  name: NameSpace.User,
   initialState,
   reducers: {},
   extraReducers(builder) {

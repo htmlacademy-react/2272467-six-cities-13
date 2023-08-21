@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { City } from '../../constants/city.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TCurrentCityState = {
   currentCity: City;
@@ -10,7 +11,7 @@ const initialState: TCurrentCityState = {
 };
 
 const currentCitySlices = createSlice({
-  name: 'currentCity',
+  name: NameSpace.CurrentCity,
   initialState,
   reducers: {
     setCurrentCity(state, action: PayloadAction<City>) {

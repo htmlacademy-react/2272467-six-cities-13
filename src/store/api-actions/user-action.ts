@@ -4,13 +4,14 @@ import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../constants/api-route.ts';
 import { dropToken, saveToken } from '../../services/token.ts';
 import { AuthData, TUser } from '../../types/user.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 export const checkAuthAction = createAsyncThunk<TUser, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'user/checkAuth',
+  `${NameSpace.User}/checkAuth`,
   async (_arg, { extra: api }) => {
     const { data } = await api.get<TUser>(ApiRoute.Login);
 
@@ -23,7 +24,7 @@ export const loginAction = createAsyncThunk<TUser, AuthData, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'user/login',
+  `${NameSpace.User}/login`,
   async ({ login: email, password }, { extra: api }) => {
     const { data } = await api.post<TUser>(ApiRoute.Login, { email, password });
     saveToken(data.token);
@@ -37,7 +38,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'user/logout',
+  `${NameSpace.User}/logout`,
   async (_arg, { extra: api }) => {
     await api.delete(ApiRoute.Logout);
     dropToken();
