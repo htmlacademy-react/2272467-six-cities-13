@@ -31,7 +31,7 @@ describe('Offers Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should add selected offer with "addSelectedOffer" action', () => {
+  it('should return reviews array with "f" action', () => {
     const initialState = {
       offers: [],
       isLoading: false,

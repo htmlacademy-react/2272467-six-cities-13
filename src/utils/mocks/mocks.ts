@@ -1,7 +1,8 @@
 import { TOffer } from '../../types/offers.ts';
-import { name, image, datatype, helpers, internet } from 'faker';
+import { name, image, datatype, helpers, internet, date, lorem } from 'faker';
 import { OfferType } from '../../constants/offer.ts';
 import { City } from '../../constants/city.ts';
+import { TReview } from '../../types/review.ts';
 
 export const makeFakeOffer = (): TOffer => ({
   id: crypto.randomUUID(),
@@ -27,4 +28,15 @@ export const makeFakeOffer = (): TOffer => ({
     email: internet.email(),
     token: crypto.randomUUID()
   }
+});
+
+export const makeFakeReview = (): TReview => ({
+  id: crypto.randomUUID(),
+  date: date.soon(),
+  user: {
+    email: internet.email(),
+    token: crypto.randomUUID()
+  },
+  comment: lorem.text(),
+  rating: datatype.number({ precision: 1 })
 });
