@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { TOffer } from '../../types/offers.ts';
 import { submitReview } from '../../store/api-actions/review-action.ts';
 import { setFormReviewValid, updateComment, updateRating } from '../../store/review-form/review-form-slices.ts';
-import { getReviewForm } from '../../store/review-form/review-form-selector.ts';
+import { getReviewForm } from '../../store/review-form/review-form-selectors.ts';
 
 const ratingAndTitle = {
   '1': 'terribly',
