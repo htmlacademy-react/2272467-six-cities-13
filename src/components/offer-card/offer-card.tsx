@@ -6,7 +6,7 @@ import Rating from '../rating/rating.tsx';
 import cn from 'classnames';
 import Bookmark from '../bookmark/bookmark.tsx';
 import { useAppDispatch } from '../../hooks';
-import { addSelectedOffer } from '../../store/offers/offers-slices.ts';
+import { addSelectedOffer } from '../../store/offer/offer-slices.ts';
 
 type TOfferCardProps = {
   offer: TOffer;

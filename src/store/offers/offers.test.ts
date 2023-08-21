@@ -1,4 +1,4 @@
-import offersSlices, { addSelectedOffer } from './offers-slices.ts';
+import offersSlices from './offers-slices.ts';
 import { expect } from 'vitest';
 import { fetchOffers } from '../api-actions/offers-action.ts';
 import { makeFakeOffer } from '../../utils/mocks/mocks.ts';
@@ -8,8 +8,7 @@ describe('Offers Slice', () => {
     const emptyAction = { type: '' };
     const expectedState = {
       offers: [],
-      isLoading: false,
-      selectedOffer: null
+      isLoading: false
     };
 
     const result = offersSlices(expectedState, emptyAction);
@@ -22,8 +21,7 @@ describe('Offers Slice', () => {
 
     const expectedState = {
       offers: [],
-      isLoading: false,
-      selectedOffer: null
+      isLoading: false
     };
 
     const result = offersSlices(undefined, emptyAction);
@@ -31,30 +29,10 @@ describe('Offers Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should return reviews array with "f" action', () => {
-    const initialState = {
-      offers: [],
-      isLoading: false,
-      selectedOffer: null
-    };
-    const id = crypto.randomUUID();
-
-    const expectedState = {
-      offers: [],
-      isLoading: false,
-      selectedOffer: id
-    };
-
-    const result = offersSlices(initialState, addSelectedOffer(id));
-
-    expect(result).toEqual(expectedState);
-  });
-
   it('should set "isLoading" to "true" with fetch fetchOffers.pending', () => {
     const expectedState = {
       offers: [],
-      isLoading: true,
-      selectedOffer: null
+      isLoading: true
     };
 
     const result = offersSlices(undefined, fetchOffers.pending);
@@ -66,8 +44,7 @@ describe('Offers Slice', () => {
     const mockOffers = makeFakeOffer();
     const expectedState = {
       offers: [mockOffers],
-      isLoading: false,
-      selectedOffer: null
+      isLoading: false
     };
 
     const result = offersSlices(

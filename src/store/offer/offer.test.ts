@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 import { makeFakeOffer } from '../../utils/mocks/mocks.ts';
-import offerSlices, { dropOffer } from './offer-slices.ts';
+import offerSlices, { addSelectedOffer, dropOffer } from './offer-slices.ts';
 import { fetchOffer } from '../api-actions/offer-action.ts';
 
 describe('Offer Slice', () => {
@@ -9,7 +9,8 @@ describe('Offer Slice', () => {
     const expectedState = {
       offer: null,
       isLoading: false,
-      hasError: false
+      hasError: false,
+      selectedOffer: null
     };
 
     const result = offerSlices(expectedState, emptyAction);
@@ -23,10 +24,32 @@ describe('Offer Slice', () => {
     const expectedState = {
       offer: null,
       isLoading: false,
-      hasError: false
+      hasError: false,
+      selectedOffer: null
     };
 
     const result = offerSlices(undefined, emptyAction);
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should return selected offer with "addSelectedOffer" action', () => {
+    const initialState = {
+      offer: null,
+      isLoading: false,
+      hasError: false,
+      selectedOffer: null
+    };
+    const testId = crypto.randomUUID();
+
+    const expectedState = {
+      offer: null,
+      isLoading: false,
+      hasError: false,
+      selectedOffer: testId
+    };
+
+    const result = offerSlices(initialState, addSelectedOffer(testId));
 
     expect(result).toEqual(expectedState);
   });
@@ -36,13 +59,15 @@ describe('Offer Slice', () => {
     const initialState = {
       offer: mockOffer,
       isLoading: false,
-      hasError: true
+      hasError: true,
+      selectedOffer: null
     };
 
     const expectedState = {
       offer: null,
       isLoading: false,
-      hasError: false
+      hasError: false,
+      selectedOffer: null
     };
 
     const result = offerSlices(initialState, dropOffer());
@@ -54,7 +79,8 @@ describe('Offer Slice', () => {
     const expectedState = {
       offer: null,
       isLoading: true,
-      hasError: false
+      hasError: false,
+      selectedOffer: null
     };
 
     const result = offerSlices(undefined, fetchOffer.pending);
@@ -66,7 +92,8 @@ describe('Offer Slice', () => {
     const initialState = {
       offer: null,
       isLoading: true,
-      hasError: false
+      hasError: false,
+      selectedOffer: null
     };
 
     const mockOffer = makeFakeOffer();
@@ -74,7 +101,8 @@ describe('Offer Slice', () => {
     const expectedState = {
       offer: mockOffer,
       isLoading: false,
-      hasError: false
+      hasError: false,
+      selectedOffer: null
     };
 
     const result = offerSlices(initialState, fetchOffer.fulfilled(mockOffer, '', { id: mockOffer.id }));
@@ -86,13 +114,15 @@ describe('Offer Slice', () => {
     const initialState = {
       offer: null,
       isLoading: true,
-      hasError: false
+      hasError: false,
+      selectedOffer: null
     };
 
     const expectedState = {
       offer: null,
       isLoading: false,
-      hasError: true
+      hasError: true,
+      selectedOffer: null
     };
 
     const result = offerSlices(initialState, fetchOffer.rejected);

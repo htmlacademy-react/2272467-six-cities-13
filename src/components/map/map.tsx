@@ -81,7 +81,7 @@ function Map({ offers, selectedCity, page }: TMapProps): React.JSX.Element {
   const cityLocation = getLocationCity(selectedCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation);
-  const selectedOffer = useAppSelector((state) => state.offers.selectedOffer);
+  const selectedOffer = useAppSelector((state) => state.offer.selectedOffer);
 
   useEffect(() => {
     if (map) {

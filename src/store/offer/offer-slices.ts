@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
 import { fetchOffer } from '../api-actions/offer-action.ts';
 import { NameSpace } from '../../constants/name-space.ts';
@@ -7,18 +7,23 @@ type TOfferState = {
   offer: TOffer | null;
   isLoading: boolean;
   hasError: boolean;
+  selectedOffer: TOffer['id'] | null;
 }
 
 const initialState: TOfferState = {
   offer: null,
   isLoading: false,
-  hasError: false
+  hasError: false,
+  selectedOffer: null
 };
 
 const offerSlices = createSlice({
   name: NameSpace.Offer,
   initialState,
   reducers: {
+    addSelectedOffer(state, action: PayloadAction<TOffer['id'] | null>) {
+      state.selectedOffer = action.payload;
+    },
     dropOffer(state) {
       state.offer = null;
       state.hasError = false;
@@ -43,5 +48,5 @@ const offerSlices = createSlice({
 
 export default offerSlices.reducer;
 
-export const { dropOffer } = offerSlices.actions;
+export const { addSelectedOffer, dropOffer } = offerSlices.actions;
 
