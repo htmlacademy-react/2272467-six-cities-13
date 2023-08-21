@@ -6,5 +6,6 @@ export enum NameSpace {
   Reviews = 'reviews',
   ReviewsForm = 'reviewForm',
   CurrentSorting = 'currentSorting',
-  CurrentCity = 'currentCity'
+  CurrentCity = 'currentCity',
+  User = 'user'
 }

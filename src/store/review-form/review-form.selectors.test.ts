@@ -2,7 +2,7 @@ import { describe, expect } from 'vitest';
 import { NameSpace } from '../../constants/name-space.ts';
 import { getReviewForm } from './review-form-selectors.ts';
 
-describe('Reviews-form selectors', () => {
+describe('ReviewsForm selectors', () => {
   const testComment = 'test comment';
   const testRating = 4;
   const state = {

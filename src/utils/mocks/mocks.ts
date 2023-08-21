@@ -3,6 +3,7 @@ import { name, image, datatype, helpers, internet, date, lorem } from 'faker';
 import { OfferType } from '../../constants/offer.ts';
 import { City } from '../../constants/city.ts';
 import { TAddReview, TReview } from '../../types/review.ts';
+import { AuthData, TUser } from '../../types/user.ts';
 
 export const makeFakeOffer = (): TOffer => ({
   id: crypto.randomUUID(),
@@ -44,4 +45,17 @@ export const makeFakeReview = (): TReview => ({
 export const makeFakeReviewDataForm = (): TAddReview => ({
   comment: lorem.text(),
   rating: datatype.number({ precision: 1 })
+});
+
+export const makeFakeUser = (): TUser => ({
+  name: name.title(),
+  avatarUrl: image.avatar(),
+  isPro: datatype.boolean(),
+  email: internet.email(),
+  token: crypto.randomUUID()
+});
+
+export const makeFakeAuthData = (): AuthData => ({
+  login: internet.email(),
+  password: internet.password()
 });
