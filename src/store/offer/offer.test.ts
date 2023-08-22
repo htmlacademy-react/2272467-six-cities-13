@@ -20,7 +20,6 @@ describe('Offer Slice', () => {
 
   it('should return default initial state and undefined action', () => {
     const emptyAction = { type: '' };
-
     const expectedState = {
       offer: null,
       isLoading: false,
@@ -34,12 +33,6 @@ describe('Offer Slice', () => {
   });
 
   it('should return selected offer with "addSelectedOffer" action', () => {
-    const initialState = {
-      offer: null,
-      isLoading: false,
-      hasError: false,
-      selectedOffer: null
-    };
     const testId = crypto.randomUUID();
 
     const expectedState = {
@@ -49,7 +42,7 @@ describe('Offer Slice', () => {
       selectedOffer: testId
     };
 
-    const result = offerSlices(initialState, addSelectedOffer(testId));
+    const result = offerSlices(undefined, addSelectedOffer(testId));
 
     expect(result).toEqual(expectedState);
   });
