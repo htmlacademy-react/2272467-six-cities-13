@@ -11,7 +11,7 @@ import Preloader from '../preloader/preloader.tsx';
 import NotFoundPage from '../not-found/not-found-page.tsx';
 import { fetchNearOffer } from '../../store/api-actions/near-offers-action.ts';
 import { fetchOffer } from '../../store/api-actions/offer-action.ts';
-import { dropOffer } from '../../store/offer/offer-slices.ts';
+import { addSelectedOffer, dropOffer } from '../../store/offer/offer-slices.ts';
 import { getCurrentCity } from '../../store/current-city/current-city-selectors.ts';
 import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from '../../store/offer/offer-selectors.ts';
 import { getNearOffer } from '../../store/near-offers/near-offers-selectors.ts';
@@ -34,6 +34,7 @@ function OfferBlock(): React.JSX.Element {
     if (id) {
       dispatch(fetchOffer({ id }));
       dispatch(fetchNearOffer({ id }));
+      dispatch(addSelectedOffer(id));
     }
 
     return () => {

@@ -37,10 +37,6 @@ function OfferCard({ offer, block }: TOfferCardProps): React.JSX.Element {
     }
   };
 
-  const handleCardClick = () => {
-    dispatch(addSelectedOffer(id));
-  };
-
   return (
     <article
       className={cn(
@@ -51,7 +47,6 @@ function OfferCard({ offer, block }: TOfferCardProps): React.JSX.Element {
       )}
       onMouseOver={handleCardMouseOver}
       onMouseLeave={handleCardMouseLeave}
-      onClick={handleCardClick}
     >
       {isPremium &&
         <div className="place-card__mark">
