@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SortingType } from '../../constants/sort-description.ts';
 import { TSorting } from '../../types/sorting.ts';
 import { NameSpace } from '../../constants/name-space.ts';
+import { SortingType } from '../../constants/sorting-type.ts';
 
 type TCurrentSortingState = {
   currentSorting: TSorting;

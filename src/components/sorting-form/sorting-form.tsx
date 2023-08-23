@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { SortingType } from '../../constants/sort-description.ts';
 import { useAppDispatch } from '../../hooks';
 import { setCurrentSorting } from '../../store/current-sorting/current-sorting-slices.ts';
 import cn from 'classnames';
 import { TSorting } from '../../types/sorting.ts';
+import { SortingType } from '../../constants/sorting-type.ts';
 
 type TSortingForm = {
   selectedSorting: TSorting;

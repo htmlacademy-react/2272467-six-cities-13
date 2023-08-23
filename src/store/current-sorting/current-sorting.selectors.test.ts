@@ -1,7 +1,7 @@
 import { describe, expect } from 'vitest';
 import { NameSpace } from '../../constants/name-space.ts';
 import { getCurrentSorting } from './current-sorting-selectors.ts';
-import { SortingType } from '../../constants/sort-description.ts';
+import { SortingType } from '../../constants/sorting-type.ts';
 
 describe('CurrentSorting selectors', () => {
   const sortingType = SortingType.Popular;

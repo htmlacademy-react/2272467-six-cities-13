@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 import currentSortingSlices, { setCurrentSorting } from './current-sorting-slices.ts';
-import { SortingType } from '../../constants/sort-description.ts';
+import { SortingType } from '../../constants/sorting-type.ts';
 
 describe('CurrentSorting Slice', () => {
   it('should return initial state with empty action', () => {
