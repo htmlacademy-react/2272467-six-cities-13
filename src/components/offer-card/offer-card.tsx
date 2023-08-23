@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
 import { TOffer } from '../../types/offers.ts';
@@ -19,11 +19,6 @@ function OfferCard({ offer, block }: TOfferCardProps): React.JSX.Element {
     id, title, type, price,
     isPremium, previewImage, rating, isFavorite
   } = offer;
-  const [isFavoriteOffer, setIsFavoriteOffer] = useState(isFavorite);
-
-  const handleSetIsFavoriteOffer = useCallback(() => {
-    setIsFavoriteOffer((prevState) => !prevState);
-  }, []);
 
   const handleCardMouseOver = () => {
     if (block === 'cities') {
@@ -81,8 +76,8 @@ function OfferCard({ offer, block }: TOfferCardProps): React.JSX.Element {
           </div>
           <Bookmark
             id={id}
-            isFavoriteOffer={isFavoriteOffer}
-            handleSetIsFavoriteOffer={handleSetIsFavoriteOffer}
+            isFavorite={isFavorite}
+            cssClass={'place-card'}
           />
         </div>
         <Rating rating={rating} block={'place'}/>

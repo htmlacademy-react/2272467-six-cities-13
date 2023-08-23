@@ -1,7 +1,6 @@
-import cn from 'classnames';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { AppRoute } from '../../constants/app-route.ts';
-import React, { memo } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -12,28 +11,34 @@ import { TOffer } from '../../types/offers.ts';
 
 type TBookmarkProps = {
   id: TOffer['id'];
-  isFavoriteOffer: boolean;
-  handleSetIsFavoriteOffer: () => void;
+  isFavorite: boolean;
+  cssClass: 'place-card' | 'offer';
 }
 
-function Bookmark({ id, isFavoriteOffer, handleSetIsFavoriteOffer }: TBookmarkProps): React.JSX.Element {
+function Bookmark({ id, isFavorite, cssClass }: TBookmarkProps): React.JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [isFavoriteOffer, setIsFavoriteOffer] = useState(isFavorite);
+
   const handleChangeStatus = () => {
     if (!isFavoriteOffer) {
       dispatch(addFavorite({ id }));
     } else {
       dispatch(deleteFavorite({ id }));
     }
-    handleSetIsFavoriteOffer();
+    setIsFavoriteOffer((prevState) => !prevState);
+  };
+
+  const getFavoriteStyles = () => {
+    if (isFavoriteOffer) {
+      return { fill: '#4481c3', stroke: '#4481c3' };
+    }
   };
 
   return (
     <button
-      className={cn(
-        'place-card__bookmark-button button',
-        { 'place-card__bookmark-button--active': isFavoriteOffer })}
+      className={`${cssClass}__bookmark-button button`}
       type="button"
       onClick={() => {
         if (authorizationStatus !== AuthorizationStatus.Auth) {
@@ -43,7 +48,11 @@ function Bookmark({ id, isFavoriteOffer, handleSetIsFavoriteOffer }: TBookmarkPr
         }
       }}
     >
-      <svg className="place-card__bookmark-icon" width={18} height={19}>
+      <svg className={`${cssClass}__bookmark-icon`}
+        width={cssClass === 'place-card' ? 18 : 31}
+        height={cssClass === 'place-card' ? 19 : 33}
+        style={getFavoriteStyles()}
+      >
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>
@@ -51,6 +60,4 @@ function Bookmark({ id, isFavoriteOffer, handleSetIsFavoriteOffer }: TBookmarkPr
   );
 }
 
-
-const BookmarkMemo = memo(Bookmark);
-export default BookmarkMemo;
+export default Bookmark;

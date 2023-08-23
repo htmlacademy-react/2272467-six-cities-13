@@ -15,6 +15,7 @@ import { addSelectedOffer, dropOffer } from '../../store/offer/offer-slices.ts';
 import { getCurrentCity } from '../../store/current-city/current-city-selectors.ts';
 import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from '../../store/offer/offer-selectors.ts';
 import { getNearOffer } from '../../store/near-offers/near-offers-selectors.ts';
+import Bookmark from '../bookmark/bookmark.tsx';
 
 
 function OfferBlock(): React.JSX.Element {
@@ -53,7 +54,7 @@ function OfferBlock(): React.JSX.Element {
   const {
     images, isPremium, title,
     rating, bedrooms, maxAdults,
-    price, goods, description,
+    price, goods, description, isFavorite,
     host: { avatarUrl, isPro, name }
   } = currentOffer;
 
@@ -83,12 +84,11 @@ function OfferBlock(): React.JSX.Element {
               <h1 className="offer__name">
                 {title}
               </h1>
-              <button className="offer__bookmark-button button" type="button">
-                <svg className="offer__bookmark-icon" width={31} height={33}>
-                  <use xlinkHref="#icon-bookmark"/>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <Bookmark
+                id={id}
+                isFavorite={isFavorite}
+                cssClass={'offer'}
+              />
             </div>
             <Rating rating={rating} block={'offer'}/>
             <ul className="offer__features">
