@@ -78,7 +78,7 @@ function OfferCard({ offer, block }: TOfferCardProps): React.JSX.Element {
           <Bookmark
             id={id}
             isFavorite={isFavorite}
-            cssClass={'place-card'}
+            block={'place-card'}
           />
         </div>
         <Rating rating={rating} block={'place'}/>

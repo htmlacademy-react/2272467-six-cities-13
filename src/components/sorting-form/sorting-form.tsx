@@ -35,7 +35,7 @@ function SortingForm({ selectedSorting }: TSortingForm): React.JSX.Element {
         handleTypeClick();
       }}
       >
-        {selectedSorting}
+        {SortingType[selectedSorting]}
         <svg className="places__sorting-arrow" width={7} height={4} style={iconStyle}>
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -45,8 +45,7 @@ function SortingForm({ selectedSorting }: TSortingForm): React.JSX.Element {
         { 'places__options--opened': isOpened })}
       >
         {Object.entries(SortingType).map(([type, value]) => (
-          <li key={type} onClick={(e) => {
-            e.stopPropagation();
+          <li key={type} onClick={() => {
             dispatch(setCurrentSorting(type as TSorting));
           }}
           className={cn(

@@ -26,7 +26,11 @@ function FavoritesPage(): React.JSX.Element {
   }
 
   return (
-    <div className="page">
+    <div className={cn(
+      'page',
+      { 'page--favorites-empty': favoritesOffersIsEmpty }
+    )}
+    >
       <Helmet>
         <title>Favorites</title>
       </Helmet>

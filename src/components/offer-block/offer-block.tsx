@@ -89,7 +89,7 @@ function OfferBlock(): React.JSX.Element {
               <Bookmark
                 id={id}
                 isFavorite={isFavorite}
-                cssClass={'offer'}
+                block={'offer'}
               />
             </div>
             <Rating rating={rating} block={'offer'}/>

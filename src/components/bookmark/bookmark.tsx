@@ -3,6 +3,7 @@ import { AppRoute } from '../../constants/app-route.ts';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
+import './bookmark.css';
 import {
   addFavorite,
   deleteFavorite,
@@ -10,13 +11,14 @@ import {
 import { TOffer } from '../../types/offers.ts';
 import cn from 'classnames';
 
+
 type TBookmarkProps = {
   id: TOffer['id'];
   isFavorite: boolean;
-  cssClass: 'place-card' | 'offer';
+  block: 'place-card' | 'offer';
 }
 
-function Bookmark({ id, isFavorite, cssClass }: TBookmarkProps): React.JSX.Element {
+function Bookmark({ id, isFavorite, block }: TBookmarkProps): React.JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -39,7 +41,13 @@ function Bookmark({ id, isFavorite, cssClass }: TBookmarkProps): React.JSX.Eleme
 
   return (
     <button
-      className={`${isFavoriteOffer ? `${cssClass}__bookmark-button--active` : `${cssClass}__bookmark-button`} button`}
+      className={cn(
+        'button',
+        {'place-card__bookmark-button': block === 'place-card' },
+        {'place-card__bookmark-button--active': block === 'place-card' && isFavoriteOffer },
+        {'offer__bookmark-button': block === 'offer' },
+        {'offer__bookmark-button--active': block === 'offer' && isFavoriteOffer },
+      )}
       type="button"
       onClick={() => {
         if (authorizationStatus !== AuthorizationStatus.Auth) {
@@ -49,10 +57,13 @@ function Bookmark({ id, isFavorite, cssClass }: TBookmarkProps): React.JSX.Eleme
         }
       }}
     >
-      <svg className={`${cssClass}__bookmark-icon`}
-        width={cssClass === 'place-card' ? 18 : 31}
-        height={cssClass === 'place-card' ? 19 : 33}
-        style={getFavoriteStyles()}
+      <svg className={cn(
+        {'place-card__bookmark-icon': block === 'place-card'},
+        {'offer__bookmark-icon': block === 'offer'},
+      )}
+      width={block === 'place-card' ? 18 : 31}
+      height={block === 'place-card' ? 19 : 33}
+      style={getFavoriteStyles()}
       >
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
