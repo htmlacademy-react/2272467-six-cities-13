@@ -42,7 +42,7 @@ function MainPage(): React.JSX.Element {
             <CitiesList selectedCity={selectedCity}/>
           </section>
         </div>
-        <CitiesBlock offers={offers} selectedCity={selectedCity} offerIsEmpty={offerIsEmpty}/>
+        <CitiesBlock offers={offers} selectedCity={selectedCity}/>
       </main>
     </div>
   );

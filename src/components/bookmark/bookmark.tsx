@@ -8,6 +8,7 @@ import {
   deleteFavorite,
 } from '../../store/api-actions/favorites-offers-action.ts';
 import { TOffer } from '../../types/offers.ts';
+import cn from 'classnames';
 
 type TBookmarkProps = {
   id: TOffer['id'];
@@ -38,7 +39,7 @@ function Bookmark({ id, isFavorite, cssClass }: TBookmarkProps): React.JSX.Eleme
 
   return (
     <button
-      className={`${cssClass}__bookmark-button button`}
+      className={`${isFavoriteOffer ? `${cssClass}__bookmark-button--active` : `${cssClass}__bookmark-button`} button`}
       type="button"
       onClick={() => {
         if (authorizationStatus !== AuthorizationStatus.Auth) {

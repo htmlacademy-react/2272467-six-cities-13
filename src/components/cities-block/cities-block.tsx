@@ -12,13 +12,13 @@ import cn from 'classnames';
 type citiesBlockProps = {
   offers: TOffer[];
   selectedCity: City;
-  offerIsEmpty: boolean;
 }
 
-function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): React.JSX.Element {
+function CitiesBlock({ offers, selectedCity }: citiesBlockProps): React.JSX.Element {
   const selectedSorting = useAppSelector(getCurrentSorting);
   const offersByCity = [...offers].filter((offer) => offer.city.name === selectedCity);
   const sortOffers = sorting[selectedSorting](offersByCity).map((offer) => offer);
+  const offerIsEmpty = sortOffers.length === 0;
 
   return (
     <div className="cities">
@@ -39,7 +39,7 @@ function CitiesBlock({ offers, selectedCity, offerIsEmpty }: citiesBlockProps): 
           :
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{sortOffers.length} places to stay in {selectedCity}</b>
+            <b className="places__found">{sortOffers.length} {sortOffers.length === 1 ? 'place' : 'places'} to stay in {selectedCity}</b>
             <SortingForm selectedSorting={selectedSorting}/>
             <OfferList offers={sortOffers} page={'main'}/>
           </section>}

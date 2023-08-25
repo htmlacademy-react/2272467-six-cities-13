@@ -16,6 +16,8 @@ import { getCurrentCity } from '../../store/current-city/current-city-selectors.
 import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from '../../store/offer/offer-selectors.ts';
 import { getNearOffer } from '../../store/near-offers/near-offers-selectors.ts';
 import Bookmark from '../bookmark/bookmark.tsx';
+import { capitalize } from '../../utils/common.ts';
+import cn from 'classnames';
 
 
 function OfferBlock(): React.JSX.Element {
@@ -53,7 +55,7 @@ function OfferBlock(): React.JSX.Element {
 
   const {
     images, isPremium, title,
-    rating, bedrooms, maxAdults,
+    rating, bedrooms, maxAdults, type,
     price, goods, description, isFavorite,
     host: { avatarUrl, isPro, name }
   } = currentOffer;
@@ -92,7 +94,7 @@ function OfferBlock(): React.JSX.Element {
             </div>
             <Rating rating={rating} block={'offer'}/>
             <ul className="offer__features">
-              <li className="offer__feature offer__feature--entire">Apartment</li>
+              <li className="offer__feature offer__feature--entire">{capitalize(type)}</li>
               <li className="offer__feature offer__feature--bedrooms">
                 {bedrooms} {bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
               </li>
@@ -115,9 +117,13 @@ function OfferBlock(): React.JSX.Element {
             <div className="offer__host">
               <h2 className="offer__host-title">Meet the host</h2>
               <div className="offer__host-user user">
-                <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                <div className={cn(
+                  'offer__avatar-wrapper user__avatar-wrapper',
+                  {'offer__avatar-wrapper--pro': isPro}
+                )}
+                >
                   <img
-                    className="offer__avatar user__avatar"
+                    className="offer__avatar user__avatar "
                     src={avatarUrl}
                     width={74}
                     height={74}

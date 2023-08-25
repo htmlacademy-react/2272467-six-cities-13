@@ -1,10 +1,13 @@
 import React, { FormEvent, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../../constants/app-route.ts';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions/user-action.ts';
 import Header from '../../components/header/header.tsx';
+import { City } from '../../constants/city.ts';
+import { setCurrentCity } from '../../store/current-city/current-city-slices.ts';
+
 
 function LoginPage(): React.JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -14,7 +17,7 @@ function LoginPage(): React.JSX.Element {
     isVisible: false
   });
   const [passwordError, setPasswordError] = useState<{text: string; isVisible: boolean}>({
-    text: 'The password must contain at least one large letter and number, and contain at least 8 characters.',
+    text: 'The password must contain one letter and one digit',
     isVisible: false
   });
 
@@ -24,7 +27,7 @@ function LoginPage(): React.JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
-      const regPass = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/;
+      const passwordValue = passwordRef.current?.value;
       const regEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
       if (!regEmail.test(loginRef.current?.value)) {
@@ -33,7 +36,7 @@ function LoginPage(): React.JSX.Element {
         return;
       }
 
-      if (!regPass.test(passwordRef.current?.value)) {
+      if (!/\d/.test(passwordValue) && !/[a-zA-Z]/.test(passwordValue)) {
         setPasswordError({...passwordError, isVisible: true});
         setTimeout(() => setPasswordError({...passwordError, isVisible: false}), 5000);
         return;
@@ -45,6 +48,14 @@ function LoginPage(): React.JSX.Element {
       }));
       navigate(AppRoute.Main);
     }
+  };
+
+  const citiesList = Object.values(City).map((city) => city);
+  const randomIndex = Math.floor(Math.random() * (citiesList.length - 1));
+  const randomCity = citiesList[randomIndex];
+
+  const handleLocationClick = () => {
+    dispatch(setCurrentCity(randomCity));
   };
 
   return (
@@ -77,9 +88,9 @@ function LoginPage(): React.JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link to={AppRoute.Main} className="locations__item-link" onClick={handleLocationClick}>
+                <span>{randomCity}</span>
+              </Link>
             </div>
           </section>
         </div>

@@ -44,7 +44,7 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
                 <li className="header__nav-item">
                   {authorizationStatus === AuthorizationStatus.Auth
                     ?
-                    <Link to={'#'} className="header__nav-link">
+                    <Link to={'#'} className="header__nav-link header__nav-link--profile">
                       <span className="header__signout" onClick={(e) => {
                         e.preventDefault();
                         dispatch(logoutAction());
@@ -53,7 +53,7 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
                       </span>
                     </Link>
                     :
-                    <Link to={AppRoute.Login} className="header__nav-link">
+                    <Link to={AppRoute.Login} className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                       <span className="header__login">Sign in</span>
                     </Link>}

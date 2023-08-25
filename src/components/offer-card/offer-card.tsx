@@ -7,6 +7,7 @@ import cn from 'classnames';
 import Bookmark from '../bookmark/bookmark.tsx';
 import { useAppDispatch } from '../../hooks';
 import { addSelectedOffer } from '../../store/offer/offer-slices.ts';
+import { capitalize } from '../../utils/common.ts';
 
 type TOfferCardProps = {
   offer: TOffer;
@@ -84,7 +85,7 @@ function OfferCard({ offer, block }: TOfferCardProps): React.JSX.Element {
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
     </article>
   );

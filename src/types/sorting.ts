@@ -1,3 +1,4 @@
-import { SortingType } from '../constants/sort-description.ts';
+import { SortingType } from '../constants/sorting-type.ts';
+
 
 export type TSorting = keyof typeof SortingType;
