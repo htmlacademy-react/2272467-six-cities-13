@@ -7,7 +7,7 @@ import { NameSpace } from '../../constants/name-space.ts';
 type TUserState = {
   authorizationStatus: AuthorizationStatus;
   user: TUser | null;
-}
+};
 
 const initialState: TUserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
