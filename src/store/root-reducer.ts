@@ -8,6 +8,7 @@ import reviewSlices from './review/review-slices.ts';
 import reviewFormSlices from './review-form/review-form-slices.ts';
 import currentSortingSlices from './current-sorting/current-sorting-slices.ts';
 import userSlices from './user/user-slices.ts';
+import loginFormSlices from './login-form/login-form-slices.ts';
 
 export const rootReducer = combineReducers({
   currentCity: currentCitySlices,
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
   reviews: reviewSlices,
   reviewForm: reviewFormSlices,
   currentSorting: currentSortingSlices,
-  user: userSlices
+  user: userSlices,
+  loginForm: loginFormSlices
 });
