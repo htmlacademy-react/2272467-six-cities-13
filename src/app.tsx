@@ -16,12 +16,7 @@ import Preloader from './components/preloader/preloader.tsx';
 import { fetchFavoritesOffers } from './store/api-actions/favorites-offers-action.ts';
 
 function App(): React.JSX.Element {
-  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
-
-  useEffect(() => {
-    dispatch(fetchFavoritesOffers());
-  }, [dispatch]);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <Preloader/>;

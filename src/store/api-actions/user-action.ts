@@ -5,6 +5,7 @@ import { ApiRoute } from '../../constants/api-route.ts';
 import { dropToken, saveToken } from '../../services/token.ts';
 import { AuthData, TUser } from '../../types/user.ts';
 import { NameSpace } from '../../constants/name-space.ts';
+import { fetchFavoritesOffers } from './favorites-offers-action.ts';
 
 export const checkAuthAction = createAsyncThunk<TUser, undefined, {
   dispatch: AppDispatch;
@@ -12,8 +13,9 @@ export const checkAuthAction = createAsyncThunk<TUser, undefined, {
   extra: AxiosInstance;
 }>(
   `${NameSpace.User}/checkAuth`,
-  async (_arg, { extra: api }) => {
+  async (_arg, { dispatch, extra: api }) => {
     const { data } = await api.get<TUser>(ApiRoute.Login);
+    dispatch(fetchFavoritesOffers());
 
     return data;
   }
