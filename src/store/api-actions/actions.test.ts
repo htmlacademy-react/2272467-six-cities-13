@@ -6,7 +6,8 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import { State } from '../../types/state.ts';
 import {
   AppThunkDispatch,
-  extractActionsTypes, makeFakeAuthData,
+  extractActionsTypes,
+  makeFakeAuthData,
   makeFakeOffer,
   makeFakeReview,
   makeFakeReviewDataForm,
@@ -23,6 +24,9 @@ import { clearFormReview } from '../review-form/review-form-slices.ts';
 import { addReview } from '../review/review-slices.ts';
 import { expect } from 'vitest';
 import { FavoriteStatus } from '../../constants/offer.ts';
+import { clearLoginForm } from '../login-form/login-form-slices.ts';
+import { redirectToRoute } from '../action.ts';
+import { AppRoute } from '../../constants/app-route.ts';
 
 describe('Async actions', () => {
   const axios = createApi();
@@ -343,6 +347,8 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         loginAction.pending.type,
+        clearLoginForm().type,
+        redirectToRoute(AppRoute.Main).type,
         loginAction.fulfilled.type,
       ]);
     });
@@ -405,6 +411,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         checkAuthAction.pending.type,
+        fetchFavoritesOffers.pending.type,
         checkAuthAction.fulfilled.type,
       ]);
     });
