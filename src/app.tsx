@@ -1,6 +1,6 @@
 import React from 'react';
 import MainPage from './pages/main/main-page.tsx';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import NotFoundPage from './components/not-found/not-found-page.tsx';
 import OfferPage from './pages/offer/offer-page.tsx';
 import LoginPage from './pages/login/login-page.tsx';
@@ -11,13 +11,22 @@ import Layout from './components/layout/layout.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppSelector } from './hooks';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthorizationStatus } from './constants/authorization-status.ts';
+import Preloader from './components/preloader/preloader.tsx';
+import browserHistory from './utils/browser-histore.ts';
+import HistoryRouter from './components/history-router/history-router.tsx';
+
 
 function App(): React.JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
 
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return <Preloader/>;
+  }
+
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={AppRoute.Main} element={<Layout/>}>
             <Route index element={<MainPage/>}/>
@@ -33,7 +42,7 @@ function App(): React.JSX.Element {
           <Route path={AppRoute.Login} element={<LoginPage/>}/>
           <Route path={AppRoute.NotFound} element={<NotFoundPage/>}/>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

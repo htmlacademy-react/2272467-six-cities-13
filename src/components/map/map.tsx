@@ -6,12 +6,12 @@ import { Marker, layerGroup } from 'leaflet';
 import cn from 'classnames';
 import { City } from '../../constants/city.ts';
 import { currentCustomIcon, defaultCustomIcon } from '../../constants/map.ts';
+import { useAppSelector } from '../../hooks';
 
 
 type TMapProps = {
   offers: TOffer[];
   selectedCity: City;
-  selectedOffer: Pick<TOffer, 'id'> | undefined;
   page: 'main' | 'offer';
 }
 
@@ -77,10 +77,11 @@ function getLocationCity(city: City): Pick<TCity, 'location'> {
 }
 
 
-function Map({ offers, selectedCity, selectedOffer, page }: TMapProps): React.JSX.Element {
+function Map({ offers, selectedCity, page }: TMapProps): React.JSX.Element {
   const cityLocation = getLocationCity(selectedCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation);
+  const selectedOffer = useAppSelector((state) => state.offer.selectedOffer);
 
   useEffect(() => {
     if (map) {
@@ -93,7 +94,7 @@ function Map({ offers, selectedCity, selectedOffer, page }: TMapProps): React.JS
 
         marker
           .setIcon(
-            selectedOffer !== undefined && offer.id === selectedOffer.id
+            offer.id === selectedOffer
               ? currentCustomIcon
               : defaultCustomIcon
           )

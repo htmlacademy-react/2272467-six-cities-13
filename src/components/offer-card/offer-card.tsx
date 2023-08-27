@@ -1,34 +1,37 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/app-route.ts';
 import { TOffer } from '../../types/offers.ts';
 import Rating from '../rating/rating.tsx';
 import cn from 'classnames';
-import { favoritesOffersChangeStatus } from '../../store/api-actions/favorites-offers-action.ts';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthorizationStatus } from '../../constants/authorization-status.ts';
+import Bookmark from '../bookmark/bookmark.tsx';
+import { useAppDispatch } from '../../hooks';
+import { addSelectedOffer } from '../../store/offer/offer-slices.ts';
+import { capitalize } from '../../utils/common.ts';
 
 type TOfferCardProps = {
   offer: TOffer;
   block: 'cities' | 'favorite' | 'near';
-  onSelectedOffer?: (id: string) => void;
 }
 
-function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JSX.Element {
+function OfferCard({ offer, block }: TOfferCardProps): React.JSX.Element {
+  const dispatch = useAppDispatch();
   const {
     id, title, type, price,
     isPremium, previewImage, rating, isFavorite
   } = offer;
-  const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
-  const navigate = useNavigate();
-  const [isFavoriteOffer, setIsFavoriteOffer] = useState(isFavorite);
 
-  const handelChangeStatus = () => {
-    dispatch(favoritesOffersChangeStatus({ id, status: !isFavoriteOffer ? 1 : 0 }));
-    setIsFavoriteOffer((prevState) => !prevState);
+  const handleCardMouseOver = () => {
+    if (block === 'cities') {
+      dispatch(addSelectedOffer(id));
+    }
   };
 
+  const handleCardMouseLeave = () => {
+    if (block === 'cities') {
+      dispatch(addSelectedOffer(null));
+    }
+  };
 
   return (
     <article
@@ -38,7 +41,8 @@ function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JS
         { 'favorites__card': block === 'favorite' },
         { 'near-places__card': block === 'near' }
       )}
-      onMouseOver={() => onSelectedOffer ? onSelectedOffer(id) : null}
+      onMouseOver={handleCardMouseOver}
+      onMouseLeave={handleCardMouseLeave}
     >
       {isPremium &&
         <div className="place-card__mark">
@@ -71,29 +75,17 @@ function OfferCard({ offer, block, onSelectedOffer }: TOfferCardProps): React.JS
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={cn(
-              'place-card__bookmark-button button',
-              { 'place-card__bookmark-button--active': isFavoriteOffer })}
-            type="button" onClick={() => {
-              if (authorizationStatus !== AuthorizationStatus.Auth) {
-                navigate(AppRoute.Login);
-              } else {
-                handelChangeStatus();
-              }
-            }}
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <Bookmark
+            id={id}
+            isFavorite={isFavorite}
+            block={'place-card'}
+          />
         </div>
         <Rating rating={rating} block={'place'}/>
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
     </article>
   );

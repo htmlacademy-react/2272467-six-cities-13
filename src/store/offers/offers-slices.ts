@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
 import { fetchOffers } from '../api-actions/offers-action.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TOffersState = {
   offers: TOffer[];
@@ -9,11 +10,11 @@ type TOffersState = {
 
 const initialState: TOffersState = {
   offers: [],
-  isLoading: false
+  isLoading: false,
 };
 
 const offersSlices = createSlice({
-  name: 'offers',
+  name: NameSpace.Offers,
   initialState,
   reducers: {},
   extraReducers(builder) {

@@ -4,3 +4,8 @@ export enum OfferType {
   House = 'House',
   Hotel = 'Hotel'
 }
+
+export enum FavoriteStatus {
+  Delete,
+  Add
+}

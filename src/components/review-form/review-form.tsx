@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { TOffer } from '../../types/offers.ts';
 import { submitReview } from '../../store/api-actions/review-action.ts';
 import { setFormReviewValid, updateComment, updateRating } from '../../store/review-form/review-form-slices.ts';
-import { getReviewForm } from '../../store/review-form/review-form-selector.ts';
+import { getReviewForm } from '../../store/review-form/review-form-selectors.ts';
 
 const ratingAndTitle = {
   '1': 'terribly',
@@ -21,11 +21,11 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const formData = useAppSelector(getReviewForm);
 
-  function handelCommentChange(e: ChangeEvent<HTMLTextAreaElement>) {
+  function handleCommentChange(e: ChangeEvent<HTMLTextAreaElement>) {
     dispatch(updateComment(e.target.value));
   }
 
-  function handelRatingChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleRatingChange(e: ChangeEvent<HTMLInputElement>) {
     dispatch(updateRating(Number(e.target.value)));
   }
 
@@ -37,7 +37,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
     }
   }, [dispatch, formData]);
 
-  function handelFormSubmit() {
+  function handleFormSubmit() {
     const { comment, rating } = formData;
     if (id) {
       dispatch(submitReview({
@@ -50,7 +50,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
   return (
     <form className="reviews__form form" onSubmit={(e) => {
       e.preventDefault();
-      handelFormSubmit();
+      handleFormSubmit();
     }}
     >
       <label className="reviews__label form__label" htmlFor="review">
@@ -69,7 +69,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
                 type="radio"
                 value={rating}
                 checked={String(formData.rating) === rating}
-                onChange={handelRatingChange}
+                onChange={handleRatingChange}
                 disabled={formData.isSends}
               />
               <label
@@ -93,7 +93,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
         maxLength={300}
         minLength={50}
         required
-        onChange={handelCommentChange}
+        onChange={handleCommentChange}
         disabled={formData.isSends}
       />
       <div className="reviews__button-wrapper">
@@ -105,7 +105,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
         </p>
         <button className="reviews__submit form__submit button" type="submit"
           disabled={!formData.isValid || formData.isSends}
-        >Submit
+        >{formData.isSends ? 'Sending...' : 'Submit'}
         </button>
       </div>
     </form>

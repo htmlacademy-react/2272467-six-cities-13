@@ -4,12 +4,12 @@ import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { AppRoute } from '../../constants/app-route.ts';
 
 
-type PrivateRouteProps = {
+type TPrivateRouteProps = {
   authorizationStatus: AuthorizationStatus;
   children: React.JSX.Element;
 }
 
-function PrivateRoute({ authorizationStatus, children }: PrivateRouteProps): React.JSX.Element {
+function PrivateRoute({ authorizationStatus, children }: TPrivateRouteProps): React.JSX.Element {
   return (
     authorizationStatus === AuthorizationStatus.Auth
       ? children

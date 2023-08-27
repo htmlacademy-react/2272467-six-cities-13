@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Review from '../review/review.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchReviews } from '../../store/api-actions/review-action.ts';
-import { getReview } from '../../store/review/review-selector.ts';
+import { getReviews } from '../../store/review/review-selectors.ts';
 
 type ReviewListProps = {
   id: string | undefined;
@@ -10,7 +10,7 @@ type ReviewListProps = {
 
 function ReviewList({ id }: ReviewListProps): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const reviews = useAppSelector(getReview);
+  const reviews = useAppSelector(getReviews);
   const sortReview = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   useEffect(() => {

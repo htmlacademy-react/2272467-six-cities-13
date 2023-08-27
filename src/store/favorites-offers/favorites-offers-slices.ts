@@ -1,8 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers.ts';
 import {
+  addFavorite, deleteFavorite,
   fetchFavoritesOffers
 } from '../api-actions/favorites-offers-action.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TFavoritesOffersState = {
   favoritesOffers: TOffer[];
@@ -15,7 +17,7 @@ const initialState: TFavoritesOffersState = {
 };
 
 const favoritesOffersSlices = createSlice({
-  name: 'favoritesOffers',
+  name: NameSpace.FavoritesOffers,
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -26,9 +28,16 @@ const favoritesOffersSlices = createSlice({
       .addCase(fetchFavoritesOffers.fulfilled, (state, action) => {
         state.favoritesOffers = action.payload;
         state.isLoading = false;
+      })
+      .addCase(addFavorite.fulfilled, (state, action: PayloadAction<TOffer>) => {
+        state.favoritesOffers.push(action.payload);
+      })
+      .addCase(deleteFavorite.fulfilled, (state, action: PayloadAction<TOffer>) => {
+        state.favoritesOffers = state.favoritesOffers.filter((offer) => offer.id !== action.payload.id);
       });
   }
 });
 
 export default favoritesOffersSlices.reducer;
+
 

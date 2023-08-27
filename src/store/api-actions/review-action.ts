@@ -7,13 +7,14 @@ import { TAddReview, TReview } from '../../types/review.ts';
 import { addReview } from '../review/review-slices.ts';
 import { clearFormReview } from '../review-form/review-form-slices.ts';
 import { toast } from 'react-toastify';
+import { NameSpace } from '../../constants/name-space.ts';
 
 export const fetchReviews = createAsyncThunk<TReview[], Pick<TOffer, 'id'>, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchReviews',
+  `${NameSpace.Data}/fetchReviews`,
   async ({ id }, { extra: api }) => {
     const { data } = await api.get<TReview[]>(`${ApiRoute.Comments}/${id}`);
 
@@ -26,7 +27,7 @@ export const submitReview = createAsyncThunk<void, { id: TOffer['id']; reviewDat
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/submit',
+  `${NameSpace.Data}/submitReview`,
   async ({ id, reviewData }, { dispatch, extra: api }) => {
     try {
       const { data } = await api.post<TReview>(`${ApiRoute.Comments}/${id}`, reviewData);

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { SortDescription } from '../../constants/sort-description.ts';
-import { TSorting } from '../../types/sorting.ts';
 import { useAppDispatch } from '../../hooks';
 import { setCurrentSorting } from '../../store/current-sorting/current-sorting-slices.ts';
 import cn from 'classnames';
+import { TSorting } from '../../types/sorting.ts';
+import { SortingType } from '../../constants/sorting-type.ts';
 
 type TSortingForm = {
   selectedSorting: TSorting;
@@ -35,7 +35,7 @@ function SortingForm({ selectedSorting }: TSortingForm): React.JSX.Element {
         handleTypeClick();
       }}
       >
-        {selectedSorting}
+        {SortingType[selectedSorting]}
         <svg className="places__sorting-arrow" width={7} height={4} style={iconStyle}>
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -44,9 +44,8 @@ function SortingForm({ selectedSorting }: TSortingForm): React.JSX.Element {
         'places__options places__options--custom',
         { 'places__options--opened': isOpened })}
       >
-        {Object.entries(SortDescription).map(([type, value]) => (
-          <li key={type} onClick={(e) => {
-            e.stopPropagation();
+        {Object.entries(SortingType).map(([type, value]) => (
+          <li key={type} onClick={() => {
             dispatch(setCurrentSorting(type as TSorting));
           }}
           className={cn(

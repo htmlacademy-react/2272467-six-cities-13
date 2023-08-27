@@ -1,17 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SortDescription } from '../../constants/sort-description.ts';
 import { TSorting } from '../../types/sorting.ts';
+import { NameSpace } from '../../constants/name-space.ts';
+import { SortingType } from '../../constants/sorting-type.ts';
 
 type TCurrentSortingState = {
   currentSorting: TSorting;
 }
 
 const initialState: TCurrentSortingState = {
-  currentSorting: SortDescription.Popular
+  currentSorting: SortingType.Popular
 };
 
 const currentSortingSlices = createSlice({
-  name: 'currentSorting',
+  name: NameSpace.CurrentSorting,
   initialState,
   reducers: {
     setCurrentSorting(state, action: PayloadAction<TSorting>) {

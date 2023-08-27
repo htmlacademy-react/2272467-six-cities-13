@@ -11,10 +11,13 @@ import Preloader from '../preloader/preloader.tsx';
 import NotFoundPage from '../not-found/not-found-page.tsx';
 import { fetchNearOffer } from '../../store/api-actions/near-offers-action.ts';
 import { fetchOffer } from '../../store/api-actions/offer-action.ts';
-import { dropOffer } from '../../store/offer/offer-slices.ts';
-import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
-import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from '../../store/offer/offer-selector.ts';
-import { getNearOffer } from '../../store/near-offers/near-offers-selector.ts';
+import { addSelectedOffer, dropOffer } from '../../store/offer/offer-slices.ts';
+import { getCurrentCity } from '../../store/current-city/current-city-selectors.ts';
+import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from '../../store/offer/offer-selectors.ts';
+import { getNearOffer } from '../../store/near-offers/near-offers-selectors.ts';
+import Bookmark from '../bookmark/bookmark.tsx';
+import { capitalize } from '../../utils/common.ts';
+import cn from 'classnames';
 
 
 function OfferBlock(): React.JSX.Element {
@@ -34,6 +37,7 @@ function OfferBlock(): React.JSX.Element {
     if (id) {
       dispatch(fetchOffer({ id }));
       dispatch(fetchNearOffer({ id }));
+      dispatch(addSelectedOffer(id));
     }
 
     return () => {
@@ -51,8 +55,8 @@ function OfferBlock(): React.JSX.Element {
 
   const {
     images, isPremium, title,
-    rating, bedrooms, maxAdults,
-    price, goods, description,
+    rating, bedrooms, maxAdults, type,
+    price, goods, description, isFavorite,
     host: { avatarUrl, isPro, name }
   } = currentOffer;
 
@@ -82,16 +86,15 @@ function OfferBlock(): React.JSX.Element {
               <h1 className="offer__name">
                 {title}
               </h1>
-              <button className="offer__bookmark-button button" type="button">
-                <svg className="offer__bookmark-icon" width={31} height={33}>
-                  <use xlinkHref="#icon-bookmark"/>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <Bookmark
+                id={id}
+                isFavorite={isFavorite}
+                block={'offer'}
+              />
             </div>
             <Rating rating={rating} block={'offer'}/>
             <ul className="offer__features">
-              <li className="offer__feature offer__feature--entire">Apartment</li>
+              <li className="offer__feature offer__feature--entire">{capitalize(type)}</li>
               <li className="offer__feature offer__feature--bedrooms">
                 {bedrooms} {bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
               </li>
@@ -114,9 +117,13 @@ function OfferBlock(): React.JSX.Element {
             <div className="offer__host">
               <h2 className="offer__host-title">Meet the host</h2>
               <div className="offer__host-user user">
-                <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                <div className={cn(
+                  'offer__avatar-wrapper user__avatar-wrapper',
+                  {'offer__avatar-wrapper--pro': isPro}
+                )}
+                >
                   <img
-                    className="offer__avatar user__avatar"
+                    className="offer__avatar user__avatar "
                     src={avatarUrl}
                     width={74}
                     height={74}
@@ -138,7 +145,7 @@ function OfferBlock(): React.JSX.Element {
             </section>
           </div>
         </div>
-        <Map offers={currentAndNearOffers} selectedCity={selectedCity} selectedOffer={currentOffer} page={'offer'}/>
+        <Map offers={currentAndNearOffers} selectedCity={selectedCity} page={'offer'}/>
       </section>
       <div className="container">
         <NearOffersBlock nearOffers={nearOffers}/>

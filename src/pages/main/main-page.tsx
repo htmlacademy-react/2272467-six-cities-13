@@ -1,24 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import CitiesBlock from '../../components/cities-block/cities-block.tsx';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Preloader from '../../components/preloader/preloader.tsx';
-import { getCurrentCity } from '../../store/current-city/current-city-selector.ts';
-import { getOffers, getOffersIsLoadingStatus } from '../../store/offers/offers-selector.ts';
+import { getCurrentCity } from '../../store/current-city/current-city-selectors.ts';
+import { getOffers, getOffersIsLoadingStatus } from '../../store/offers/offers-selectors.ts';
 import cn from 'classnames';
+import { fetchOffers } from '../../store/api-actions/offers-action.ts';
 
 
 function MainPage(): React.JSX.Element {
+  const dispatch = useAppDispatch();
   const offers = useAppSelector(getOffers);
   const selectedCity = useAppSelector(getCurrentCity);
-  const offersByCity = offers.filter((offer) => offer.city.name === selectedCity);
   const isOffersLoading = useAppSelector(getOffersIsLoadingStatus);
-  const offerIsEmpty = offersByCity.length === 0;
+  const offerIsEmpty = offers.length === 0;
+
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
 
   if (isOffersLoading) {
     return <Preloader/>;
   }
+
 
   return (
     <div className="page page--gray page--main">
@@ -35,7 +42,7 @@ function MainPage(): React.JSX.Element {
             <CitiesList selectedCity={selectedCity}/>
           </section>
         </div>
-        <CitiesBlock offers={offersByCity} selectedCity={selectedCity} offerIsEmpty={offerIsEmpty}/>
+        <CitiesBlock offers={offers} selectedCity={selectedCity}/>
       </main>
     </div>
   );

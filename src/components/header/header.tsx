@@ -5,8 +5,8 @@ import Logo from '../logo/logo.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 import { logoutAction } from '../../store/api-actions/user-action.ts';
-import { getAuthorizationStatus, getUser } from '../../store/user/user-selector.ts';
-import { getFavoritesOffers } from '../../store/favorites-offers/favorites-offers-selector.ts';
+import { getAuthorizationStatus, getUser } from '../../store/user/user-selectors.ts';
+import { getFavoritesOffers } from '../../store/favorites-offers/favorites-offers-selectors.ts';
 
 type THeaderProps = {
   typeView: 'withNavigation' | 'withoutNavigation';
@@ -39,7 +39,7 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
                 <li className="header__nav-item">
                   {authorizationStatus === AuthorizationStatus.Auth
                     ?
-                    <Link to={'#'} className="header__nav-link">
+                    <Link to={'#'} className="header__nav-link header__nav-link--profile">
                       <span className="header__signout" onClick={(e) => {
                         e.preventDefault();
                         dispatch(logoutAction());
@@ -48,7 +48,7 @@ function Header({ typeView }: THeaderProps): React.JSX.Element {
                       </span>
                     </Link>
                     :
-                    <Link to={AppRoute.Login} className="header__nav-link">
+                    <Link to={AppRoute.Login} className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                       <span className="header__login">Sign in</span>
                     </Link>}

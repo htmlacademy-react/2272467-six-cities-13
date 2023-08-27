@@ -1,0 +1,8 @@
+.offer__bookmark-button--active {
+  position: absolute;
+  top: 41px;
+  right: 93px;
+  width: 31px;
+  height: 33px;
+  margin-top: 2px;
+}

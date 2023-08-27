@@ -1,15 +1,14 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { TOffer } from '../../types/offers.ts';
 import OfferCard from '../offer-card/offer-card.tsx';
 import cn from 'classnames';
 
 type TOfferListProps = {
   offers: TOffer[];
-  onSelectedOffer?: (id: string) => void;
   page: 'main' | 'offer';
 }
 
-function OfferList({ offers, onSelectedOffer, page }: TOfferListProps): React.JSX.Element {
+function OfferList({ offers, page }: TOfferListProps): React.JSX.Element {
   return (
     <div className={cn(
       'places__list',
@@ -19,11 +18,11 @@ function OfferList({ offers, onSelectedOffer, page }: TOfferListProps): React.JS
     >
       {
         offers.map((offer) => (
-          <OfferCard key={offer.id} offer={offer} block={page === 'main' ? 'cities' : 'near'} onSelectedOffer={onSelectedOffer}/>)
+          <OfferCard key={offer.id} offer={offer} block={page === 'main' ? 'cities' : 'near'}/>)
         )
       }
     </div>
   );
 }
 
-export default memo(OfferList);
+export default OfferList;

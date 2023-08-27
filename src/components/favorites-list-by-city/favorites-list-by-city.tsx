@@ -9,7 +9,13 @@ type TFavoritesListByCityProps = {
   favoritesOffers: TOffer[];
 }
 
-function FavoritesListByCity({ city, favoritesOffers }: TFavoritesListByCityProps): React.JSX.Element {
+function FavoritesListByCity({ city, favoritesOffers }: TFavoritesListByCityProps): React.JSX.Element | null {
+  const favoriteListByCity = favoritesOffers.filter((offer) => offer.city.name === city).map((offer) => offer);
+  const isEmpty = favoriteListByCity.length === 0;
+  if (isEmpty) {
+    return null;
+  }
+
   return (
     <li key={city} className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -20,7 +26,7 @@ function FavoritesListByCity({ city, favoritesOffers }: TFavoritesListByCityProp
         </div>
       </div>
       <div className="favorites__places">
-        {favoritesOffers.filter((offer) => offer.city.name === city).map((offer) => (
+        {favoriteListByCity.map((offer) => (
           <OfferCard offer={offer} block={'favorite'} key={offer.id}/>))}
       </div>
     </li>

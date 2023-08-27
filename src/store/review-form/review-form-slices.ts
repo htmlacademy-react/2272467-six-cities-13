@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { submitReview } from '../api-actions/review-action.ts';
+import { NameSpace } from '../../constants/name-space.ts';
 
 type TReviewsFormState = {
   comment: string;
@@ -16,7 +17,7 @@ const initialState: TReviewsFormState = {
 };
 
 const reviewsFormSlices = createSlice({
-  name: 'reviewsForm',
+  name: NameSpace.ReviewsForm,
   initialState,
   reducers: {
     updateComment(state, action: PayloadAction<string>) {
