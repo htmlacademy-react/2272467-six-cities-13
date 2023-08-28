@@ -18,6 +18,7 @@ import { getNearOffer } from '../../store/near-offers/near-offers-selectors.ts';
 import Bookmark from '../bookmark/bookmark.tsx';
 import { capitalize } from '../../utils/common.ts';
 import cn from 'classnames';
+import { clearFormReview } from '../../store/review-form/review-form-slices.ts';
 
 
 function OfferBlock(): React.JSX.Element {
@@ -42,6 +43,7 @@ function OfferBlock(): React.JSX.Element {
 
     return () => {
       dispatch(dropOffer());
+      dispatch(clearFormReview());
     };
   }, [dispatch, id]);
 

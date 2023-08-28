@@ -30,7 +30,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
   }
 
   useEffect(() => {
-    if (formData.comment.length >= 50 && formData.rating !== null) {
+    if (formData.comment.length >= 50 && formData.comment.length <= 300 && formData.rating !== null) {
       dispatch(setFormReviewValid(true));
     } else {
       dispatch(setFormReviewValid(false));
@@ -90,7 +90,6 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.comment}
-        maxLength={300}
         minLength={50}
         required
         onChange={handleCommentChange}
