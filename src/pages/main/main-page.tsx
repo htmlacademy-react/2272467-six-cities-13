@@ -17,7 +17,6 @@ function MainPage(): React.JSX.Element {
   const isOffersLoading = useAppSelector(getOffersIsLoadingStatus);
   const offerIsEmpty = offers.length === 0;
 
-
   useEffect(() => {
     dispatch(fetchOffers());
   }, [dispatch]);
@@ -25,7 +24,6 @@ function MainPage(): React.JSX.Element {
   if (isOffersLoading) {
     return <Preloader/>;
   }
-
 
   return (
     <div className="page page--gray page--main">

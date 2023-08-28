@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../../constants/app-route.ts';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions/user-action.ts';
 import Header from '../../components/header/header.tsx';
@@ -9,9 +9,12 @@ import { City } from '../../constants/city.ts';
 import { setCurrentCity } from '../../store/current-city/current-city-slices.ts';
 import { updateEmail, updatePassword } from '../../store/login-form/login-form-slices.ts';
 import { getLoginForm } from '../../store/login-form/login-form.selectors.ts';
+import { getAuthorizationStatus } from '../../store/user/user-selectors.ts';
+import { AuthorizationStatus } from '../../constants/authorization-status.ts';
 
 
 function LoginPage(): React.JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const loginForm = useAppSelector(getLoginForm);
   const [passwordError, setPasswordError] = useState<{ text: string; isVisible: boolean }>({
@@ -49,6 +52,9 @@ function LoginPage(): React.JSX.Element {
   const handleLocationClick = () => {
     dispatch(setCurrentCity(randomCity));
   };
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={ AppRoute.Main }/>;
+  }
 
   return (
     <div className="page page--gray page--login">
