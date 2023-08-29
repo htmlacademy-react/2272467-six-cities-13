@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../../constants/app-route.ts';
 import { Link, Navigate } from 'react-router-dom';
@@ -11,7 +11,6 @@ import { updateEmail, updatePassword } from '../../store/login-form/login-form-s
 import { getLoginForm } from '../../store/login-form/login-form.selectors.ts';
 import { getAuthorizationStatus } from '../../store/user/user-selectors.ts';
 import { AuthorizationStatus } from '../../constants/authorization-status.ts';
-import { clearFormReview } from '../../store/review-form/review-form-slices.ts';
 
 
 function LoginPage(): React.JSX.Element {
