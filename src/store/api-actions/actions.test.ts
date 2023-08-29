@@ -308,23 +308,6 @@ describe('Async actions', () => {
       ]);
     });
 
-    //TODO Нужно исправить
-    // it('should dispatch "submitReview.pending", "submitReview.reject", when server response 400', async () => {
-    //   const mockReviews = makeFakeReview();
-    //   const mockReviewFormData = makeFakeReviewDataForm();
-    //   mockAxiosAdapter.onPost(`${ApiRoute.Comments}/${mockReviews.id}`).reply(400);
-    //
-    //   await store.dispatch(submitReview({ id: mockReviews.id, reviewData: mockReviewFormData }));
-    //
-    //   const emittedActions = store.getActions();
-    //   const extractedActionsTypes = extractActionsTypes(emittedActions);
-    //
-    //   expect(extractedActionsTypes).toEqual([
-    //     submitReview.pending.type,
-    //     submitReview.rejected.type
-    //   ]);
-    // });
-
     it('should call "addReview" with "mockReviews" data', async () => {
       const mockReviews = makeFakeReview();
       mockAxiosAdapter.onPost(`${ApiRoute.Comments}/${mockReviews.id}`).reply(200, mockReviews);
