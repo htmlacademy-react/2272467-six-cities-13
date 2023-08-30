@@ -7,3 +7,5 @@ export const getOffer = (state: Pick<State, NameSpace.Offer>): TOffer | null => 
 export const getOfferIsLoadingStatus = (state: Pick<State, NameSpace.Offer>): boolean => state[NameSpace.Offer].isLoading;
 
 export const getOfferErrorStatus = (state: Pick<State, NameSpace.Offer>): boolean => state[NameSpace.Offer].hasError;
+
+export const getSelectedOffer = (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].selectedOffer;

@@ -1,7 +1,8 @@
 import { expect } from 'vitest';
 import { makeFakeOffer } from '../../utils/mocks/mocks.ts';
-import nearOffersSlices from './near-offers-slices.ts';
+import nearOffersSlices, { dropNearOffers } from './near-offers-slices.ts';
 import { fetchNearOffer } from '../api-actions/near-offers-action.ts';
+
 
 describe('NearOffers Slice', () => {
   it('should return initial state with empty action', () => {
@@ -34,6 +35,21 @@ describe('NearOffers Slice', () => {
     };
 
     const result = nearOffersSlices(undefined, fetchNearOffer.fulfilled([mockOffer], '', { id: mockOffer.id }));
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should drop nearOffers with "dropNearOffers" action', () => {
+    const mockOffer = makeFakeOffer();
+    const initialState = {
+      nearOffers: [mockOffer]
+    };
+
+    const expectedState = {
+      nearOffers: []
+    };
+
+    const result = nearOffersSlices(initialState, dropNearOffers());
 
     expect(result).toEqual(expectedState);
   });

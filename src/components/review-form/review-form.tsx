@@ -13,11 +13,17 @@ const ratingAndTitle = {
   '5': 'perfect'
 };
 
-type ReviewFormProps = {
+export enum ReviewLength {
+  Min = 50,
+  Max = 300
+}
+
+type TReviewFormProps = {
   id: TOffer['id'] | undefined;
 }
 
-function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
+
+function ReviewForm({ id }: TReviewFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const formData = useAppSelector(getReviewForm);
 
@@ -30,7 +36,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
   }
 
   useEffect(() => {
-    if (formData.comment.length >= 50 && formData.comment.length <= 300 && formData.rating !== null) {
+    if (formData.comment.length >= ReviewLength.Min && formData.comment.length <= ReviewLength.Max && formData.rating !== null) {
       dispatch(setFormReviewValid(true));
     } else {
       dispatch(setFormReviewValid(false));
@@ -90,7 +96,7 @@ function ReviewForm({ id }: ReviewFormProps): React.JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.comment}
-        minLength={50}
+        minLength={ReviewLength.Min}
         required
         onChange={handleCommentChange}
         disabled={formData.isSends}

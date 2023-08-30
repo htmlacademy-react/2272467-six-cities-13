@@ -15,11 +15,11 @@ import { AuthorizationStatus } from './constants/authorization-status.ts';
 import Preloader from './components/preloader/preloader.tsx';
 import browserHistory from './utils/browser-histore.ts';
 import HistoryRouter from './components/history-router/history-router.tsx';
+import { getAuthorizationStatus } from './store/user/user-selectors.ts';
 
 
 function App(): React.JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
-
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <Preloader/>;
   }

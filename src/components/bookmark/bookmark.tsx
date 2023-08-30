@@ -10,6 +10,7 @@ import {
 } from '../../store/api-actions/favorites-offers-action.ts';
 import { TOffer } from '../../types/offers.ts';
 import cn from 'classnames';
+import { getAuthorizationStatus } from '../../store/user/user-selectors.ts';
 
 
 type TBookmarkProps = {
@@ -19,7 +20,7 @@ type TBookmarkProps = {
 }
 
 function Bookmark({ id, isFavorite, block }: TBookmarkProps): React.JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isFavoriteOffer, setIsFavoriteOffer] = useState(isFavorite);
