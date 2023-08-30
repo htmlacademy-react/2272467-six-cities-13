@@ -9,6 +9,7 @@ import { fetchFavoritesOffers } from './favorites-offers-action.ts';
 import { clearLoginForm } from '../login-form/login-form-slices.ts';
 import { redirectToRoute } from '../action.ts';
 import { AppRoute } from '../../constants/app-route.ts';
+import { fetchOffers } from './offers-action.ts';
 
 export const checkAuthAction = createAsyncThunk<TUser, undefined, {
   dispatch: AppDispatch;
@@ -46,8 +47,9 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   `${NameSpace.User}/logout`,
-  async (_arg, { extra: api }) => {
+  async (_arg, { dispatch, extra: api }) => {
     await api.delete(ApiRoute.Logout);
+    dispatch(fetchOffers());
     dropToken();
   },
 );

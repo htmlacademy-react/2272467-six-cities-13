@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchReviews } from '../../store/api-actions/review-action.ts';
 import { getReviews } from '../../store/review/review-selectors.ts';
 
+const MAX_REVIEW = 10;
+
 type ReviewListProps = {
   id: string | undefined;
 }
@@ -25,7 +27,7 @@ function ReviewList({ id }: ReviewListProps): React.JSX.Element {
         Reviews · <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        {sortReview.slice(0, 10).map((review) => <Review key={review.id} review={review}/>)}
+        {sortReview.slice(0, MAX_REVIEW).map((review) => <Review key={review.id} review={review}/>)}
       </ul>
     </>
   );

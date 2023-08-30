@@ -18,7 +18,7 @@ type TOfferHost = Omit<TUser, 'email' | 'token'>;
 export type TOffer = {
   id: string;
   title: string;
-  type: keyof typeof OfferType;
+  type: OfferType;
   price: number;
   city: TCity;
   location: TLocation;

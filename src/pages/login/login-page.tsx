@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../../constants/app-route.ts';
 import { Link, Navigate } from 'react-router-dom';
@@ -21,6 +21,13 @@ function LoginPage(): React.JSX.Element {
     text: 'The password must contain one letter and one digit',
     isVisible: false
   });
+  const [randomCity, setRandomCity] = useState<City | null>(null);
+
+  useEffect(() => {
+    const citiesList = Object.values(City).map((city) => city);
+    const randomIndex = Math.floor(Math.random() * (citiesList.length - 1));
+    setRandomCity(citiesList[randomIndex]);
+  }, []);
 
   function handleEmailChange(e: ChangeEvent<HTMLInputElement>) {
     dispatch(updateEmail(e.target.value));
@@ -44,10 +51,6 @@ function LoginPage(): React.JSX.Element {
       }
     }
   };
-
-  const citiesList = Object.values(City).map((city) => city);
-  const randomIndex = Math.floor(Math.random() * (citiesList.length - 1));
-  const randomCity = citiesList[randomIndex];
 
   const handleLocationClick = () => {
     dispatch(setCurrentCity(randomCity));

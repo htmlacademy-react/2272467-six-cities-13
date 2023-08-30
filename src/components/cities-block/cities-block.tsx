@@ -9,12 +9,12 @@ import { useAppSelector } from '../../hooks';
 import { getCurrentSorting } from '../../store/current-sorting/current-sorting-selectors.ts';
 import cn from 'classnames';
 
-type citiesBlockProps = {
+type TCitiesBlockProps = {
   offers: TOffer[];
   selectedCity: City;
 }
 
-function CitiesBlock({ offers, selectedCity }: citiesBlockProps): React.JSX.Element {
+function CitiesBlock({ offers, selectedCity }: TCitiesBlockProps): React.JSX.Element {
   const selectedSorting = useAppSelector(getCurrentSorting);
   const offersByCity = [...offers].filter((offer) => offer.city.name === selectedCity);
   const sortOffers = sorting[selectedSorting](offersByCity).map((offer) => offer);

@@ -20,6 +20,8 @@ import { capitalize } from '../../utils/common.ts';
 import cn from 'classnames';
 import { clearFormReview } from '../../store/review-form/review-form-slices.ts';
 
+const MAX_IMAGE_OFFER = 6;
+const MAX_NEAR_OFFER = 3;
 
 function OfferBlock(): React.JSX.Element {
   const { id } = useParams();
@@ -31,7 +33,7 @@ function OfferBlock(): React.JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const isOfferLoading = useAppSelector(getOfferIsLoadingStatus);
   const hasError = useAppSelector(getOfferErrorStatus);
-  const currentAndNearOffers = [...nearOffers.slice(0, 3), currentOffer];
+  const currentAndNearOffers = [...nearOffers.slice(0, MAX_IMAGE_OFFER), currentOffer];
 
 
   useEffect(() => {
@@ -67,7 +69,7 @@ function OfferBlock(): React.JSX.Element {
       <section className="offer">
         <div className="offer__gallery-container container">
           <div className="offer__gallery">
-            {images.slice(0, 6).map((image) => (
+            {images.slice(0, MAX_NEAR_OFFER).map((image) => (
               <div key={image} className="offer__image-wrapper">
                 <img
                   className="offer__image"
@@ -121,7 +123,7 @@ function OfferBlock(): React.JSX.Element {
               <div className="offer__host-user user">
                 <div className={cn(
                   'offer__avatar-wrapper user__avatar-wrapper',
-                  {'offer__avatar-wrapper--pro': isPro}
+                  { 'offer__avatar-wrapper--pro': isPro }
                 )}
                 >
                   <img
