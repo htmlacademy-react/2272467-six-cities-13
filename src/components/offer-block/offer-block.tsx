@@ -19,6 +19,8 @@ import Bookmark from '../bookmark/bookmark.tsx';
 import { capitalize } from '../../utils/common.ts';
 import cn from 'classnames';
 import { clearFormReview } from '../../store/review-form/review-form-slices.ts';
+import { dropNearOffers } from '../../store/near-offers/near-offers-slices.ts';
+import { getAuthorizationStatus } from '../../store/user/user-selectors.ts';
 
 const MAX_IMAGE_OFFER = 6;
 const MAX_NEAR_OFFER = 3;
@@ -30,11 +32,10 @@ function OfferBlock(): React.JSX.Element {
   const selectedCity = useAppSelector(getCurrentCity);
   const currentOffer = useAppSelector(getOffer);
   const nearOffers = useAppSelector(getNearOffer);
-  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOfferLoading = useAppSelector(getOfferIsLoadingStatus);
   const hasError = useAppSelector(getOfferErrorStatus);
-  const currentAndNearOffers = [...nearOffers.slice(0, MAX_IMAGE_OFFER), currentOffer];
-
+  const currentAndNearOffers = [...nearOffers.slice(0, MAX_NEAR_OFFER), currentOffer];
 
   useEffect(() => {
     if (id) {
@@ -45,6 +46,7 @@ function OfferBlock(): React.JSX.Element {
 
     return () => {
       dispatch(dropOffer());
+      dispatch(dropNearOffers());
       dispatch(clearFormReview());
     };
   }, [dispatch, id]);
@@ -69,7 +71,7 @@ function OfferBlock(): React.JSX.Element {
       <section className="offer">
         <div className="offer__gallery-container container">
           <div className="offer__gallery">
-            {images.slice(0, MAX_NEAR_OFFER).map((image) => (
+            {images.slice(0, MAX_IMAGE_OFFER).map((image) => (
               <div key={image} className="offer__image-wrapper">
                 <img
                   className="offer__image"

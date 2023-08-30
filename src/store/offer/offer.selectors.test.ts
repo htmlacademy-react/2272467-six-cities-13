@@ -1,7 +1,9 @@
 import { describe, expect } from 'vitest';
 import { makeFakeOffer } from '../../utils/mocks/mocks.ts';
 import { NameSpace } from '../../constants/name-space.ts';
-import { getOffer, getOfferErrorStatus, getOfferIsLoadingStatus } from './offer-selectors.ts';
+import {
+  getOffer, getOfferErrorStatus, getOfferIsLoadingStatus, getSelectedOffer
+} from './offer-selectors.ts';
 
 describe('Offer selectors', () => {
   const mockOffer = makeFakeOffer();
@@ -9,7 +11,8 @@ describe('Offer selectors', () => {
     [NameSpace.Offer]: {
       offer: mockOffer,
       isLoading: true,
-      hasError: false
+      hasError: false,
+      selectedOffer: mockOffer.id
     }
   };
 
@@ -29,5 +32,11 @@ describe('Offer selectors', () => {
     const { hasError } = state[NameSpace.Offer];
     const result = getOfferErrorStatus(state);
     expect(result).toBe(hasError);
+  });
+
+  it('should return "selectedOffer" from state ', () => {
+    const { selectedOffer } = state[NameSpace.Offer];
+    const result = getSelectedOffer(state);
+    expect(result).toEqual(selectedOffer);
   });
 });

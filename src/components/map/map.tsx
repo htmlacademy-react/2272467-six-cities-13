@@ -7,6 +7,7 @@ import cn from 'classnames';
 import { City } from '../../constants/city.ts';
 import { currentCustomIcon, defaultCustomIcon } from '../../constants/map.ts';
 import { useAppSelector } from '../../hooks';
+import { getSelectedOffer } from '../../store/offer/offer-selectors.ts';
 
 
 type TMapProps = {
@@ -81,7 +82,7 @@ function Map({ offers, selectedCity, page }: TMapProps): React.JSX.Element {
   const cityLocation = getLocationCity(selectedCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation);
-  const selectedOffer = useAppSelector((state) => state.offer.selectedOffer);
+  const selectedOffer = useAppSelector(getSelectedOffer);
 
   useEffect(() => {
     if (map) {

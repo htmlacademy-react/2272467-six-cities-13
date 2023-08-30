@@ -14,7 +14,11 @@ const initialState: TNearOffersState = {
 const nearOfferSlices = createSlice({
   name: NameSpace.NearOffers,
   initialState,
-  reducers: {},
+  reducers: {
+    dropNearOffers(state) {
+      state.nearOffers = [];
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchNearOffer.fulfilled, (state, action) => {
@@ -24,4 +28,5 @@ const nearOfferSlices = createSlice({
 });
 
 export default nearOfferSlices.reducer;
+export const { dropNearOffers } = nearOfferSlices.actions;
 

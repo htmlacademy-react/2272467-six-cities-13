@@ -9,19 +9,16 @@ import PrivateRoute from './components/private-route/private-route.tsx';
 import { AppRoute } from './constants/app-route.ts';
 import Layout from './components/layout/layout.tsx';
 import { HelmetProvider } from 'react-helmet-async';
-import { useAppDispatch, useAppSelector } from './hooks';
+import { useAppSelector } from './hooks';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthorizationStatus } from './constants/authorization-status.ts';
 import Preloader from './components/preloader/preloader.tsx';
 import browserHistory from './utils/browser-histore.ts';
 import HistoryRouter from './components/history-router/history-router.tsx';
 import { getAuthorizationStatus } from './store/user/user-selectors.ts';
-import { checkAuthAction } from './store/api-actions/user-action.ts';
 
 
 function App(): React.JSX.Element {
-  const dispatch = useAppDispatch();
-  dispatch(checkAuthAction());
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <Preloader/>;

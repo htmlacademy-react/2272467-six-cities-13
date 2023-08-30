@@ -375,6 +375,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         logoutAction.pending.type,
+        fetchOffers.pending.type,
         logoutAction.fulfilled.type
       ]);
     });
